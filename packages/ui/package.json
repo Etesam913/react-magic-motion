@@ -17,5 +17,8 @@
     "react": "^18.2.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "framer-motion": "^10.16.2"
   }
 }

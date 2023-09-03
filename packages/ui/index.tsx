@@ -1,3 +1,3 @@
 // component exports
-export * from "./button";
+export * from "./animated-card";
 export * from "./header";
