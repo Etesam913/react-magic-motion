@@ -8,7 +8,10 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Header text="Web" />
-      <ExpandableCard isCardExpanded={isCardExpanded}>
+      <ExpandableCard
+        setIsCardExpanded={setIsCardExpanded}
+        isCardExpanded={isCardExpanded}
+      >
         <div className="expanded-card">
           <h1>My Art Gallery</h1>
           <p>Here is the Mona Lisa, created by Leonardo Da Vinci</p>
@@ -23,15 +26,12 @@ export default function Page(): JSX.Element {
               cm).
             </p>
           )}
+
+          <button onClick={() => setIsCardExpanded((prev) => !prev)}>
+            {isCardExpanded ? "Expand" : "Close"}
+          </button>
         </div>
       </ExpandableCard>
-      <button
-        style={{ marginTop: "1rem" }}
-        type="button"
-        onClick={() => setIsCardExpanded((prev) => !prev)}
-      >
-        {isCardExpanded ? "Collapse the card" : "Expand the card"}{" "}
-      </button>
     </>
   );
 }

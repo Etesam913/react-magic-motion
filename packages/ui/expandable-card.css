@@ -1,9 +1,8 @@
 .expanded-card[data-expanded="true"] {
-  background-color: orange;
+  background-color: #ebebeb;
   width: min(40rem, 95%);
   height: calc(100% - 10rem);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -14,4 +13,10 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  padding: 1rem;
+}
+
+.expandable-button {
+  width: 7rem;
+  display: block;
 }
