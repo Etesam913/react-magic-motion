@@ -1,0 +1,17 @@
+.expanded-card[data-expanded="true"] {
+  background-color: orange;
+  width: min(40rem, 95%);
+  height: calc(100% - 10rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
