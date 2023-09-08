@@ -1,7 +1,8 @@
 "use client";
-import { Dispatch, SetStateAction, createElement } from "react";
+import { createElement } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
-import { MotionDiv } from "./motion-div";
+import { MotionElement } from "./motion-element";
 import "./expandable-card.css";
 
 interface ExpandableCardProps {
@@ -15,7 +16,11 @@ export function ExpandableCard({
   setIsCardExpanded,
   children,
 }: ExpandableCardProps): JSX.Element {
-  const element = createElement(MotionDiv, null, <div> my name is jeff</div>);
+  const element = createElement(
+    MotionElement,
+    { elementType: motion.div },
+    <div> my name is jeff</div>,
+  );
 
   return (
     <motion.div className="expanded-card" data-expanded={isCardExpanded} layout>
@@ -48,6 +53,8 @@ export function ExpandableCard({
       >
         {isCardExpanded ? "Close" : "Expand"}
       </motion.button>
+
+      {element}
     </motion.div>
   );
 }
