@@ -1,26 +1,20 @@
-.expanded-card {
-  background-color: #ebebeb;
-  width: fit-content;
-  padding: 1.25rem;
-}
-.expanded-card[data-expanded="true"] {
+.cool-layout-animations-card-expanded{
+  left:0;
+  right:0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
   width: min(40rem, 95%);
   height: calc(100% - 10rem);
-  overflow: auto;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   margin: auto;
   z-index: 10;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 1rem;
-}
+  overflow: auto;
+} 
 
-.expandable-button {
-  width: 7rem;
-  display: block;
+
+.cool-layout-animations-placholder-box{
+  background: transparent;
 }

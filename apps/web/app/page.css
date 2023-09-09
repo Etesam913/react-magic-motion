@@ -1,0 +1,15 @@
+.expandable-card-container-condensed{
+  width: fit-content;
+  overflow:hidden;
+  background-color: transparent;
+  transition: background-color 300ms linear;
+}
+
+.expandable-card-container-expanded{
+  background-color: #ebebeb;
+  padding: 0.85rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  transition: background-color 300ms linear;
+}

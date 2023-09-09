@@ -1,9 +1,5 @@
 import { Header } from "ui";
 
 export default function Page(): JSX.Element {
-  return (
-    <>
-      <Header text="Docs" />
-    </>
-  );
+  return <Header text="Docs" />;
 }
