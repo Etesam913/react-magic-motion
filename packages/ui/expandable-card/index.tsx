@@ -1,14 +1,27 @@
 "use client";
 import { motion } from "framer-motion";
-import type { Dispatch, SetStateAction, ReactNode } from "react";
-import { createElement, isValidElement, Children } from "react";
+import type {
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+  ElementType,
+  ComponentType,
+} from "react";
+import { createElement, isValidElement, Children, useMemo } from "react";
 import "./index.css";
-import { MotionElement } from "../motion-element";
+import MotionElement from "../motion-element";
 
 interface ExpandableCardProps {
   isCardExpanded: boolean;
   setIsCardExpanded: Dispatch<SetStateAction<boolean>>;
   children: JSX.Element;
+}
+
+function getRandomBackgroundColor() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function convertChildrenToMotionChildren(children: ReactNode) {
@@ -21,10 +34,15 @@ function convertChildrenToMotionChildren(children: ReactNode) {
       child = (child.type as Function)();
       if (!isValidElement(child)) return child;
     }
+    const childType = child.type as ComponentType;
+    console.log(childType, child.props);
     // Creates a motion version of the element child type
     let newElem = createElement(
-      MotionElement,
-      { ...child.props, elementType: child.type },
+      motion[childType],
+      {
+        ...child.props,
+        layout: true,
+      },
       convertChildrenToMotionChildren(child.props.children),
     );
 
@@ -38,10 +56,9 @@ export function ExpandableCard({
   children,
 }: ExpandableCardProps): JSX.Element {
   return (
-    <>
+    <div>
       {convertChildrenToMotionChildren(children)}
-      {/* {createMotionComponent(MyComponent)} */}
-      <motion.div
+      {/* <motion.div
         className="expanded-card"
         data-expanded={isCardExpanded}
         layout
@@ -75,7 +92,7 @@ export function ExpandableCard({
         >
           {isCardExpanded ? "Close" : "Expand"}
         </motion.button>
-      </motion.div>
-    </>
+      </motion.div> */}
+    </div>
   );
 }

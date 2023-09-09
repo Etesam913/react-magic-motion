@@ -1,5 +1,9 @@
-.expanded-card[data-expanded="true"] {
+.expanded-card {
   background-color: #ebebeb;
+  width: fit-content;
+  padding: 1.25rem;
+}
+.expanded-card[data-expanded="true"] {
   width: min(40rem, 95%);
   height: calc(100% - 10rem);
   overflow: auto;
