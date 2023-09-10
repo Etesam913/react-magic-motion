@@ -12,8 +12,14 @@
   justify-content: flex-start;
   flex-direction: column;
   overflow: auto;
+  transition: z-index 200ms;
 } 
 
+.cool-layout-animations-card-condensed{
+  z-index: 0;
+  transition: z-index 2s;
+
+} 
 
 .cool-layout-animations-placholder-box{
   background: transparent;

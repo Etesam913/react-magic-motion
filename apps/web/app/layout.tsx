@@ -1,3 +1,7 @@
+import { Instrument_Sans } from "next/font/google";
+
+const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +9,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={instrumentSans.className}>{children}</body>
     </html>
   );
 }

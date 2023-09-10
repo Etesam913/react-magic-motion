@@ -61,7 +61,7 @@ export function ExpandableCard({
           className: `${className ?? ""} ${
             isRoot && isCardExpanded
               ? "cool-layout-animations-card-expanded"
-              : ""
+              : "cool-layout-animations-card-condensed"
           }`,
           layout: getLayoutValueFromChildren(child.props.children),
           transition: isRoot ? transition : undefined,
