@@ -20,6 +20,20 @@
 }
 
 .app-store-expandable-card-container-condensed{
-  
+  background-color: #ebebeb;
+  height: fit-content;
+}
+
+.app-store-expandable-card-container-expanded{
+  background-color: #ebebeb;
+}
+
+.app-store-expandable-card-background-image{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  padding: 1rem;
+  background-image: url(https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/app-store-background.png);
 }
 

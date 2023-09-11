@@ -4,6 +4,7 @@ import { ExpandableCard } from "ui";
 import "./page.css";
 import "../../global.css";
 import Link from "next/link";
+import AppRow from "./[app-row]";
 
 export default function ExpandableCards() {
   const [isCardExpanded1, setIsCardExpanded1] = useState(false);
@@ -18,12 +19,12 @@ export default function ExpandableCards() {
         style={{
           display: "grid",
           gap: "2rem",
-          gridTemplateColumns: "fit-content(500px) fit-content(500px);",
+          gridTemplateColumns: "fit-content(500px) fit-content(500px)",
         }}
       >
         <ExpandableCard
           isCardExpanded={isCardExpanded1}
-          transition={{ type: "spring", stiffness: 200, damping: 30 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
           <div
             className={
@@ -85,42 +86,54 @@ export default function ExpandableCards() {
             }}
             style={{
               borderRadius: "0.5rem",
+              overflow: "hidden",
             }}
           >
             <div
+              className="app-store-expandable-card-background-image"
               style={{
                 height: isCardExpanded2 ? "10rem" : "auto",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                backgroundSize: "cover",
-                padding: "0.5rem",
-                color: isCardExpanded2 ? "black" : "white",
-                backgroundImage:
-                  "url(https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/app-store-background.png)",
+
+                transition: "color 0.3s ease-in-out",
               }}
             >
               <h2>Top Apps</h2>
             </div>
-            <ul>
-              <li>item 1</li>
-              <li>item 2</li>
-              <li>item 3</li>
-              <li>item 4</li>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: "1rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.2rem",
+                overflowY: "auto",
+              }}
+            >
+              <AppRow
+                isCardExpanded={isCardExpanded2}
+                name="Roblox"
+                desc="Join Millions of Experiences"
+                img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/roblox-icon.webp"
+              />
+              <AppRow
+                isCardExpanded={isCardExpanded2}
+                name="Pokémon GO"
+                desc="Epic AR adventure & online RPG"
+                img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/pokemon-go-logo.png"
+              />
+              <AppRow
+                isCardExpanded={isCardExpanded2}
+                name="Subway Surfers"
+                desc="Join the endless running fun!"
+                img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/subway-surfers-logo.png"
+              />
+              <AppRow
+                isCardExpanded={isCardExpanded2}
+                name="Minecraft"
+                desc="Create, explore and survive!"
+                img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/minecraft-mobile-logo.png"
+              />
             </ul>
-            {isCardExpanded2 ? (
-              <div>
-                <p>
-                  The Mona Lisa is one of the most famous paintings in the
-                  world, housed at the Louvre Museum in Paris, France. It was
-                  painted by the Italian Renaissance artist Leonardo da Vinci
-                  between 1503 and 1506, although some experts believe he may
-                  have continued to work on it until as late as 1517. The
-                  painting is executed in oil on a poplar wood panel and
-                  measures 30 inches by 21 inches (76 cm by 53 cm).
-                </p>
-              </div>
-            ) : null}
           </div>
         </ExpandableCard>
       </div>

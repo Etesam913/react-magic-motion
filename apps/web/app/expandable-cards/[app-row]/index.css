@@ -1,0 +1,40 @@
+.app-row{
+  width: 100%;
+}
+
+.app-row-header{
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: .2px;
+}
+
+.app-row-desc{
+  color: rgb(92, 92, 92);
+  font-size: 0.85rem;
+  text-wrap: balance;
+}
+
+.app-row-flex{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.app-row-img{
+
+  border-radius: 0.5rem;
+  background-position: center;
+  background-size: cover;
+}
+
+.app-row-get-button{
+  background-color: #dddddd;
+  color: rgb(99, 99, 223);
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border: 0;
+}
