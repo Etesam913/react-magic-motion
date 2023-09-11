@@ -8,6 +8,7 @@ import {
   useRef,
   useEffect,
   useState,
+  cloneElement,
 } from "react";
 import "./index.css";
 
@@ -45,13 +46,14 @@ export function ExpandableCard({
 
       // Checks if the child is a function component
       if (typeof child.type === "function") {
-        child = (child.type as Function)();
+        child = (child.type as Function)(child.props);
         if (!isValidElement(child)) return child;
       }
 
       const childType = child.type as keyof typeof motion;
 
       const { className, ...restOfProps } = child.props;
+
       // Creates a motion version of the element child type
       const newElem = createElement(
         motion[childType] as string | FunctionComponent<any>,
