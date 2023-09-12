@@ -37,3 +37,28 @@
   background-image: url(https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/app-store-background.png);
 }
 
+.app-row-list{
+  list-style: none;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow-y:auto;
+}
+
+.app-row-horizontal-list{
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style-type: none;
+  padding: 0;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}

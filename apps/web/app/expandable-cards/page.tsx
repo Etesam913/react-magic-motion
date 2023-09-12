@@ -5,6 +5,7 @@ import "./page.css";
 import "../../global.css";
 import Link from "next/link";
 import AppRow from "./[app-row]";
+import AppCol from "./[app-col]";
 
 export default function ExpandableCards() {
   const [isCardExpanded1, setIsCardExpanded1] = useState(false);
@@ -99,16 +100,7 @@ export default function ExpandableCards() {
             >
               <h2>Top Apps</h2>
             </div>
-            <ul
-              style={{
-                listStyle: "none",
-                padding: "1rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.2rem",
-                overflowY: "auto",
-              }}
-            >
+            <ul className="app-row-list">
               <AppRow
                 isCardExpanded={isCardExpanded2}
                 name="Roblox"
@@ -133,6 +125,30 @@ export default function ExpandableCards() {
                 desc="Create, explore and survive!"
                 img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/minecraft-mobile-logo.png"
               />
+              {isCardExpanded2 ? (
+                <ul className="app-row-horizontal-list">
+                  <AppCol
+                    isCardExpanded={isCardExpanded2}
+                    name="Dumb Ways to Die"
+                    desc="Safety First"
+                    img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/dumb-ways-to-die-logo.webp"
+                  />
+
+                  <AppCol
+                    isCardExpanded={isCardExpanded2}
+                    name="Candy Crush Saga"
+                    desc="Sugar Rush Match 3 Puzzle Game"
+                    img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/candy-crush-logo.png"
+                  />
+
+                  <AppCol
+                    isCardExpanded={isCardExpanded2}
+                    name="FIFA Soccer"
+                    desc="Train soccer stars & compete!"
+                    img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/fifa-soccer-logo.png"
+                  />
+                </ul>
+              ) : null}
             </ul>
           </div>
         </ExpandableCard>

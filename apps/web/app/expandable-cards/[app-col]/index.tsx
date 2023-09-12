@@ -1,5 +1,5 @@
 import "./index.css";
-export default function AppRow({
+export default function AppCol({
   isCardExpanded,
   name,
   desc,
@@ -11,15 +11,15 @@ export default function AppRow({
   img: string;
 }) {
   return (
-    <li className="app-row">
-      <div className="app-row-flex" style={{ justifyContent: "space-between" }}>
-        <div className="app-row-flex">
+    <li className="app-col">
+      <div className="app-col-flex">
+        <div className="app-col-flex">
           <div
             className="app-row-img"
             style={{
               backgroundImage: `url(${img})`,
-              minHeight: isCardExpanded ? "64px" : '48px',
-              minWidth: isCardExpanded ? "64px" : '48px'
+              minHeight: isCardExpanded ? "64px" : "48px",
+              maxWidth: isCardExpanded ? "64px" : "48px",
             }}
           />
           <div>
