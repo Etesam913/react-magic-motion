@@ -126,28 +126,28 @@ export default function ExpandableCards() {
                 img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/minecraft-mobile-logo.png"
               />
               {isCardExpanded2 ? (
-                <ul className="app-row-horizontal-list">
-                  <AppCol
+                <div className="app-row-list" style={{ padding: 0 }}>
+                  <AppRow
                     isCardExpanded={isCardExpanded2}
                     name="Dumb Ways to Die"
                     desc="Safety First"
                     img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/dumb-ways-to-die-logo.webp"
                   />
 
-                  <AppCol
+                  <AppRow
                     isCardExpanded={isCardExpanded2}
                     name="Candy Crush Saga"
                     desc="Sugar Rush Match 3 Puzzle Game"
                     img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/candy-crush-logo.png"
                   />
 
-                  <AppCol
+                  <AppRow
                     isCardExpanded={isCardExpanded2}
                     name="FIFA Soccer"
                     desc="Train soccer stars & compete!"
                     img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/fifa-soccer-logo.png"
                   />
-                </ul>
+                </div>
               ) : null}
             </ul>
           </div>

@@ -38,20 +38,12 @@
 }
 
 .app-row-list{
-  list-style: none;
-  padding: 1rem;
+  animation: fade-in 0.5s ease-in-out;
+  gap: 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  overflow-y:auto;
-}
-
-.app-row-horizontal-list{
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: 1fr 1fr 1fr;
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
+  padding: 1rem;
 }
 
 @keyframes fade-in {
