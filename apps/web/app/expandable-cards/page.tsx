@@ -5,26 +5,28 @@ import "./page.css";
 import "../../global.css";
 import Link from "next/link";
 import AppRow from "./[app-row]";
-import AppCol from "./[app-col]";
 
 export default function ExpandableCards() {
   const [isCardExpanded1, setIsCardExpanded1] = useState(false);
   const [isCardExpanded2, setIsCardExpanded2] = useState(false);
+
   return (
     <main>
       <Link href="/" className="go-back">
         Go To Home 👈
       </Link>
       <h1>Expandable Cards</h1>
+
       <div
         style={{
           display: "grid",
           gap: "2rem",
-          gridTemplateColumns: "fit-content(500px) fit-content(500px)",
+          gridTemplateColumns: "1fr 1fr",
         }}
       >
         <ExpandableCard
           isCardExpanded={isCardExpanded1}
+          onBackgroundFadeClick={() => setIsCardExpanded1(false)}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
           <div

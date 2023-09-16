@@ -18,9 +18,21 @@
 .cool-layout-animations-card-condensed{
   z-index: 0;
   transition: z-index 2s;
-
 } 
 
-.cool-layout-animations-placholder-box{
-  background: transparent;
+.cool-layout-animations-placeholder-box{
+  background: transparent !important;
+}
+
+.cool-layout-animations-background-fade{
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  left:0;
+  right:0;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+  z-index:5;
+  height: 100vh;
+  width: 100vw;
 }
