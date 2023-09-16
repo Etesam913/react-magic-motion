@@ -17,13 +17,7 @@ export default function ExpandableCards() {
       </Link>
       <h1>Expandable Cards</h1>
 
-      <div
-        style={{
-          display: "grid",
-          gap: "2rem",
-          gridTemplateColumns: "1fr 1fr",
-        }}
-      >
+      <div className="expandable-card-container">
         <ExpandableCard
           isCardExpanded={isCardExpanded1}
           onBackgroundFadeClick={() => setIsCardExpanded1(false)}
@@ -77,7 +71,10 @@ export default function ExpandableCards() {
           </div>
         </ExpandableCard>
 
-        <ExpandableCard isCardExpanded={isCardExpanded2}>
+        <ExpandableCard
+          isCardExpanded={isCardExpanded2}
+          onBackgroundFadeClick={() => setIsCardExpanded2((prev) => !prev)}
+        >
           <div
             className={
               !isCardExpanded2
@@ -96,7 +93,6 @@ export default function ExpandableCards() {
               className="app-store-expandable-card-background-image"
               style={{
                 height: isCardExpanded2 ? "10rem" : "auto",
-
                 transition: "color 0.3s ease-in-out",
               }}
             >

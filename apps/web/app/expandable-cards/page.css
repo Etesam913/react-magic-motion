@@ -45,6 +45,7 @@
   flex-direction: column;
   list-style: none;
   padding: 1rem;
+  overflow-y:auto;
 }
 
 @keyframes fade-in {
@@ -54,4 +55,10 @@
   to{
     opacity: 1;
   }
+}
+
+.expandable-card-container{
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
 }
