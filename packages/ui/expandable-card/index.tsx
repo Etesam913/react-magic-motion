@@ -1,13 +1,7 @@
 "use client";
 import { AnimatePresence, Transition, motion } from "framer-motion";
 import type { ReactNode, FunctionComponent } from "react";
-import {
-  createElement,
-  isValidElement,
-  Children,
-  useRef,
-  useState,
-} from "react";
+import { createElement, isValidElement, Children, useRef } from "react";
 import "./index.css";
 import { usePlaceholderBoxSize } from "../hooks";
 
@@ -17,7 +11,7 @@ interface ExpandableCardProps {
   transition?: Transition;
   isBackgroundFadeEnabled?: boolean;
   onBackgroundFadeClick?: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => void;
 }
 
@@ -37,7 +31,7 @@ export function ExpandableCard({
 
   function convertChildrenToMotionChildren(
     children: ReactNode,
-    depth: number
+    depth: number,
   ): ReactNode {
     return Children.map(children, (child, i): ReactNode => {
       // Checks if the child is a string or boolean or number
@@ -75,8 +69,8 @@ export function ExpandableCard({
         },
         convertChildrenToMotionChildren(
           child.props.children as ReactNode,
-          depth + 1
-        )
+          depth + 1,
+        ),
       );
 
       return newElem;
@@ -85,14 +79,9 @@ export function ExpandableCard({
 
   const motionChildren = convertChildrenToMotionChildren(children, 1);
 
-  const [placeholderBoxDimensions, setPlaceholderBoxDimensions] = useState({
-    height: 0,
-    width: 0,
-  });
-
   const { placeholderBoxHeight, placeholderBoxWidth } = usePlaceholderBoxSize(
     isCardExpanded,
-    rootNode
+    rootNode,
   );
 
   return (
