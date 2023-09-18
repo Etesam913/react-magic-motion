@@ -1,4 +1,4 @@
 // component exports
 export * from "./expandable-card";
-export * from "./header";
+export * from "./layout-container";
 export * from "./tab-select";

@@ -1,9 +1,17 @@
 "use client";
-import { AnimatePresence, Transition, motion } from "framer-motion";
+
+import {
+  AnimatePresence,
+  Transition,
+  m,
+  LazyMotion,
+  domMax,
+} from "framer-motion";
 import type { ReactNode, FunctionComponent } from "react";
 import { createElement, isValidElement, Children, useRef } from "react";
 import "./index.css";
 import { usePlaceholderBoxSize } from "../hooks";
+import { getLayoutValueFromChildren } from "../utils";
 
 interface ExpandableCardProps {
   isCardExpanded: boolean;
@@ -15,11 +23,6 @@ interface ExpandableCardProps {
   ) => void;
 }
 
-function getLayoutValueFromChildren(children: ReactNode): "position" | true {
-  if (typeof children === "string") return "position";
-  return true;
-}
-
 export function ExpandableCard({
   children,
   isCardExpanded,
@@ -29,7 +32,7 @@ export function ExpandableCard({
 }: ExpandableCardProps): JSX.Element {
   const rootNode = useRef<HTMLElement>(null);
 
-  function convertChildrenToMotionChildren(
+  function convertChildrenToExpandableCardChildren(
     children: ReactNode,
     depth: number,
   ): ReactNode {
@@ -49,13 +52,13 @@ export function ExpandableCard({
         if (!isValidElement(child)) return child;
       }
 
-      const childType = child.type as keyof typeof motion;
+      const childType = child.type as keyof typeof m;
 
       const { className, ...restOfProps } = child.props;
 
       // Creates a motion version of the element child type
       const newElem = createElement(
-        motion[childType] as string | FunctionComponent<any>,
+        m[childType] as string | FunctionComponent<any>,
         {
           ...restOfProps,
           ref: isRoot ? rootNode : undefined,
@@ -67,7 +70,7 @@ export function ExpandableCard({
           layout: getLayoutValueFromChildren(child.props.children),
           transition: isRoot ? transition : undefined,
         },
-        convertChildrenToMotionChildren(
+        convertChildrenToExpandableCardChildren(
           child.props.children as ReactNode,
           depth + 1,
         ),
@@ -77,7 +80,7 @@ export function ExpandableCard({
     });
   }
 
-  const motionChildren = convertChildrenToMotionChildren(children, 1);
+  const motionChildren = convertChildrenToExpandableCardChildren(children, 1);
 
   const { placeholderBoxHeight, placeholderBoxWidth } = usePlaceholderBoxSize(
     isCardExpanded,
@@ -85,7 +88,7 @@ export function ExpandableCard({
   );
 
   return (
-    <>
+    <LazyMotion features={domMax}>
       {motionChildren}
       {isCardExpanded && (
         <div
@@ -99,7 +102,7 @@ export function ExpandableCard({
       {isBackgroundFadeEnabled && (
         <AnimatePresence>
           {isCardExpanded && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -109,6 +112,6 @@ export function ExpandableCard({
           )}
         </AnimatePresence>
       )}
-    </>
+    </LazyMotion>
   );
 }

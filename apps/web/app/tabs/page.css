@@ -20,12 +20,13 @@
   position: relative;
   border-radius: 36px;
   transition: color 300ms 100ms;
+  white-space: nowrap;
 }
 
 .highlight {
   width: 100%;
   height: 100%;
-  background-color: rgba(126, 186, 255, 0.771);
+  background-color: rgb(120 179 247);
   position: absolute;
   top: 0;
   left: 0;
@@ -36,5 +37,11 @@
 
 .tabs-container {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+}
+
+.vertical-tabs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1;
 }

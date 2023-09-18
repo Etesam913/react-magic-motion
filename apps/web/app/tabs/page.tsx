@@ -1,19 +1,19 @@
 "use client";
 import Link from "next/link";
-import "../../global.css";
-import TabSelect from "ui/tab-select";
 import { useState } from "react";
+import { TabSelect } from "ui";
+import "../../global.css";
 import "./page.css";
-
-function CustomElement() {
-  return <div>Custom Element</div>;
-}
 
 export default function TabsPage() {
   const tabs1 = ["Recipes 🧑‍🍳", "Notes 📝", "Programming 🧑‍💻"];
   const [selectedIndex1, setSelectedIndex1] = useState(0);
 
-  const tabs2 = ["Homework 📄", "Cats 🐱", "Jokes 😂"];
+  const tabs2 = [
+    "Homework 📄",
+    "Cats 🐱",
+    "Jokes and ooooother funny things 😂",
+  ];
   const [selectedIndex2, setSelectedIndex2] = useState(0);
 
   const tabsComponentsUnderline = tabs1.map((text, i) => {
@@ -46,7 +46,10 @@ export default function TabsPage() {
       >
         {text}
         {selectedIndex2 === i && (
-          <TabSelect id="highlight">
+          <TabSelect
+            id="highlight"
+            transition={{ type: "spring", damping: 13, stiffness: 110 }}
+          >
             <div className="highlight" style={{ borderRadius: 36 }} />
           </TabSelect>
         )}
