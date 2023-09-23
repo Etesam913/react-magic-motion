@@ -1,0 +1,44 @@
+import { TodoList } from "../../components/todo-list";
+import { LayoutContainer } from "react-motionize";
+import { Callout } from "nextra/components";
+
+# To Do List Example
+
+### Todo list With No Animation
+
+<TodoList />
+
+#### Sample Code
+
+```jsx filename="Todo List" showLineNumbers copy
+function App() {
+  return(
+    <TodoList />;
+  )
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+  The full code for the `<TodoList />` can be found here:
+  https://gist.github.com/Etesam913/8fb9875db69fb78bea1f51b2dec1eca4
+</Callout>
+
+### Todo list With `react-motionize`
+
+<LayoutContainer>
+  <TodoList />
+</LayoutContainer>
+
+#### Sample Code
+
+```jsx filename="Todo List With react-motionize" showLineNumbers copy /LayoutContainer/
+import { LayoutContainer } from "react-motionize";
+
+function App() {
+  return (
+    <LayoutContainer>
+      <TodoList />
+    </LayoutContainer>
+  );
+}
+```
