@@ -8,7 +8,7 @@ import {
 
 interface LayoutContainerProps {
   children: JSX.Element;
-  layoutDependency?: any;
+  layoutDependency?: unknown;
 }
 
 export function LayoutContainer({

@@ -23,9 +23,7 @@ interface ExpandableCardProps {
   children: JSX.Element;
   transition?: Transition;
   isBackgroundFadeEnabled?: boolean;
-  onBackgroundFadeClick?: (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => void;
+  onBackgroundFadeClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export function ExpandableCard({
@@ -43,7 +41,7 @@ export function ExpandableCard({
   ): ReactNode {
     return Children.map(nodes, (child, i): ReactNode => {
       // Checks if the node is a string or boolean or number
-      const node = child;
+      let node = child;
       if (!isValidElement(node)) return node;
 
       let isRoot = false;
@@ -54,8 +52,8 @@ export function ExpandableCard({
 
       // Checks if the child is a function component
       if (typeof node.type === "function") {
-        child = (node.type as FunctionComponent)(node.props);
-        if (!isValidElement(child)) return child;
+        node = (node.type as FunctionComponent)(node.props);
+        if (!isValidElement(node)) return node;
       }
 
       const nodeType = node.type as keyof typeof m;

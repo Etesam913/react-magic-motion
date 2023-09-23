@@ -4,11 +4,9 @@ import { ExpandableCard } from "ui";
 import "./page.css";
 import "../../global.css";
 import Link from "next/link";
-import AppRow from "./[app-row]";
 
 export default function ExpandableCards() {
   const [isCardExpanded1, setIsCardExpanded1] = useState(false);
-  const [isCardExpanded2, setIsCardExpanded2] = useState(false);
 
   return (
     <main>
@@ -23,7 +21,8 @@ export default function ExpandableCards() {
           onBackgroundFadeClick={() => setIsCardExpanded1(false)}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <div
+          <button
+            type="button"
             className={
               !isCardExpanded1
                 ? "mona-lisa-expandable-card-container-condensed"
@@ -40,6 +39,7 @@ export default function ExpandableCards() {
               style={{
                 display: "flex",
                 flexDirection: "column",
+                width: "100%",
                 alignItems: isCardExpanded1 ? "center" : "flex-start",
               }}
             >
@@ -55,7 +55,7 @@ export default function ExpandableCards() {
                 marginInline: "auto",
               }}
             />
-            {isCardExpanded1 ? (
+            {isCardExpanded1 && (
               <div>
                 <p>
                   The Mona Lisa is one of the most famous paintings in the
@@ -67,15 +67,15 @@ export default function ExpandableCards() {
                   measures 30 inches by 21 inches (76 cm by 53 cm).
                 </p>
               </div>
-            ) : null}
-          </div>
+            )}
+          </button>
         </ExpandableCard>
 
-        <ExpandableCard
+        {/* <ExpandableCard
           isCardExpanded={isCardExpanded2}
           onBackgroundFadeClick={() => setIsCardExpanded2((prev) => !prev)}
         >
-          <div
+          <button
             className={
               !isCardExpanded2
                 ? "app-store-expandable-card-container-condensed"
@@ -123,7 +123,7 @@ export default function ExpandableCards() {
                 desc="Create, explore and survive!"
                 img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/minecraft-mobile-logo.png"
               />
-              {isCardExpanded2 ? (
+              {isCardExpanded2 && (
                 <div className="app-row-list" style={{ padding: 0 }}>
                   <AppRow
                     isCardExpanded={isCardExpanded2}
@@ -146,10 +146,10 @@ export default function ExpandableCards() {
                     img="https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/fifa-soccer-logo.png"
                   />
                 </div>
-              ) : null}
+              )}
             </ul>
-          </div>
-        </ExpandableCard>
+          </button>
+        </ExpandableCard> */}
       </div>
     </main>
   );

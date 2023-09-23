@@ -1,7 +1,6 @@
 "use client";
 import { type Transition, m, LazyMotion, domMax } from "framer-motion";
-import { createElement } from "react";
-import type { FunctionComponent } from "react";
+import { type FunctionComponent, createElement } from "react";
 
 interface TabSelectProps {
   children: JSX.Element;
@@ -13,10 +12,13 @@ export function TabSelect({
   id,
   transition,
 }: TabSelectProps): JSX.Element {
-  let motionChildren = children;
+  let motionChildren: JSX.Element | null = children;
 
   if (typeof motionChildren.type === "function") {
-    motionChildren = (motionChildren.type as Function)(motionChildren.props);
+    motionChildren = (motionChildren.type as FunctionComponent)(
+      motionChildren.props,
+    );
+    if (motionChildren === null) motionChildren = <> </>;
   }
   const childType = motionChildren.type as keyof typeof m;
 

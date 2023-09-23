@@ -19,7 +19,8 @@ export default function TabsPage() {
   const tabsComponentsUnderline = tabs1.map((text, i) => {
     return (
       <button
-        key={`tab-${i}`}
+        type="button"
+        key={`tab-${text}`}
         onClick={() => setSelectedIndex1(i)}
         className="tab-1"
       >
@@ -28,7 +29,6 @@ export default function TabsPage() {
           <div style={{ position: "relative" }}>
             <TabSelect id="underline">
               <div className="underline" />
-              {/* <CustomElement /> */}
             </TabSelect>
           </div>
         )}
@@ -39,7 +39,8 @@ export default function TabsPage() {
   const tabsComponentsHighlight = tabs2.map((text, i) => {
     return (
       <button
-        key={`tab-${i}`}
+        type="button"
+        key={`tab-${text}`}
         onClick={() => setSelectedIndex2(i)}
         className="tab-2"
         style={{ color: selectedIndex2 === i ? "white" : "black" }}

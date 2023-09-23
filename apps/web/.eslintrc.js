@@ -5,5 +5,6 @@ module.exports = {
     "react/jsx-no-leaked-render": "off",
     "react/jsx-sort-props": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
   },
 };

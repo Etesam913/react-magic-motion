@@ -69,6 +69,7 @@ export default function LayoutContainerPage() {
               Add
             </button>
             <button
+              type="button"
               onClick={() => setItems(shuffle([...items]))}
               className="shuffle-button"
             >

@@ -1,4 +1,4 @@
-.mona-lisa-expandable-card-container-condensed{
+.mona-lisa-expandable-card-container-condensed {
   overflow: hidden;
   background-color: #ebebeb;
   padding: 1.3rem;
@@ -6,30 +6,32 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  border: 0;
 }
 
-.mona-lisa-expandable-card-container-expanded{
+.mona-lisa-expandable-card-container-expanded {
   overflow-y: auto;
   overflow-x: hidden;
-  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   background-color: #ebebeb;
   padding: 0.85rem;
   gap: 1rem;
   display: flex;
   flex-direction: column;
+  border: 0;
 }
 
-.app-store-expandable-card-container-condensed{
+.app-store-expandable-card-container-condensed {
   background-color: #ebebeb;
   width: 100%;
 }
 
-.app-store-expandable-card-container-expanded{
+.app-store-expandable-card-container-expanded {
   background-color: #ebebeb;
-  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.15);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.15);
 }
 
-.app-store-expandable-card-background-image{
+.app-store-expandable-card-background-image {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -38,26 +40,26 @@
   background-image: url(https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/app-store-background.png);
 }
 
-.app-row-list{
+.app-row-list {
   animation: fade-in 0.5s ease-in-out;
   gap: 1.2rem;
   display: flex;
   flex-direction: column;
   list-style: none;
   padding: 1rem;
-  overflow-y:auto;
+  overflow: hidden;
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-.expandable-card-container{
+.expandable-card-container {
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr 1fr;

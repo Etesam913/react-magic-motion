@@ -1,6 +1,6 @@
-import { Instrument_Sans } from "next/font/google";
+import { Instrument_Sans as InstrumentSans } from "next/font/google";
 
-const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
+const instrumentSans = InstrumentSans({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,

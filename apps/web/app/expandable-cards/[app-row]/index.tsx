@@ -1,4 +1,5 @@
 import "./index.css";
+
 export default function AppRow({
   isCardExpanded,
   name,
@@ -18,8 +19,8 @@ export default function AppRow({
             className="app-row-img"
             style={{
               backgroundImage: `url(${img})`,
-              minHeight: isCardExpanded ? "64px" : '48px',
-              minWidth: isCardExpanded ? "64px" : '48px'
+              minHeight: isCardExpanded ? "64px" : "48px",
+              minWidth: isCardExpanded ? "64px" : "48px",
             }}
           />
           <div>
@@ -28,7 +29,9 @@ export default function AppRow({
           </div>
         </div>
 
-        <button className="app-row-get-button">Get</button>
+        <button type="button" className="app-row-get-button">
+          Get
+        </button>
       </div>
     </li>
   );
