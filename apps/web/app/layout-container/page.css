@@ -4,13 +4,17 @@
   gap: 0.5rem;
   list-style-type: none;
   padding: 0;
-  overflow: auto;
+  overflow-y: hidden;
 }
 
 .todo-item {
   padding: 0.65rem;
   background-color: #efebeb;
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .add-button {

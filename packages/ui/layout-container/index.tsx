@@ -18,16 +18,14 @@ export function LayoutContainer({
   const motionChildren = convertChildrenToMotionChildren(children, (child) => {
     return {
       layout: getLayoutValueFromChildren(child),
+      layoutDependency,
       transition: {
         type: "spring",
         damping: 10,
         stiffness: 80,
-        layoutDependency,
       },
     };
   });
-
-  //console.log(motionChildren);
 
   return <LazyMotion features={domMax}>{motionChildren}</LazyMotion>;
 }

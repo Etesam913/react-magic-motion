@@ -4,11 +4,7 @@ import { LayoutContainer } from "ui";
 import "../../global.css";
 import "./page.css";
 import { useRef, useState } from "react";
-
-function TestContainer({ children }: { children: React.ReactNode }) {
-  // console.log(children);
-  return <div>{children}</div>;
-}
+import TodoItem from "./todo-item";
 
 export default function LayoutContainerPage() {
   const [items, setItems] = useState([
@@ -16,9 +12,7 @@ export default function LayoutContainerPage() {
     { id: crypto.randomUUID(), text: "Complete math homework" },
   ]);
 
-  const [itemToAddText, setItemToAddText] = useState("");
-  const inputRef = useRef(null);
-  const input2Ref = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <main>
@@ -26,56 +20,37 @@ export default function LayoutContainerPage() {
         Go To Home 👈
       </Link>
       <h1>Layout Container</h1>
-      <LayoutContainer layoutDependency={items}>
-        <div>
-          <form className="submit-form" onSubmit={(e) => e.preventDefault()}>
-            <ul className="todo-list">
-              {items.map((item) => (
-                <li
-                  onClick={() =>
-                    setItems((prev) => prev.filter((i) => item.id !== i.id))
-                  }
-                  key={item.id}
-                  className="todo-item"
-                >
-                  {item.text}
-                </li>
-              ))}
-            </ul>
-            adksfj
-            <div className="submit-row">
-              <input
-                ref={input2Ref}
-                onChange={(e) => setItemToAddText(e.target.value)}
-                value={itemToAddText}
-                className="add-input"
-                type="text"
-              />
+      <form className="submit-form" onSubmit={(e) => e.preventDefault()}>
+        <LayoutContainer>
+          <ul className="todo-list">
+            {items.map((item) => (
+              <TodoItem key={item.id} item={item} setItems={setItems} />
+            ))}
+          </ul>
+        </LayoutContainer>
+        <LayoutContainer>
+          <div className="submit-row">
+            <input ref={inputRef} className="add-input" type="text" />
 
-              <button
-                onClick={() => {
-                  setItems((prev) => [
-                    ...prev,
-                    {
-                      id: crypto.randomUUID(),
-                      text: itemToAddText,
-                    },
-                  ]);
-                  setItemToAddText("");
-                }}
-                className="add-button"
-                type="submit"
-              >
-                Add Item
-              </button>
-            </div>
-          </form>
-          <div>test</div>
-        </div>
-      </LayoutContainer>
-      <TestContainer>
-        <div ref={inputRef}>wow</div>
-      </TestContainer>
+            <button
+              onClick={() => {
+                const newTodo = inputRef.current?.value;
+                if (!newTodo) return;
+                setItems([
+                  ...items,
+                  { id: crypto.randomUUID(), text: newTodo },
+                ]);
+
+                inputRef.current.value = "";
+              }}
+              className="add-button"
+              type="submit"
+            >
+              Add Item
+            </button>
+          </div>
+        </LayoutContainer>
+      </form>
     </main>
   );
 }
