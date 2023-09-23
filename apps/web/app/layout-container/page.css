@@ -17,6 +17,15 @@
   gap: 1.25rem;
 }
 
+.shuffle-button {
+  border: 1.5px solid #6697f7;
+  background-color: transparent;
+  color: #6697f7;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  width: fit-content;
+}
+
 .add-button {
   border: 0;
   background-color: #6697f7;

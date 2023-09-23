@@ -6,6 +6,26 @@ import "./page.css";
 import { useRef, useState } from "react";
 import TodoItem from "./todo-item";
 
+function shuffle<T>(array: T[]): T[] {
+  let currentIndex = array.length;
+  let randomIndex: number;
+  let temporaryValue: T;
+
+  // While there remain elements to shuffle
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 export default function LayoutContainerPage() {
   const [items, setItems] = useState([
     { id: crypto.randomUUID(), text: "Walk the dog" },
@@ -46,7 +66,13 @@ export default function LayoutContainerPage() {
               className="add-button"
               type="submit"
             >
-              Add Item
+              Add
+            </button>
+            <button
+              onClick={() => setItems(shuffle([...items]))}
+              className="shuffle-button"
+            >
+              Shuffle
             </button>
           </div>
         </LayoutContainer>
