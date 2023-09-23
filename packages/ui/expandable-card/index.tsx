@@ -1,17 +1,22 @@
 "use client";
-
 import {
   AnimatePresence,
-  Transition,
-  m,
   LazyMotion,
   domMax,
+  m,
+  type Transition,
 } from "framer-motion";
-import type { ReactNode, FunctionComponent } from "react";
-import { createElement, isValidElement, Children, useRef } from "react";
-import "./index.css";
+import {
+  Children,
+  createElement,
+  isValidElement,
+  useRef,
+  type FunctionComponent,
+  type ReactNode,
+} from "react";
 import { usePlaceholderBoxSize } from "../hooks";
 import { getLayoutValueFromChildren } from "../utils";
+import "./index.css";
 
 interface ExpandableCardProps {
   isCardExpanded: boolean;
@@ -19,7 +24,7 @@ interface ExpandableCardProps {
   transition?: Transition;
   isBackgroundFadeEnabled?: boolean;
   onBackgroundFadeClick?: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    e: React.MouseEvent<HTMLDivElement>,
   ) => void;
 }
 
@@ -33,12 +38,13 @@ export function ExpandableCard({
   const rootNode = useRef<HTMLElement>(null);
 
   function convertChildrenToExpandableCardChildren(
-    children: ReactNode,
+    nodes: ReactNode,
     depth: number,
   ): ReactNode {
-    return Children.map(children, (child, i): ReactNode => {
-      // Checks if the child is a string or boolean or number
-      if (!isValidElement(child)) return child;
+    return Children.map(nodes, (child, i): ReactNode => {
+      // Checks if the node is a string or boolean or number
+      const node = child;
+      if (!isValidElement(node)) return node;
 
       let isRoot = false;
       // If first child at the first level, then the node is the root
@@ -47,18 +53,18 @@ export function ExpandableCard({
       }
 
       // Checks if the child is a function component
-      if (typeof child.type === "function") {
-        child = (child.type as Function)(child.props);
+      if (typeof node.type === "function") {
+        child = (node.type as FunctionComponent)(node.props);
         if (!isValidElement(child)) return child;
       }
 
-      const childType = child.type as keyof typeof m;
+      const nodeType = node.type as keyof typeof m;
 
-      const { className, ...restOfProps } = child.props;
+      const { className, ...restOfProps } = node.props;
 
       // Creates a motion version of the element child type
       const newElem = createElement(
-        m[childType] as string | FunctionComponent<any>,
+        m[nodeType] as string | FunctionComponent<any>,
         {
           ...restOfProps,
           ref: isRoot ? rootNode : undefined,
@@ -67,11 +73,11 @@ export function ExpandableCard({
               ? "cool-layout-animations-card-expanded"
               : "cool-layout-animations-card-condensed"
           }`,
-          layout: getLayoutValueFromChildren(child.props.children),
+          layout: getLayoutValueFromChildren(node.props.children),
           transition: isRoot ? transition : undefined,
         },
         convertChildrenToExpandableCardChildren(
-          child.props.children as ReactNode,
+          node.props.children as ReactNode,
           depth + 1,
         ),
       );
@@ -92,7 +98,7 @@ export function ExpandableCard({
       {motionChildren}
       {isCardExpanded && (
         <div
-          className={"cool-layout-animations-placeholder-box"}
+          className="cool-layout-animations-placeholder-box"
           style={{
             width: placeholderBoxWidth,
             height: placeholderBoxHeight,

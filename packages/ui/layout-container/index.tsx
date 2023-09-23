@@ -14,7 +14,7 @@ interface LayoutContainerProps {
 export function LayoutContainer({
   children,
   layoutDependency,
-}: LayoutContainerProps) {
+}: LayoutContainerProps): JSX.Element {
   const motionChildren = convertChildrenToMotionChildren(children, (child) => {
     return {
       layout: getLayoutValueFromChildren(child),

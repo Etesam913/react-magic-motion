@@ -1,6 +1,7 @@
-import type { FunctionComponent, ReactNode } from "react";
+import type { FunctionComponent, Ref, ReactNode } from "react";
 import { Children, createElement, isValidElement } from "react";
 import { m } from "framer-motion";
+import { isPortal } from "react-is";
 
 /** Sets the `layout` property depending on the type of the children*/
 export function getLayoutValueFromChildren(
@@ -15,36 +16,35 @@ export function convertChildrenToMotionChildren(
   customProps?: (child: ReactNode) => Record<string, unknown>,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
+    let node = child;
     // Checks if the child is a string or boolean or number
-    if (!isValidElement(child)) return child;
-    let childRef = null;
-    // Checks if the child is a function component
+    if (!isValidElement(node)) return node;
 
-    if (typeof child.type === "function") {
-      // console.log("before", child);
-      if (child.props?.test) {
-        childRef = child.props.test;
-      }
-      child = (child.type as Function)(child.props);
+    // Checks if the child is a function component
+    const nodeProps = node.props as Record<string, unknown>;
+
+    if (typeof node.type === "function") {
+      node = (node.type as FunctionComponent)(nodeProps);
 
       // console.log("after", childRef);
-      if (!isValidElement(child)) return child;
+      if (!isValidElement(node)) return node;
     }
 
-    const childType = child.type as keyof typeof m;
-    // console.log(child, child.props, child.ref);
+    const childType = node.type as keyof typeof m;
+
     // Creates a motion version of the element child type
     const passedInProps = customProps ? customProps(child) : {};
-    // console.log(child);
+    const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
+
     const newElem = createElement(
       m[childType] as string | FunctionComponent<any>,
       {
-        ...child.props,
-        ref: child.ref,
+        ...node.props,
+        ref: nodeRef,
         ...passedInProps,
       },
       convertChildrenToMotionChildren(
-        child.props.children as ReactNode,
+        node.props.children as ReactNode,
         customProps,
       ),
     );

@@ -9,14 +9,14 @@ import type { RefObject } from "react";
 export function usePlaceholderBoxSize(
   isCardExpanded: boolean,
   rootNode: RefObject<HTMLElement>,
-) {
+): { placeholderBoxHeight: number; placeholderBoxWidth: number } {
   const [placeholderBoxDimensions, setPlaceholderBoxDimensions] = useState({
     width: 0,
     height: 0,
   });
 
   useEffect(() => {
-    if (!isCardExpanded && rootNode?.current) {
+    if (!isCardExpanded && rootNode.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         const dimensions = {
           width: entries[0].borderBoxSize[0].inlineSize,
@@ -29,13 +29,13 @@ export function usePlaceholderBoxSize(
         });
       });
 
-      resizeObserver.observe(rootNode?.current);
+      resizeObserver.observe(rootNode.current);
 
       return () => {
         resizeObserver.disconnect();
       };
     }
-  }, [isCardExpanded]);
+  }, [isCardExpanded, rootNode]);
 
   return {
     placeholderBoxHeight: placeholderBoxDimensions.height,
