@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { TabSelect } from "ui";
+import { TabSelect } from "react-motionize";
 import "../../global.css";
 import "./page.css";
 

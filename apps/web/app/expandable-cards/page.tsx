@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ExpandableCard } from "ui";
+import { ExpandableCard } from "react-motionize";
 import "./page.css";
 import "../../global.css";
 import Link from "next/link";

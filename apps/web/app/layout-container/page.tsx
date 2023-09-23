@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { LayoutContainer } from "ui";
+import { LayoutContainer } from "react-motionize";
 import "../../global.css";
 import "./page.css";
 import { useRef, useState } from "react";
