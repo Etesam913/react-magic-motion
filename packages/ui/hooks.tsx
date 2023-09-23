@@ -8,7 +8,7 @@ import type { RefObject } from "react";
  */
 export function usePlaceholderBoxSize(
   isCardExpanded: boolean,
-  rootNode: RefObject<HTMLElement>
+  rootNode: RefObject<HTMLElement>,
 ) {
   const [placeholderBoxDimensions, setPlaceholderBoxDimensions] = useState({
     width: 0,
