@@ -1,5 +1,25 @@
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
 
+function shuffle<T>(array: T[]): T[] {
+  let currentIndex = array.length;
+  let randomIndex: number;
+  let temporaryValue: T;
+
+  // While there remain elements to shuffle
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 function TodoListItem({
   todo,
   setTodos,
@@ -78,6 +98,7 @@ export function TodoList(): JSX.Element {
             width: "100%",
           }}
         />
+
         <button
           type="submit"
           title="Add a new todo"
@@ -100,6 +121,20 @@ export function TodoList(): JSX.Element {
           }}
         >
           Add Todo
+        </button>
+
+        <button
+          type="submit"
+          title="Shuffle Items"
+          style={{
+            whiteSpace: "nowrap",
+            padding: "0.5rem 1rem",
+            backgroundColor: "#eac530",
+            color: "#ffffff",
+          }}
+          onClick={() => setTodos(shuffle([...todos]))}
+        >
+          🔀
         </button>
       </form>
     </div>
