@@ -1,32 +1,11 @@
-import { MyGoals } from "../components/my-goals";
-import { LayoutContainer } from "react-motionize";
-
-# react-motionize
-
-`react-motionize` is a react.js library that ✨ magically animates your components.
-
-## Getting Started
-
-### Installation
-
-```sh npm2yarn
-npm i react-motionize
-```
-
-### Usage
-
-#### Sample Code
-
-- `react-motionize` provides `<LayoutContainer />` for automatic animation of your components.
-
-```jsx copy filename="my-goals.js" showLineNumbers
 import { useState } from "react";
 import { LayoutContainer } from "react-motionize";
 
 function ListItem({ children }: { children: string }) {
   return (
     <li
-      style={{ backgroundColor: "rgba(249,250,251,.1)", padding: "0.5rem" }}
+      className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
+      style={{ padding: "0.5rem" }}
     >
       {children}
     </li>
@@ -72,9 +51,3 @@ export function MyGoals() {
     </LayoutContainer>
   );
 }
-
-```
-
-#### Example
-
-<MyGoals />
