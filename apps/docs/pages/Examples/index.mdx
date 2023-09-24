@@ -25,7 +25,7 @@ function App() {
 
 ### Todo list With `react-motionize`
 
-<LayoutContainer>
+<LayoutContainer transition={{ type: "spring", stiffness: 110, damping: 15 }}>
   <TodoList />
 </LayoutContainer>
 
@@ -36,7 +36,9 @@ import { LayoutContainer } from "react-motionize";
 
 function App() {
   return (
-    <LayoutContainer>
+    <LayoutContainer
+      transition={{ type: "spring", stiffness: 110, damping: 15 }}
+    >
       <TodoList />
     </LayoutContainer>
   );

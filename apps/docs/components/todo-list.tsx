@@ -56,7 +56,10 @@ export function TodoList(): JSX.Element {
   const [todos, setTodos] = useState([
     { id: crypto.randomUUID(), text: "🐕 Walk the dog" },
     { id: crypto.randomUUID(), text: "🍔 Eat lunch" },
-    { id: crypto.randomUUID(), text: "📚 Study React" },
+    { id: crypto.randomUUID(), text: "📚 Study react" },
+    { id: crypto.randomUUID(), text: "🏀 Play basketball" },
+    { id: crypto.randomUUID(), text: "🔎 Study biology" },
+    { id: crypto.randomUUID(), text: "👟 Buy shoes" },
   ]);
 
   const newTodoInput = useRef<HTMLInputElement>(null);

@@ -25,7 +25,7 @@ export default {
         <a
           href="https://github.com/etesam913/react-motionize"
           target="_blank"
-          style={{ display: "flex", gap: "0.35rem", alignItems: "center" }}
+          style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
         >
           <img
             style={{ height: 24, width: 24 }}
