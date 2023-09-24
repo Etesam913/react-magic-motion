@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LayoutContainer } from "react-motionize";
 
-function ListItem({ children }: { children: string }) {
+function ListItem({ children }: { children: string }): JSX.Element {
   return (
     <li
       className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
@@ -12,7 +12,7 @@ function ListItem({ children }: { children: string }) {
   );
 }
 
-export function MyGoals() {
+export function MyGoals(): JSX.Element {
   const [areGoalsShowing, setAreGoalsShowing] = useState(true);
   return (
     <LayoutContainer>
@@ -36,6 +36,7 @@ export function MyGoals() {
           </ul>
         )}
         <button
+          type="button"
           style={{
             width: "fit-content",
             whiteSpace: "nowrap",

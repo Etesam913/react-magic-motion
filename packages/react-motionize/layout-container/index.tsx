@@ -1,6 +1,6 @@
 "use client";
 
-import { LazyMotion, Transition, domMax } from "framer-motion";
+import { LazyMotion, type Transition, domMax } from "framer-motion";
 import {
   convertChildrenToMotionChildren,
   getLayoutValueFromChildren,
@@ -21,7 +21,7 @@ export function LayoutContainer({
     return {
       layout: getLayoutValueFromChildren(child),
       layoutDependency,
-      transition: transition,
+      transition,
     };
   });
 

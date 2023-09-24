@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { type Dispatch, type SetStateAction, useRef, useState } from "react";
 
 function TodoListItem({
   todo,
@@ -6,7 +6,7 @@ function TodoListItem({
 }: {
   todo: { id: string; text: string };
   setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
-}) {
+}): JSX.Element {
   return (
     <li
       className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
@@ -32,7 +32,7 @@ function TodoListItem({
   );
 }
 
-export function TodoList() {
+export function TodoList(): JSX.Element {
   const [todos, setTodos] = useState([
     { id: crypto.randomUUID(), text: "🐕 Walk the dog" },
     { id: crypto.randomUUID(), text: "🍔 Eat lunch" },
@@ -55,7 +55,7 @@ export function TodoList() {
           display: "flex",
           flexDirection: "column",
           gap: "0.75rem",
-          overflow: "auto",
+          overflow: "hidden",
         }}
       >
         {todos.map((todo) => (
