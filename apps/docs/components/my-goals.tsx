@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LayoutContainer } from "react-motionize";
+import { LayoutContainer } from "react-magic-motion";
 
 function ListItem({ children }: { children: string }): JSX.Element {
   return (

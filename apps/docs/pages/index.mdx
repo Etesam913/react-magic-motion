@@ -1,27 +1,36 @@
 import { MyGoals } from "../components/my-goals";
-import { LayoutContainer } from "react-motionize";
+import { LayoutContainer } from "react-magic-motion";
 
-# react-motionize
+<div style={{display: "flex", marginTop: "1.5rem", gap: "0.85rem"}}>
+<img
+    style={{ height: 36, width: 36 }}
+    src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
+  />
 
-`react-motionize` is a react.js library that ✨ magically animates your components.
+<h1 className=" nx-text-4xl nx-font-bold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100">
+  react-magic-motion
+</h1>
+</div>
+
+`react-magic-motion` is a react.js library that ✨ magically animates your components.
 
 ## Getting Started
 
 ### Installation
 
 ```sh npm2yarn
-npm i react-motionize
+npm i react-magic-motion
 ```
 
 ### Usage
 
-- `react-motionize` provides `<LayoutContainer />` for automatic animation of your components.
+- `react-magic-motion` provides `<LayoutContainer />` for automatic animation of your components.
 
 #### Sample Code
 
 ```jsx copy filename="my-goals.js" showLineNumbers /LayoutContainer/
 import { useState } from "react";
-import { LayoutContainer } from "react-motionize";
+import { LayoutContainer } from "react-magic-motion";
 
 function ListItem({ children }: { children: string }) {
   return (

@@ -3,13 +3,13 @@ export default {
     <span style={{ display: "flex", gap: "0.65rem", alignItems: "center" }}>
       <img
         style={{ height: 36, width: 36 }}
-        src="https://react-motionize.nyc3.cdn.digitaloceanspaces.com/react-motionize-logo.png"
+        src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
       />
-      <h1 style={{ fontWeight: "bold" }}>react-motionize</h1>
+      <h1 style={{ fontWeight: "bold" }}>react-magic-motion</h1>
     </span>
   ),
   project: {
-    link: "https://github.com/etesam913/react-motionize",
+    link: "https://github.com/etesam913/react-magic-motion",
   },
   footer: {
     text: (
@@ -23,15 +23,15 @@ export default {
         }}
       >
         <a
-          href="https://github.com/etesam913/react-motionize"
+          href="https://github.com/etesam913/react-magic-motion"
           target="_blank"
           style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
         >
           <img
             style={{ height: 24, width: 24 }}
-            src="https://react-motionize.nyc3.cdn.digitaloceanspaces.com/react-motionize-logo.png"
+            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
           />
-          react-motionize
+          react-magic-motion
         </a>
         <span> MIT {new Date().getFullYear()} ©</span>
       </span>

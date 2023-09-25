@@ -1,4 +1,4 @@
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["react-motionize"],
+  transpilePackages: ["react-magic-motion"],
 };

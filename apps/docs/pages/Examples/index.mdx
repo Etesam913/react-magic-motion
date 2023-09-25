@@ -1,5 +1,5 @@
 import { TodoList } from "../../components/todo-list";
-import { LayoutContainer } from "react-motionize";
+import { LayoutContainer } from "react-magic-motion";
 import { Callout } from "nextra/components";
 
 # To Do List Example
@@ -23,7 +23,7 @@ function App() {
   https://gist.github.com/Etesam913/8fb9875db69fb78bea1f51b2dec1eca4
 </Callout>
 
-### Todo list With `react-motionize`
+### Todo list With `react-magic-motion`
 
 <LayoutContainer transition={{ type: "spring", stiffness: 110, damping: 15 }}>
   <TodoList />
@@ -31,8 +31,8 @@ function App() {
 
 #### Sample Code
 
-```jsx filename="Todo List With react-motionize" showLineNumbers copy /LayoutContainer/
-import { LayoutContainer } from "react-motionize";
+```jsx filename="Todo List With react-magic-motion" showLineNumbers copy /LayoutContainer/
+import { LayoutContainer } from "react-magic-motion";
 
 function App() {
   return (
