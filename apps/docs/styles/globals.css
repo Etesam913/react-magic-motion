@@ -1,0 +1,20 @@
+.toggle-circle{
+  height: 18px;
+  width: 18px;
+  border-radius: 999rem;
+  background-color: #c7c7c7;
+}
+.dark .toggle-circle{
+  background-color: #666666;
+}
+
+.toggle-button{
+  background-color: rgba(0,0,0,.05);
+
+}
+
+.dark .toggle-button{
+  background-color: rgba(249,250,251,.1);
+}
+
+

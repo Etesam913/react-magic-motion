@@ -1,45 +1,184 @@
 import { TodoList } from "../../components/todo-list";
 import { LayoutContainer } from "react-magic-motion";
 import { Callout } from "nextra/components";
+import { useState } from "react";
+import { Toggle } from "../../components/toggle";
 
 # To Do List Example
 
-### Todo list With No Animation
+export function App() {
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      {isAnimationEnabled ? (
+        <LayoutContainer>
+          <TodoList />{" "}
+        </LayoutContainer>
+      ) : (
+        <TodoList />
+      )}
+      <h3 style={{marginTop: '2.5rem'}}>Options </h3>
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <Toggle
+          isActive={isAnimationEnabled}
+          setIsActive={setIsAnimationEnabled}
+        />
 
-<TodoList />
+        <span>Animation {isAnimationEnabled ? "Enabled" : "Disabled"}</span>
+      </div>
+    </div>
+
+);
+}
+
+<App />
 
 #### Sample Code
 
 ```jsx filename="Todo List" showLineNumbers copy
-function App() {
-  return(
-    <TodoList />;
-  )
+import { type Dispatch, type SetStateAction, useRef, useState } from "react";
+
+function shuffle<T>(array: T[]): T[] {
+  let currentIndex = array.length;
+  let randomIndex: number;
+  let temporaryValue: T;
+
+  // While there remain elements to shuffle
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
-```
 
-<Callout type="info" emoji="ℹ️">
-  The full code for the `<TodoList />` can be found here:
-  https://gist.github.com/Etesam913/8fb9875db69fb78bea1f51b2dec1eca4
-</Callout>
-
-### Todo list With `react-magic-motion`
-
-<LayoutContainer transition={{ type: "spring", stiffness: 110, damping: 15 }}>
-  <TodoList />
-</LayoutContainer>
-
-#### Sample Code
-
-```jsx filename="Todo List With react-magic-motion" showLineNumbers copy /LayoutContainer/
-import { LayoutContainer } from "react-magic-motion";
-
-function App() {
+function TodoListItem({
+  todo,
+  setTodos,
+}: {
+  todo: { id: string; text: string };
+  setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
+}): JSX.Element {
   return (
-    <LayoutContainer
-      transition={{ type: "spring", stiffness: 110, damping: 15 }}
+    <li
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        lineHeight: "2rem",
+        padding: "0.35rem 1rem",
+        backgroundColor: "rgba(249,250,251,.1)"
+      }}
     >
-      <TodoList />
+      {todo.text}
+      <button
+        type="button"
+        title="Delete this item"
+        onClick={() =>
+          setTodos((todos) => todos.filter((t) => t.id !== todo.id))
+        }
+      >
+        🗑️
+      </button>
+    </li>
+  );
+}
+
+function TodoList(): JSX.Element {
+  const [todos, setTodos] = useState([
+    { id: crypto.randomUUID(), text: "🐕 Walk the dog" },
+    { id: crypto.randomUUID(), text: "🍔 Eat lunch" },
+    { id: crypto.randomUUID(), text: "📚 Study react" },
+    { id: crypto.randomUUID(), text: "🏀 Play basketball" },
+    { id: crypto.randomUUID(), text: "🔎 Study biology" },
+    { id: crypto.randomUUID(), text: "👟 Buy shoes" },
+  ]);
+
+  const newTodoInput = useRef<HTMLInputElement>(null);
+
+  return (
+    <LayoutContainer>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
+          marginTop: "1rem",
+        }}
+      >
+        <ul
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.75rem",
+            overflow: "hidden",
+          }}
+        >
+          {todos.map((todo) => (
+            <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
+          ))}
+        </ul>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          style={{ display: "flex", gap: "1rem" }}
+        >
+          <input
+            ref={newTodoInput}
+            type="text"
+            placeholder="Write a new todo 📝"
+            style={{
+              padding: "0.5rem 1rem",
+              border: "none",
+              borderRadius: "0.25rem",
+              width: "100%",
+              backgroundColor: "rgba(249,250,251,.1)"
+            }}
+          />
+
+          <button
+            type="submit"
+            title="Add a new todo"
+            style={{
+              whiteSpace: "nowrap",
+              padding: "0.5rem 1rem",
+              backgroundColor: "#5a70ed",
+              color: "#ffffff",
+            }}
+            onClick={() => {
+              if (!newTodoInput.current?.value) return;
+              setTodos([
+                ...todos,
+                {
+                  id: crypto.randomUUID(),
+                  text: newTodoInput.current.value,
+                },
+              ]);
+              newTodoInput.current.value = "";
+            }}
+          >
+            Add Todo
+          </button>
+
+          <button
+            type="submit"
+            title="Shuffle Items"
+            style={{
+              whiteSpace: "nowrap",
+              padding: "0.5rem 1rem",
+              backgroundColor: "#eac530",
+              color: "#ffffff",
+            }}
+            onClick={() => setTodos(shuffle([...todos]))}
+          >
+            🔀
+          </button>
+        </form>
+      </div>
     </LayoutContainer>
   );
 }
