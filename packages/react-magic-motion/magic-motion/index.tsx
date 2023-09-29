@@ -13,7 +13,7 @@ interface LayoutContainerProps {
   disabled?: boolean;
 }
 
-export function LayoutContainer({
+export function MagicMotion({
   children,
   transition,
   layoutDependency,

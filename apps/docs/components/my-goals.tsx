@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LayoutContainer } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
 
 function ListItem({ children }: { children: string }): JSX.Element {
   return (
@@ -15,7 +15,7 @@ function ListItem({ children }: { children: string }): JSX.Element {
 export function MyGoals(): JSX.Element {
   const [areGoalsShowing, setAreGoalsShowing] = useState(true);
   return (
-    <LayoutContainer>
+    <MagicMotion>
       <div
         style={{
           marginTop: "0.75rem",
@@ -49,6 +49,6 @@ export function MyGoals(): JSX.Element {
           {areGoalsShowing ? "Hide" : "Show"} my goals
         </button>
       </div>
-    </LayoutContainer>
+    </MagicMotion>
   );
 }

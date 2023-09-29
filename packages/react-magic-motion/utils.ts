@@ -11,7 +11,7 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-const forbiddenComponentNames = new Set(["LayoutContainer"])
+const forbiddenComponentNames = new Set(["MagicMotion"])
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,

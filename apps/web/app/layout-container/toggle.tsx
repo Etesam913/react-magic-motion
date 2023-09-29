@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { LayoutContainer } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
 
 export function Toggle({
   isActive,
@@ -21,11 +21,9 @@ export function Toggle({
         borderRadius: "999rem",
       }}
     >
-      <LayoutContainer
-        transition={{ type: "spring", damping: 14, stiffness: 150 }}
-      >
+      <MagicMotion transition={{ type: "spring", damping: 14, stiffness: 150 }}>
         <span className="toggle-circle" />
-      </LayoutContainer>
+      </MagicMotion>
     </button>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { LayoutContainer } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
 import "../../global.css";
 import "./page.css";
 import { useRef, useState } from "react";
@@ -41,14 +41,14 @@ export default function LayoutContainerPage() {
       </Link>
       <h1>Layout Container</h1>
       <form className="submit-form" onSubmit={(e) => e.preventDefault()}>
-        <LayoutContainer>
+        <MagicMotion>
           <ul className="todo-list">
             {items.map((item) => (
               <TodoItem key={item.id} item={item} setItems={setItems} />
             ))}
           </ul>
-        </LayoutContainer>
-        <LayoutContainer>
+        </MagicMotion>
+        <MagicMotion>
           <div className="submit-row">
             <input ref={inputRef} className="add-input" type="text" />
 
@@ -76,7 +76,7 @@ export default function LayoutContainerPage() {
               Shuffle
             </button>
           </div>
-        </LayoutContainer>
+        </MagicMotion>
       </form>
     </main>
   );
