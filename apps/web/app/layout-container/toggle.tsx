@@ -7,12 +7,11 @@ export function Toggle({
 }: {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
-}): JSX.Element {
+}) {
   return (
     <button
       onClick={() => setIsActive((prev) => !prev)}
       className="toggle-button"
-      type="button"
       style={{
         display: "flex",
         justifyContent: isActive ? "flex-end" : "flex-start",

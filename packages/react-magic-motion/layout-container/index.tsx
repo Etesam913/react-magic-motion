@@ -10,13 +10,17 @@ interface LayoutContainerProps {
   children: JSX.Element;
   transition?: Transition;
   layoutDependency?: unknown;
+  disabled?: boolean;
 }
 
 export function LayoutContainer({
   children,
   transition,
   layoutDependency,
+  disabled,
 }: LayoutContainerProps): JSX.Element {
+  if (disabled) return children;
+
   const motionChildren = convertChildrenToMotionChildren(children, (child) => {
     return {
       layout: getLayoutValueFromChildren(child),

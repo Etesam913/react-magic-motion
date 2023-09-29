@@ -66,3 +66,17 @@
 .add-input:focus-visible {
   box-shadow: 0 0 0 2px #6697f7;
 }
+
+
+.toggle-circle{
+  height: 18px;
+  width: 18px;
+  border-radius: 999rem;
+  background-color: #c7c7c7;
+}
+
+.toggle-button{
+  background-color: rgba(0,0,0,.05);
+  border: 0;
+  cursor: pointer;
+}

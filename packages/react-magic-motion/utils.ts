@@ -11,6 +11,8 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
+const forbiddenComponentNames = new Set(["LayoutContainer"])
+
 export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps?: (child: ReactNode) => Record<string, unknown>,
@@ -19,11 +21,15 @@ export function convertChildrenToMotionChildren(
     let node = child;
     // Checks if the child is a string or boolean or number
     if (!isValidElement(node)) return node;
-
+    
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
 
     if (typeof node.type === "function") {
+      if(forbiddenComponentNames.has(node.type.name)){
+        return node;
+      }
+
       node = (node.type as FunctionComponent)(nodeProps);
 
       // console.log("after", childRef);
