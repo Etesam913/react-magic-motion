@@ -5,5 +5,5 @@ const withNextra = require("nextra")({
 
 module.exports = withNextra({
   transpilePackages: ["react-magic-motion"],
-  reactStrictMode: true,
+  reactStrictMode: false,
 });

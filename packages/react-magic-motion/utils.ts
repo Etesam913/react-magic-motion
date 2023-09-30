@@ -11,7 +11,7 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-const forbiddenComponentNames = new Set(["MagicMotion", "MagicExclude"])
+const forbiddenComponentNames = new Set(["MagicMotion", "MagicExclude"]);
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
@@ -21,27 +21,25 @@ export function convertChildrenToMotionChildren(
     let node = child;
     // Checks if the child is a string or boolean or number
     if (!isValidElement(node)) return node;
-    
+
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
 
     if (typeof node.type === "function") {
-      if(forbiddenComponentNames.has(node.type.name)){
+      if (forbiddenComponentNames.has(node.type.name)) {
         return node;
       }
 
       node = (node.type as FunctionComponent)(nodeProps);
-
-      // console.log("after", childRef);
       if (!isValidElement(node)) return node;
     }
 
     const childType = node.type as keyof typeof m;
-
+    console.log(child);
     // Creates a motion version of the element child type
     const passedInProps = customProps ? customProps(child) : {};
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
-    console.log(child, passedInProps)
+
     const newElem = createElement(
       m[childType] as string | FunctionComponent<any>,
       {

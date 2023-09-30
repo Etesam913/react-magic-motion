@@ -1,34 +1,9 @@
-import { TodoList } from "../../components/todo-list";
-import { MagicMotion } from "react-magic-motion";
 import { Callout } from "nextra/components";
-import { useState } from "react";
-import { Toggle } from "../../components/toggle";
+import { ExampleComponent } from "../../components/example-component";
 
 # To Do List Example
 
-export function App() {
-  const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <MagicMotion
-        disabled={!isAnimationEnabled}
-      >
-        <TodoList />
-        <p style={{ marginTop: "0.65rem" }}>Options</p>
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <Toggle
-            isActive={isAnimationEnabled}
-            setIsActive={setIsAnimationEnabled}
-          />
-          <span>Animation {isAnimationEnabled ? "Enabled" : "Disabled"}</span>
-        </div>
-      </MagicMotion>
-    </div>
-
-);
-}
-
-<App />
+<ExampleComponent />
 
 #### Sample Code
 

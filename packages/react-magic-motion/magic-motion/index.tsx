@@ -20,7 +20,7 @@ export function MagicMotion({
   disabled,
 }: LayoutContainerProps): JSX.Element {
   if (disabled) return children;
-
+  console.log("---");
   const motionChildren = convertChildrenToMotionChildren(children, (child) => {
     return {
       layout: getLayoutValueFromChildren(child),
@@ -28,6 +28,7 @@ export function MagicMotion({
       transition,
     };
   });
+  console.log("---");
 
   return <LazyMotion features={domMax}>{motionChildren}</LazyMotion>;
 }
