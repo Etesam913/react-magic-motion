@@ -10,7 +10,9 @@ export function App() {
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <MagicMotion disabled={!isAnimationEnabled}>
+      <MagicMotion
+        disabled={!isAnimationEnabled}
+      >
         <TodoList />
         <p style={{ marginTop: "0.65rem" }}>Options</p>
         <div style={{ display: "flex", gap: "1rem" }}>
@@ -22,7 +24,8 @@ export function App() {
         </div>
       </MagicMotion>
     </div>
-  );
+
+);
 }
 
 <App />

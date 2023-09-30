@@ -11,7 +11,7 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-const forbiddenComponentNames = new Set(["MagicMotion"])
+const forbiddenComponentNames = new Set(["MagicMotion", "MagicExclude"])
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
@@ -41,7 +41,7 @@ export function convertChildrenToMotionChildren(
     // Creates a motion version of the element child type
     const passedInProps = customProps ? customProps(child) : {};
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
-
+    console.log(child, passedInProps)
     const newElem = createElement(
       m[childType] as string | FunctionComponent<any>,
       {
