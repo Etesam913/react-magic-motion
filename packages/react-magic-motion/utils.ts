@@ -35,7 +35,7 @@ export function convertChildrenToMotionChildren(
     }
 
     const childType = node.type as keyof typeof m;
-    console.log(child);
+
     // Creates a motion version of the element child type
     const passedInProps = customProps ? customProps(child) : {};
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);

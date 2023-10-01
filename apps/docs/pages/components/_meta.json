@@ -1,3 +1,4 @@
 {
-  "index": "<MagicMotion />"
+  "index": "<MagicMotion />",
+  "magic-exclude": "<MagicExclude />"
 }

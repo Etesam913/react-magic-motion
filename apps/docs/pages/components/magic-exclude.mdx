@@ -1,0 +1,11 @@
+# `<MagicExclude />`
+
+### Overview
+
+- This component is to be used inside of a `<MagicMotion />` component.
+- It will exclude any children from being auto-animated.
+- As the `<MagicMotion />` component controls the `transform` css property of all its children, the `<MagicExclude />` property is good for when you want to set your own `transform` property on a child component.
+
+An example of this can be seen on lines 32-52 of the [Accordion](/examples/accordion#sample-code) sample code.
+
+- As the `transform` property is set to `transform: rotate(${isOpen ? 180 : 0}deg)` on the`<svg />`element, the component is wrapped in a `<MagicExclude />`.

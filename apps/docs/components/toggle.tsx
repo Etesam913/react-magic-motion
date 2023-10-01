@@ -1,5 +1,4 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { MagicMotion } from "react-magic-motion";
 
 export function Toggle({
   isActive,
@@ -22,9 +21,7 @@ export function Toggle({
         borderRadius: "999rem",
       }}
     >
-      <MagicMotion transition={{ type: "spring", damping: 14, stiffness: 150 }}>
-        <span className="toggle-circle" />
-      </MagicMotion>
+      <span className="toggle-circle" />
     </button>
   );
 }

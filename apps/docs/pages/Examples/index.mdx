@@ -1,14 +1,20 @@
 import { Callout } from "nextra/components";
 import { ExampleComponent } from "../../components/example-component";
+import { TodoList } from "../../components/todo-list";
 
-# To Do List Example
+# To Do List
 
-<ExampleComponent />
+### To Do List Example
+
+<ExampleComponent>
+  <TodoList />
+</ExampleComponent>
 
 #### Sample Code
 
 ```jsx filename="Todo List" showLineNumbers copy
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
+import { MagicMotion } from "react-magic-motion"
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
