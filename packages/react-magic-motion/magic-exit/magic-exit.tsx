@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatePresence, AnimatePresenceProps } from "framer-motion";
 
 interface MagicExitProps extends AnimatePresenceProps {

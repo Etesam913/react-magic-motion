@@ -1,1 +1,16 @@
-# Layout Container
+import { Callout } from "nextra/components";
+
+# `<MagicMotion />`
+
+### Overview
+
+- This component is the main component of the library.
+- All children of this component will be automatically animated.
+
+An example of this component can be seen on the [To Do List example](/examples).
+
+<Callout type="warning" emoji="⚠️">
+  All children of the `<MagicMotion />` component will have their css
+  `transform` property overriden. To exclude a child from being animated, you
+  can wrap it in a `<MagicExclude />`
+</Callout>

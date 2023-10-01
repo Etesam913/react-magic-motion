@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { MagicMotion } from "react-magic-motion";
 
 const menuPages = new Map([
   ["home", ["📓 My Classes", "🤩 My Hobbies", "🧑‍💻 My Programming Languages"]],
@@ -71,7 +70,7 @@ export function ContextMenu() {
           return (
             <li
               key={item}
-              style={{ padding: "0.35rem 0.7rem" }}
+              style={{ padding: "0.35rem 0.7rem", borderRadius: "0.25rem" }}
               className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
             >
               <button

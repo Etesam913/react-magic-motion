@@ -1,5 +1,5 @@
 // component exports
-export * from "./expandable-card";
+export * from "./magic-card";
 export * from "./magic-motion";
 export * from "./tab-select";
 export * from "./magic-exclude";

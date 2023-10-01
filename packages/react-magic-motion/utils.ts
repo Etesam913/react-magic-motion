@@ -11,7 +11,7 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-const forbiddenComponentNames = new Set(["MagicMotion", "MagicExclude"]);
+export const forbiddenComponentNames = new Set(["MagicMotion", "MagicExclude"]);
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,

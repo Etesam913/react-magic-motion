@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import { ExpandableCard } from "react-magic-motion";
+import { MagicCard } from "react-magic-motion";
 import "./page.css";
 import "../../global.css";
 import Link from "next/link";
 
-export default function ExpandableCards() {
+export default function MagicCards() {
   const [isCardExpanded1, setIsCardExpanded1] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ export default function ExpandableCards() {
       <h1>Expandable Cards</h1>
 
       <div className="expandable-card-container">
-        <ExpandableCard
+        <MagicCard
           isCardExpanded={isCardExpanded1}
           onBackgroundFadeClick={() => setIsCardExpanded1(false)}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -69,7 +69,7 @@ export default function ExpandableCards() {
               </div>
             )}
           </button>
-        </ExpandableCard>
+        </MagicCard>
 
         {/* <ExpandableCard
           isCardExpanded={isCardExpanded2}

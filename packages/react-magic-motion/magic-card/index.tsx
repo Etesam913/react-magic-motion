@@ -1,4 +1,5 @@
 "use client";
+
 import {
   AnimatePresence,
   LazyMotion,
@@ -15,10 +16,10 @@ import {
   type ReactNode,
 } from "react";
 import { usePlaceholderBoxSize } from "../hooks";
-import { getLayoutValueFromChildren } from "../utils";
+import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
 import "./index.css";
 
-interface ExpandableCardProps {
+interface MagicCardProps {
   isCardExpanded: boolean;
   children: JSX.Element;
   transition?: Transition;
@@ -26,16 +27,16 @@ interface ExpandableCardProps {
   onBackgroundFadeClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export function ExpandableCard({
+export function MagicCard({
   children,
   isCardExpanded,
   transition,
   isBackgroundFadeEnabled = true,
   onBackgroundFadeClick,
-}: ExpandableCardProps): JSX.Element {
+}: MagicCardProps): JSX.Element {
   const rootNode = useRef<HTMLElement>(null);
 
-  function convertChildrenToExpandableCardChildren(
+  function convertChildrenToMagicCardChildren(
     nodes: ReactNode,
     depth: number,
   ): ReactNode {
@@ -52,6 +53,9 @@ export function ExpandableCard({
 
       // Checks if the child is a function component
       if (typeof node.type === "function") {
+        if (forbiddenComponentNames.has(node.type.name)) {
+          return node;
+        }
         node = (node.type as FunctionComponent)(node.props);
         if (!isValidElement(node)) return node;
       }
@@ -68,13 +72,13 @@ export function ExpandableCard({
           ref: isRoot ? rootNode : undefined,
           className: `${className ?? ""} ${
             isRoot && isCardExpanded
-              ? "cool-layout-animations-card-expanded"
-              : "cool-layout-animations-card-condensed"
+              ? "react-magic-motion-card-expanded"
+              : "react-magic-motion-card-condensed"
           }`,
           layout: getLayoutValueFromChildren(node.props.children),
           transition: isRoot ? transition : undefined,
         },
-        convertChildrenToExpandableCardChildren(
+        convertChildrenToMagicCardChildren(
           node.props.children as ReactNode,
           depth + 1,
         ),
@@ -84,7 +88,7 @@ export function ExpandableCard({
     });
   }
 
-  const motionChildren = convertChildrenToExpandableCardChildren(children, 1);
+  const motionChildren = convertChildrenToMagicCardChildren(children, 1);
 
   const { placeholderBoxHeight, placeholderBoxWidth } = usePlaceholderBoxSize(
     isCardExpanded,
@@ -96,7 +100,7 @@ export function ExpandableCard({
       {motionChildren}
       {isCardExpanded && (
         <div
-          className="cool-layout-animations-placeholder-box"
+          className="react-magic-motion-placeholder-box"
           style={{
             width: placeholderBoxWidth,
             height: placeholderBoxHeight,
@@ -111,7 +115,7 @@ export function ExpandableCard({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={onBackgroundFadeClick}
-              className="cool-layout-animations-background-fade"
+              className="react-magic-motion-background-fade"
             />
           )}
         </AnimatePresence>
