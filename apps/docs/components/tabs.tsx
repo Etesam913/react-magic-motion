@@ -1,14 +1,3 @@
-import { UnderlineTabs, PillTabs } from "../../components/tabs";
-
-# Tabs
-
-### Underline Example
-
-<UnderlineTabs />
-
-#### Sample Code
-
-```jsx filename="Underline Tabs" copy showLineNumbers
 import { useState } from "react";
 import { MagicTabSelect } from "react-magic-motion";
 
@@ -23,10 +12,8 @@ export function UnderlineTabs() {
         type="button"
         key={`tab-${text}`}
         onClick={() => setSelectedIndex(i)}
-        style={{
-          padding: "0.65rem 0.75rem",
-          backgroundColor: "rgba(249,250,251,.1)"
-        }}
+        style={{ padding: "0.65rem 0.75rem" }}
+        className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
       >
         {text}
 
@@ -40,7 +27,7 @@ export function UnderlineTabs() {
                 style={{
                   width: "100%",
                   height: "0.15rem",
-                  backgroundColor: "white",
+                  backgroundColor: "currentColor",
                   position: "absolute",
                 }}
               />
@@ -50,17 +37,13 @@ export function UnderlineTabs() {
       </button>
     );
   });
-```
 
-### Pill Example
-
-<PillTabs />
-
-#### Sample Code
-
-```jsx filename="Pill Tabs" copy showLineNumbers
-import { useState } from "react";
-import { MagicTabSelect } from "react-magic-motion";
+  return (
+    <div style={{ display: "flex", gap: "0.75rem", margin: "0.75rem 0" }}>
+      {tabsComponents}
+    </div>
+  );
+}
 
 const pillTabs = ["Hobbies", "Work", "Projects", "Languages"];
 
@@ -75,8 +58,7 @@ export function PillTabs() {
         style={{
           position: "relative",
           padding: "0.65rem 0.75rem",
-          backgroundColor: "black",
-          color: "white",
+          color: "currentColor",
         }}
       >
         {selectedIndex === i && (
@@ -93,7 +75,7 @@ export function PillTabs() {
                 right: 0,
                 bottom: 0,
                 zIndex: 10,
-                backgroundColor: "white",
+                backgroundColor: "currentColor",
                 mixBlendMode: "difference",
               }}
             />
@@ -110,4 +92,3 @@ export function PillTabs() {
     </div>
   );
 }
-```

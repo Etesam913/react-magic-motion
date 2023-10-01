@@ -140,7 +140,7 @@ export function ExpandableCard(): JSX.Element {
             </MagicExclude>
           </button>
         </div>
-        <div style={{ overflowY: "auto" }}>
+        <div style={{ overflowY: "auto", overflowX: "hidden" }}>
           <img
             style={{
               maxWidth: isCardExpanded ? "24rem" : "17.5rem",

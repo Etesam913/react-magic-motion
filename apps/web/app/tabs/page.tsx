@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { TabSelect } from "react-magic-motion";
+import { MagicTabSelect } from "react-magic-motion";
 import "../../global.css";
 import "./page.css";
 
@@ -27,9 +27,9 @@ export default function TabsPage() {
         {text}
         {selectedIndex1 === i && (
           <div style={{ position: "relative" }}>
-            <TabSelect id="underline">
+            <MagicTabSelect id="underline">
               <div className="underline" />
-            </TabSelect>
+            </MagicTabSelect>
           </div>
         )}
       </button>
@@ -47,12 +47,12 @@ export default function TabsPage() {
       >
         {text}
         {selectedIndex2 === i && (
-          <TabSelect
+          <MagicTabSelect
             id="highlight"
             transition={{ type: "spring", damping: 13, stiffness: 110 }}
           >
             <div className="highlight" style={{ borderRadius: 36 }} />
-          </TabSelect>
+          </MagicTabSelect>
         )}
       </button>
     );
