@@ -7,7 +7,13 @@ import { isPortal } from "react-is";
 export function getLayoutValueFromChildren(
   children: ReactNode,
 ): "position" | true {
-  if (typeof children === "string") return "position";
+  if (
+    typeof children === "string" ||
+    (Array.isArray(children) &&
+      children.every((child) => typeof child === "string"))
+  ) {
+    return "position";
+  }
   return true;
 }
 
@@ -41,7 +47,7 @@ export function convertChildrenToMotionChildren(
     const childType = node.type as keyof typeof m;
 
     // Creates a motion version of the element child type
-    const passedInProps = customProps ? customProps(child) : {};
+    const passedInProps = customProps ? customProps(node.props.children) : {};
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
 
     const newElem = createElement(

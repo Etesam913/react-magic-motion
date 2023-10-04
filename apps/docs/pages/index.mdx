@@ -22,7 +22,7 @@ import { MagicMotion } from "react-magic-motion";
 npm i react-magic-motion
 ```
 
-### Usage
+### Basic Usage
 
 - `react-magic-motion` provides `<MagicMotion />` for automatic animation of your components.
 
@@ -87,3 +87,22 @@ export function MyGoals() {
 #### Example
 
 <MyGoals />
+
+## About
+
+### Info
+
+- `react-magic-motion` provides the `<MagicMotion />` component for automatic animation of your components.
+
+* The `<MagicCard />` and `<MagicTabSelect />` components are built on top of `<MagicMotion />` and to provide a more specific use case for automatic animation.
+
+- `react-magic-motion`'s only dependency is `framer-motion` as the automatic animation is built off of `framer-motion`'s layout animations.
+
+### Package Comparisons
+
+|                                                                 | `react-magic-motion` | `@formkit/auto-animate` |
+| :-------------------------------------------------------------- | :------------------: | :---------------------: |
+| "linear" easing                                                 |          ✅          |           ✅            |
+| "spring" easing                                                 |          ✅          |           ❌            |
+| [shared layout animations](http://localhost:3001/examples/tabs) |          ✅          |           ❌            |
+| multi-framework support                                         |          ❌          |           ✅            |

@@ -35,19 +35,23 @@ export function MyGoals(): JSX.Element {
             <ListItem>🏃‍♂️ Run a 5k in under 20 minutes</ListItem>
           </ul>
         )}
-        <button
-          type="button"
-          style={{
-            width: "fit-content",
-            whiteSpace: "nowrap",
-            padding: "0.5rem 1rem",
-            backgroundColor: "#5a70ed",
-            color: "#ffffff",
-          }}
-          onClick={() => setAreGoalsShowing(!areGoalsShowing)}
-        >
-          {areGoalsShowing ? "Hide" : "Show"} my goals
-        </button>
+        <div>
+          <button
+            type="button"
+            style={{
+              width: "fit-content",
+              whiteSpace: "nowrap",
+              padding: "0.5rem 1rem",
+              backgroundColor: "#5a70ed",
+              color: "#ffffff",
+            }}
+            onClick={() => setAreGoalsShowing(!areGoalsShowing)}
+          >
+            <div>
+              {areGoalsShowing ? "Hide" : "wowowowowowowowowowwoo"} my goals
+            </div>
+          </button>
+        </div>
       </div>
     </MagicMotion>
   );
