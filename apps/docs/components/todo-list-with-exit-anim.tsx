@@ -1,16 +1,3 @@
-import { TodoListWithExit } from "../../components/todo-list-with-exit-anim";
-
-# Adding Exit Animations
-
-The `<AnimatePresence>` component is used to remove components from the DOM. It's used in conjunction with the `exit` prop on a `<motion>` component.
-
-### Example: Todo List with Exit Animations
-
-<TodoListWithExit />
-
-### Sample Code
-
-```jsx filename="Todo List With Example" showLineNumbers copy /AnimatePresence/ /exit/ /motion.li/ /layout/ /transition/ /MagicMotion/
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
 import { AnimatePresence, MagicMotion, motion } from "react-magic-motion";
 
@@ -164,4 +151,3 @@ export function TodoListWithExit(): JSX.Element {
     </MagicMotion>
   );
 }
-```
