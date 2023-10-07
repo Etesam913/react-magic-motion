@@ -9,3 +9,13 @@
 An example of this can be seen on lines 32-52 of the [Accordion](/examples/accordion#sample-code) sample code.
 
 - As the `transform` property is set to `transform: rotate(${isOpen ? 180 : 0}deg)` on the`<svg />`element, the component is wrapped in a `<MagicExclude />`.
+
+* It is also recommended to wrap all svg elements in a `<MagicExclude />` component as they can be difficult to automatically animate.
+
+### Props
+
+```ts
+interface MagicExcludeProps {
+  children: JSX.Element;
+}
+```

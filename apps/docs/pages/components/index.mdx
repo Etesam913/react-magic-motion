@@ -14,3 +14,20 @@ An example of this component can be seen on the [To Do List example](/examples).
   `transform` property overriden. To exclude a child from being animated, you
   can wrap it in a `<MagicExclude />`
 </Callout>
+
+### Props
+
+```ts
+interface MagicMotionProps {
+  children: JSX.Element;
+  transition?: Transition;
+  layoutDependency?: unknown;
+  disabled?: boolean;
+}
+```
+
+| Prop name                                                 | Default value                                                                  | Description                                                                                                                                   |
+| :-------------------------------------------------------- | :----------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`transition`](https://www.framer.com/motion/transition/) | [see here](https://gist.github.com/Etesam913/c56419e539573aece75bb7b9c6feef55) | The transition animation for the card.                                                                                                        |
+| `layoutDependency`                                        | `undefined`                                                                    | A value that is used to optimize when a layout animation should occur. In the To Do list example this value could be set to the `todos` state |
+| `disabled`                                                | `false`                                                                        | If `true`, the animation will be disabled                                                                                                     |

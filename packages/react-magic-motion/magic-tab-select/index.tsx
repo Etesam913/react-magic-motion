@@ -1,7 +1,13 @@
 "use client";
 
-import { type Transition, m, LazyMotion, domMax } from "framer-motion";
-import { type FunctionComponent, createElement } from "react";
+import {
+  type Transition,
+  m,
+  LazyMotion,
+  domMax,
+  LayoutGroup,
+} from "framer-motion";
+import { type FunctionComponent, createElement, useMemo } from "react";
 
 interface TabSelectProps {
   children: JSX.Element;

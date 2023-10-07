@@ -1,0 +1,28 @@
+# `<MagicCard />`
+
+### Overview
+
+- This component is used for making an expandable card-like animation.
+- Passing in an `isCardExpanded` prop will make the card expand and collapse.
+- The expanded card is positioned absolutely and in the center of the screen.
+
+An example of the component can be seen on the [Expandable Card example](/examples/expandable-card).
+
+### Props
+
+```ts
+interface MagicCardProps {
+  isCardExpanded: boolean;
+  children: JSX.Element;
+  transition?: Transition;
+  isBackgroundFadeEnabled?: boolean;
+  onBackgroundFadeClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+```
+
+| Prop name                                                 | Default value                                                                  | Description                                                                                                                                |
+| :-------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `isCardExpanded`                                          | `false`                                                                        | Whether the card is expanded or not.                                                                                                       |
+| [`transition`](https://www.framer.com/motion/transition/) | [see here](https://gist.github.com/Etesam913/c56419e539573aece75bb7b9c6feef55) | The transition animation for the card.                                                                                                     |
+| `isBackgroundFadeEnabled`                                 | `true`                                                                         | Whether the background for the expanded card should show. This is good for creating contrast between the expanded card and the background. |
+| `onBackgroundFadeClick`                                   | `undefined`                                                                    | Callback function for when the background is clicked. This is useful for collapsing the card.                                              |

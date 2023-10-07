@@ -1,12 +1,17 @@
 "use client";
 
-import { LazyMotion, type Transition, domMax } from "framer-motion";
+import {
+  LazyMotion,
+  type Transition,
+  domMax,
+  LayoutGroup,
+} from "framer-motion";
 import {
   convertChildrenToMotionChildren,
   getLayoutValueFromChildren,
 } from "../utils";
 
-interface LayoutContainerProps {
+interface MagicMotionProps {
   children: JSX.Element;
   transition?: Transition;
   layoutDependency?: unknown;
@@ -18,7 +23,7 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
-}: LayoutContainerProps): JSX.Element {
+}: MagicMotionProps): JSX.Element {
   if (disabled) return children;
 
   const motionChildren = convertChildrenToMotionChildren(children, (child) => {
@@ -29,5 +34,9 @@ export function MagicMotion({
     };
   });
 
-  return <LazyMotion features={domMax}>{motionChildren}</LazyMotion>;
+  return (
+    <LayoutGroup>
+      <LazyMotion features={domMax}>{motionChildren}</LazyMotion>
+    </LayoutGroup>
+  );
 }

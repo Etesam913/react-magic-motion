@@ -20,7 +20,7 @@ export function UnderlineTabs() {
         {selectedIndex === i && (
           <div style={{ position: "relative", transform: "translateY(3px)" }}>
             <MagicTabSelect
-              id="underline"
+              id="underlineTabs"
               transition={{ type: "spring", bounce: 0.3 }}
             >
               <div

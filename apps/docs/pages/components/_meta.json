@@ -1,4 +1,5 @@
 {
   "index": "<MagicMotion />",
-  "magic-exclude": "<MagicExclude />"
+  "magic-exclude": "<MagicExclude />",
+  "magic-card": "<MagicCard />"
 }

@@ -47,9 +47,7 @@ export function MyGoals(): JSX.Element {
             }}
             onClick={() => setAreGoalsShowing(!areGoalsShowing)}
           >
-            <div>
-              {areGoalsShowing ? "Hide" : "wowowowowowowowowowwoo"} my goals
-            </div>
+            <div>{areGoalsShowing ? "Hide" : "Show"} my goals</div>
           </button>
         </div>
       </div>

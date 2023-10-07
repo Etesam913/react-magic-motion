@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MagicExclude } from "react-magic-motion";
+import { AnimatePresence, MagicExclude, motion } from "react-magic-motion";
 
 export function Accordion(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,38 +48,50 @@ export function Accordion(): JSX.Element {
           </svg>
         </MagicExclude>
       </button>
-      {isOpen && (
-        <div
-          style={{
-            gap: "1rem",
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "1rem",
-          }}
-        >
+      <AnimatePresence>
+        {isOpen && (
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-            lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-            ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-            Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-            pellentesque mauris, sit amet tincidunt nisl convallis id.
+            <motion.div
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              style={{
+                gap: "1rem",
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1rem",
+              }}
+            >
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+                dapibus tellus ut libero sagittis, a pharetra eros placerat.
+                Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+                Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+                convallis id.
+              </div>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+                dapibus tellus ut libero sagittis, a pharetra eros placerat.
+                Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+                Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+                convallis id.
+              </div>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+                dapibus tellus ut libero sagittis, a pharetra eros placerat.
+                Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+                Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+                convallis id.
+              </div>
+            </motion.div>
           </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-            lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-            ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-            Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-            pellentesque mauris, sit amet tincidunt nisl convallis id.
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-            lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-            ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-            Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-            pellentesque mauris, sit amet tincidunt nisl convallis id.
-          </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
