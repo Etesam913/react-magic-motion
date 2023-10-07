@@ -22,6 +22,7 @@ export const forbiddenComponentNames = new Set([
   "MagicExclude",
   "MagicTabSelect",
   "AnimatePresence",
+  "svg"
 ]);
 
 export function convertChildrenToMotionChildren(

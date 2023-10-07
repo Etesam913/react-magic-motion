@@ -9,12 +9,12 @@
 }
 
 .toggle-button{
-  background-color: rgba(0,0,0,.05);
+  background-color: rgb(239, 239, 239) !important;
 
 }
 
 .dark .toggle-button{
-  background-color: rgba(249,250,251,.1);
+  background-color: rgba(249,250,251,.1) !important;
 }
 
 
