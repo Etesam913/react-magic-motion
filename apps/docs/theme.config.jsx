@@ -1,8 +1,11 @@
+import Image from "next/image";
 export default {
   logo: (
     <span style={{ display: "flex", gap: "0.65rem", alignItems: "center" }}>
-      <img
-        style={{ height: 36, width: 36 }}
+      <Image
+        alt="react-magic-motion logo"
+        height={36}
+        width={36}
         src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
       />
       <h1 style={{ fontWeight: "bold" }}>react-magic-motion</h1>
@@ -24,11 +27,12 @@ export default {
       >
         <a
           href="https://github.com/etesam913/react-magic-motion"
-          target="_blank"
           style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
         >
-          <img
-            style={{ height: 24, width: 24 }}
+          <Image
+            height={24}
+            width={24}
+            alt="react-magic-motion-logo"
             src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
           />
           react-magic-motion

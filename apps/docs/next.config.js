@@ -6,4 +6,7 @@ const withNextra = require("nextra")({
 module.exports = withNextra({
   transpilePackages: ["react-magic-motion"],
   reactStrictMode: false,
+  images: {
+    domains: ["react-magic-motion.nyc3.cdn.digitaloceanspaces.com"],
+  },
 });
