@@ -1,12 +1,14 @@
 {
   "name": "react-magic-motion",
-  "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "version": "1.0.0",
+  "main": "./dist/index.tsx",
+  "types": "./dist/index.tsx",
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "generate:component": "turbo gen react-component"
+    "generate:component": "turbo gen react-component",
+    "build": "tsup ./index.tsx --format cjs,esm --external react",
+    "dev": "tsup ./index.tsx --format cjs,esm --watch --external react"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.12",
@@ -18,6 +20,7 @@
     "react": "^18.2.0",
     "react-is": "^18.2.0",
     "tsconfig": "workspace:*",
+    "tsup": "^7.2.0",
     "typescript": "^4.5.2"
   },
   "dependencies": {

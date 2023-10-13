@@ -1,17 +1,20 @@
 import type { FunctionComponent, Ref, ReactNode } from "react";
 import { Children, createElement, isValidElement } from "react";
-import { m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { isPortal } from "react-is";
+
+function isNodeText(node: ReactNode) {
+  return (
+    typeof node === "string" ||
+    (Array.isArray(node) && node.every((child) => typeof child === "string"))
+  );
+}
 
 /** Sets the `layout` property depending on the type of the children*/
 export function getLayoutValueFromChildren(
   children: ReactNode,
 ): "position" | true {
-  if (
-    typeof children === "string" ||
-    (Array.isArray(children) &&
-      children.every((child) => typeof child === "string"))
-  ) {
+  if (isNodeText(children)) {
     return "position";
   }
   return true;
@@ -22,7 +25,7 @@ export const forbiddenComponentNames = new Set([
   "MagicExclude",
   "MagicTabSelect",
   "AnimatePresence",
-  "svg"
+  "svg",
 ]);
 
 export function convertChildrenToMotionChildren(

@@ -1,9 +1,9 @@
 import "../styles/globals.css";
-import { Space_Mono } from "next/font/google";
+import { Fragment_Mono } from "next/font/google";
 
-const spaceMono = Space_Mono({
+const fragmentMono = Fragment_Mono({
   style: "normal",
-  weight: ["400", "700"],
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -13,7 +13,7 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
     <>
       <style jsx global>{`
         code {
-          font-family: ${spaceMono.style.fontFamily};
+          font-family: ${fragmentMono.style.fontFamily};
         }
       `}</style>
       <Component {...pageProps} />
