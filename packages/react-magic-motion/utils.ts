@@ -1,9 +1,14 @@
-import type { FunctionComponent, Ref, ReactNode } from "react";
+import type {
+  FunctionComponent,
+  Ref,
+  ReactNode,
+  PropsWithChildren,
+} from "react";
 import { Children, createElement, isValidElement } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import { isPortal } from "react-is";
 
-function isNodeText(node: ReactNode) {
+function isNodeText(node: ReactNode): boolean {
   return (
     typeof node === "string" ||
     (Array.isArray(node) && node.every((child) => typeof child === "string"))
@@ -53,7 +58,11 @@ export function convertChildrenToMotionChildren(
     const childType = node.type as keyof typeof m;
 
     // Creates a motion version of the element child type
-    const passedInProps = customProps ? customProps(node.props.children) : {};
+    const passedInProps = customProps
+      ? customProps((node.props as PropsWithChildren).children)
+      : {};
+
+    // @ts-ignore
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
 
     const newElem = createElement(

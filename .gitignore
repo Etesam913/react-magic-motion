@@ -17,6 +17,9 @@ build
 .DS_Store
 *.pem
 
+*.d.ts
+*.d.ts.map
+
 # debug
 npm-debug.log*
 yarn-debug.log*

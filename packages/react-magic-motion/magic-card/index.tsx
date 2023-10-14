@@ -14,6 +14,7 @@ import {
   useRef,
   type FunctionComponent,
   type ReactNode,
+  PropsWithChildren,
 } from "react";
 import { usePlaceholderBoxSize } from "../hooks";
 import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
@@ -61,8 +62,11 @@ export function MagicCard({
       }
 
       const nodeType = node.type as keyof typeof m;
+      const nodeProps = node.props as PropsWithChildren<{
+        className?: string;
+      }>;
 
-      const { className, ...restOfProps } = node.props;
+      const { className, ...restOfProps } = nodeProps;
 
       // Creates a motion version of the element child type
       const newElem = createElement(
@@ -75,11 +79,11 @@ export function MagicCard({
               ? "react-magic-motion-card-expanded"
               : "react-magic-motion-card-condensed"
           }`,
-          layout: getLayoutValueFromChildren(node.props.children),
+          layout: getLayoutValueFromChildren(nodeProps.children),
           transition: isRoot ? transition : undefined,
         },
         convertChildrenToMagicCardChildren(
-          node.props.children as ReactNode,
+          nodeProps.children as ReactNode,
           depth + 1,
         ),
       );
