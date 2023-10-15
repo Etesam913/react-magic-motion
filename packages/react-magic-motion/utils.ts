@@ -62,7 +62,7 @@ export function convertChildrenToMotionChildren(
       ? customProps((node.props as PropsWithChildren).children)
       : {};
 
-    // @ts-ignore
+    // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
 
     const newElem = createElement(

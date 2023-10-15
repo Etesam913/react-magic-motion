@@ -7,15 +7,8 @@ import {
   m,
   type Transition,
 } from "framer-motion";
-import {
-  Children,
-  createElement,
-  isValidElement,
-  useRef,
-  type FunctionComponent,
-  type ReactNode,
-  PropsWithChildren,
-} from "react";
+import { Children, createElement, isValidElement, useRef } from "react";
+import type { PropsWithChildren, FunctionComponent, ReactNode } from "react";
 import { usePlaceholderBoxSize } from "../hooks";
 import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
 import "../card.css";
@@ -82,10 +75,7 @@ export function MagicCard({
           layout: getLayoutValueFromChildren(nodeProps.children),
           transition: isRoot ? transition : undefined,
         },
-        convertChildrenToMagicCardChildren(
-          nodeProps.children as ReactNode,
-          depth + 1
-        )
+        convertChildrenToMagicCardChildren(nodeProps.children, depth + 1)
       );
 
       return newElem;

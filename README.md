@@ -1,6 +1,18 @@
-# Turborepo starter
+<h1 align="center">react-magic-motion</h1>
 
-This is an official starter Turborepo.
+<p align="center"><code>react-magic-motion</code> is a react.js library that ✨ magically animates your components.</p>
+
+## ⭐️ Getting Started
+
+### 📦 Install
+
+```console
+npm i react-magic-motion
+```
+
+### 💫 Usage
+
+## [📓 See More At Docs]("")
 
 ## Using this example
 

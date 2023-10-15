@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  type Transition,
-  m,
-  LazyMotion,
-  domMax,
-  LayoutGroup,
-} from "framer-motion";
+import { type Transition, m, LazyMotion, domMax } from "framer-motion";
 import { type FunctionComponent, createElement } from "react";
 
 interface TabSelectProps {
@@ -23,7 +17,7 @@ export function MagicTabSelect({
 
   if (typeof motionChildren.type === "function") {
     motionChildren = (motionChildren.type as FunctionComponent)(
-      motionChildren.props,
+      motionChildren.props
     );
     if (motionChildren === null) motionChildren = <></>;
   }
@@ -32,7 +26,7 @@ export function MagicTabSelect({
   const motionElement = createElement(
     m[childType] as string | FunctionComponent<any>,
     { ...motionChildren.props, layoutId: id, transition },
-    motionChildren.props.children,
+    motionChildren.props.children
   );
 
   return <LazyMotion features={domMax}>{motionElement}</LazyMotion>;
