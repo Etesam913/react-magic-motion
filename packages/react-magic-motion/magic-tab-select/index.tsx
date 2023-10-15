@@ -7,7 +7,7 @@ import {
   domMax,
   LayoutGroup,
 } from "framer-motion";
-import { type FunctionComponent, createElement, useMemo } from "react";
+import { type FunctionComponent, createElement } from "react";
 
 interface TabSelectProps {
   children: JSX.Element;
