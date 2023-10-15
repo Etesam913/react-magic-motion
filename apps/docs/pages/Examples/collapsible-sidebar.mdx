@@ -17,18 +17,18 @@ import { ExampleComponent } from "../../components/example-component";
 import { useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 
-export function CollapsibleSidebar() {
+export default function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <MagicMotion>
       <aside
-        className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
         style={{
+          backgroundColor: "rgba(238, 238, 238)",
           padding: "1rem",
           margin: "1rem 0",
           borderRadius: "0.65rem",
-          width: isCollapsed ? "3.3rem" : "20rem",
+          width: isCollapsed ? "1.3rem" : "20rem",
           fontWeight: "bold",
           display: "flex",
           flexDirection: "column",
@@ -44,10 +44,10 @@ export function CollapsibleSidebar() {
             justifyContent: "space-between",
           }}
         >
-          {!isCollapsed && <h4>Company Portfolio</h4>}
+          {!isCollapsed && <h4 style={{ margin: 0 }}>Company Portfolio</h4>}
 
           <button
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", padding: 0, border: 0 }}
             onClick={() => setIsCollapsed(!isCollapsed)}
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
@@ -87,7 +87,15 @@ export function CollapsibleSidebar() {
           </button>
         </div>
 
-        <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <ul
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            margin: 0,
+            padding: 0,
+          }}
+        >
           <li
             style={{
               display: "flex",

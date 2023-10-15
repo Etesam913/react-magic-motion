@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Toggle } from "./toggle";
 import { MagicMotion } from "react-magic-motion";
 
-export function GridArea() {
+export default function GridArea() {
   const [adjustGridAreas, setAdjustGridAreas] = useState(false);
 
   const gridTemplateAreasString = adjustGridAreas

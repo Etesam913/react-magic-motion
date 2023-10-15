@@ -18,7 +18,7 @@ import { ExampleComponent } from "../../components/example-component";
 import { useState } from "react";
 import { MagicExclude, MagicMotion } from "react-magic-motion";
 
-export function Accordion(): JSX.Element {
+export default function Accordion(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <MagicMotion
@@ -26,7 +26,7 @@ export function Accordion(): JSX.Element {
     >
       <div
         style={{
-          backgroundColor: "rgba(249,250,251,.1)",
+          backgroundColor: "rgba(238, 238, 238)",
           padding: "1rem",
           borderRadius: 12,
           margin: "1rem 0",
@@ -78,25 +78,28 @@ export function Accordion(): JSX.Element {
             }}
           >
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-              lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-              ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-              Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-              pellentesque mauris, sit amet tincidunt nisl convallis id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+              dapibus tellus ut libero sagittis, a pharetra eros placerat.
+              Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+              Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+              convallis id.
             </div>
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-              lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-              ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-              Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-              pellentesque mauris, sit amet tincidunt nisl convallis id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+              dapibus tellus ut libero sagittis, a pharetra eros placerat.
+              Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+              Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+              convallis id.
             </div>
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
-              lobortis sem, vel blandit dolor ultrices nec. Donec dapibus tellus
-              ut libero sagittis, a pharetra eros placerat. Aliquam erat volutpat.
-              Nunc nec nisl ac turpis semper pharetra. Nullam pulvinar
-              pellentesque mauris, sit amet tincidunt nisl convallis id.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+              dapibus tellus ut libero sagittis, a pharetra eros placerat.
+              Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+              Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+              convallis id.
             </div>
           </div>
         )}
@@ -104,5 +107,4 @@ export function Accordion(): JSX.Element {
     </MagicMotion>
   );
 }
-
 ```

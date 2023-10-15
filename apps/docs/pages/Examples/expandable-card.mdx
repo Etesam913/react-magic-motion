@@ -11,6 +11,7 @@ import { ExpandableCard } from "../../components/expandable-card";
 ```jsx filename="Expandable Card" copy showLineNumbers
 import { useState } from "react";
 import { MagicCard, MagicExclude } from "react-magic-motion";
+import "react-magic-motion/card.css";
 
 function CloseFullscreenSvg() {
   return (
@@ -94,7 +95,7 @@ function OpenFullscreenSvg() {
   );
 }
 
-export function ExpandableCard(): JSX.Element {
+export default function ExpandableCard(): JSX.Element {
   const [isCardExpanded, setIsCardExpanded] = useState(false);
 
   return (
@@ -110,7 +111,7 @@ export function ExpandableCard(): JSX.Element {
           display: "flex",
           flexDirection: "column",
           padding: "1.35rem 0",
-          color: "white",
+          color: isCardExpanded ? "white" : "currentColor",
         }}
       >
         <div
@@ -157,7 +158,7 @@ export function ExpandableCard(): JSX.Element {
               height: "auto",
             }}
             alt="Mona Lisa"
-            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/mona-lisa.jpg"
+            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/expandable-card/mona-lisa.jpg"
           />
           {isCardExpanded && (
             <section

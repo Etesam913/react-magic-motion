@@ -14,7 +14,7 @@ import { TodoList } from "../../components/todo-list";
 
 ```jsx filename="Todo List" showLineNumbers copy
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
-import { MagicMotion } from "react-magic-motion"
+import { MagicMotion } from "react-magic-motion";
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
@@ -40,8 +40,18 @@ function TodoListItem({
   todo,
   setTodos,
 }: {
-  todo: { id: string; text: string };
-  setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
+  todo: {
+    id: `${string}-${string}-${string}-${string}-${string}`;
+    text: string;
+  };
+  setTodos: Dispatch<
+    SetStateAction<
+      {
+        id: `${string}-${string}-${string}-${string}-${string}`;
+        text: string;
+      }[]
+    >
+  >;
 }): JSX.Element {
   return (
     <li
@@ -50,7 +60,7 @@ function TodoListItem({
         justifyContent: "space-between",
         lineHeight: "2rem",
         padding: "0.35rem 1rem",
-        backgroundColor: "rgba(249,250,251,.1)"
+        backgroundColor: "rgb(239 239 239 / 70%)",
       }}
     >
       {todo.text}
@@ -67,7 +77,7 @@ function TodoListItem({
   );
 }
 
-function TodoList(): JSX.Element {
+export default function TodoList(): JSX.Element {
   const [todos, setTodos] = useState([
     { id: crypto.randomUUID(), text: "🐕 Walk the dog" },
     { id: crypto.randomUUID(), text: "🍔 Eat lunch" },
@@ -114,7 +124,7 @@ function TodoList(): JSX.Element {
               border: "none",
               borderRadius: "0.25rem",
               width: "100%",
-              backgroundColor: "rgba(249,250,251,.1)"
+              backgroundColor: "rgb(239 239 239)",
             }}
           />
 
