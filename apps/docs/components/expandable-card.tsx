@@ -88,6 +88,7 @@ export function ExpandableCard(): JSX.Element {
 
   return (
     <MagicCard
+      isBackgroundFadeEnabled
       isCardExpanded={isCardExpanded}
       onBackgroundFadeClick={() => setIsCardExpanded(false)}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}

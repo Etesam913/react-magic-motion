@@ -18,7 +18,7 @@ import {
 } from "react";
 import { usePlaceholderBoxSize } from "../hooks";
 import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
-import "./index.css";
+import "../card.css";
 
 interface MagicCardProps {
   isCardExpanded: boolean;
@@ -39,7 +39,7 @@ export function MagicCard({
 
   function convertChildrenToMagicCardChildren(
     nodes: ReactNode,
-    depth: number,
+    depth: number
   ): ReactNode {
     return Children.map(nodes, (child, i): ReactNode => {
       // Checks if the node is a string or boolean or number
@@ -84,8 +84,8 @@ export function MagicCard({
         },
         convertChildrenToMagicCardChildren(
           nodeProps.children as ReactNode,
-          depth + 1,
-        ),
+          depth + 1
+        )
       );
 
       return newElem;
@@ -96,7 +96,7 @@ export function MagicCard({
 
   const { placeholderBoxHeight, placeholderBoxWidth } = usePlaceholderBoxSize(
     isCardExpanded,
-    rootNode,
+    rootNode
   );
 
   return (

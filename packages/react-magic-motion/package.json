@@ -1,6 +1,6 @@
 {
   "name": "react-magic-motion",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -8,9 +8,11 @@
   "scripts": {
     "lint": "eslint .",
     "generate:component": "turbo gen react-component",
-    "build": "tsup index.tsx --format esm,cjs --dts --external react",
-    "dev": "tsup ./index.tsx --format cjs,esm --watch --external react"
+    "build": "tsup ./index.tsx --format esm,cjs --dts --sourcemap --external react",
+    "dev": "tsup ./index.tsx --format esm,cjs --watch --dts --sourcemap  --external react",
+    "clean": "rm -rf .turbo && rm -rf ./node_modules && rm -rf ./dist"
   },
+  "files": ["dist/", "card.css"],
   "devDependencies": {
     "@turbo/gen": "^1.10.12",
     "@types/node": "^20.5.2",

@@ -6,6 +6,12 @@
     "jsx": "react-jsx",
     "lib": ["ES2015", "DOM"],
     "module": "ESNext",
-    "target": "es6"
+    "target": "es6",
+    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "rootDir": "./"
   }
 }

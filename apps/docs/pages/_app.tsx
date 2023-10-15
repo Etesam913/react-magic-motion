@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "react-magic-motion/";
 import { Fragment_Mono } from "next/font/google";
 
 const fragmentMono = Fragment_Mono({
