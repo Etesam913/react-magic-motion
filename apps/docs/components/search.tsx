@@ -69,7 +69,13 @@ const books = [
   },
 ];
 
-function Book({ title, imgSrc }: { title: string; imgSrc: string }) {
+function Book({
+  title,
+  imgSrc,
+}: {
+  title: string;
+  imgSrc: string;
+}): JSX.Element {
   return (
     <div
       style={{
@@ -91,6 +97,7 @@ function Book({ title, imgSrc }: { title: string; imgSrc: string }) {
         {title}
       </h5>
       <img
+        alt={title}
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
       />
@@ -98,7 +105,7 @@ function Book({ title, imgSrc }: { title: string; imgSrc: string }) {
   );
 }
 
-export function Search() {
+export function Search(): JSX.Element {
   const [searchText, setSearchText] = useState("");
 
   return (
@@ -139,10 +146,7 @@ export function Search() {
       >
         {books
           .filter(({ title }) =>
-            title
-              .toLowerCase()
-              .trim()
-              .includes(searchText.toLowerCase().trim()),
+            title.toLowerCase().trim().includes(searchText.toLowerCase().trim())
           )
           .map(({ id, title, imgSrc }) => (
             <Book key={id} title={title} imgSrc={imgSrc} />

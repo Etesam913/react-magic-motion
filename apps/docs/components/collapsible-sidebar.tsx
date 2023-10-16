@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { MagicMotion } from "react-magic-motion";
 
-export function CollapsibleSidebar() {
+export function CollapsibleSidebar(): JSX.Element {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -30,6 +29,7 @@ export function CollapsibleSidebar() {
         {!isCollapsed && <h4>Company Portfolio</h4>}
 
         <button
+          type="button"
           style={{ cursor: "pointer" }}
           onClick={() => setIsCollapsed(!isCollapsed)}
           title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
@@ -172,7 +172,7 @@ export function CollapsibleSidebar() {
             <path
               d="M12 21L12 9L6 9L6 15L12 21Z"
               fill="currentColor"
-              fill-opacity="0.5"
+              fillOpacity="0.5"
             />
             <path d="M18 9V3H6L12 9H6V15H18L12 9H18Z" fill="currentColor" />
           </svg>

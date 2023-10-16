@@ -1,8 +1,8 @@
 import "../styles/globals.css";
-import "react-magic-motion/";
-import { Fragment_Mono } from "next/font/google";
+import "react-magic-motion/dist/index.css";
+import { Fragment_Mono as fragmentMonoFont } from "next/font/google";
 
-const fragmentMono = Fragment_Mono({
+const fragmentMono = fragmentMonoFont({
   style: "normal",
   weight: "400",
   subsets: ["latin"],
@@ -12,6 +12,7 @@ const fragmentMono = Fragment_Mono({
 export default function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <>
+      {/* eslint-disable-next-line*/}
       <style jsx global>{`
         code {
           font-family: ${fragmentMono.style.fontFamily};

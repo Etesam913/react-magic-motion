@@ -3,7 +3,7 @@ import { MagicTabSelect } from "react-magic-motion";
 
 const underlineTabs = ["Recipes 🧑‍🍳", "Notes 📝", "Programming 🧑‍💻"];
 
-export function UnderlineTabs() {
+export function UnderlineTabs(): JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState(1);
 
   const tabsComponents = underlineTabs.map((text, i) => {
@@ -47,12 +47,13 @@ export function UnderlineTabs() {
 
 const pillTabs = ["Hobbies", "Work", "Projects", "Languages"];
 
-export function PillTabs() {
+export function PillTabs(): JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState(1);
 
   const tabsComponents = pillTabs.map((text, i) => {
     return (
       <button
+        type="button"
         key={text}
         onClick={() => setSelectedIndex(i)}
         style={{

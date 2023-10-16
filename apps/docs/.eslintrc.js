@@ -3,6 +3,7 @@ module.exports = {
   rules: {
     "react/jsx-sort-props": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
-    "react/jsx-no-leaked-render": "off"
+    "react/jsx-no-leaked-render": "off",
+    "eslint-comments/require-description": "off"
   }
 };

@@ -21,7 +21,7 @@ const menuPages = new Map([
   ["programming-languages", ["JavaScript/React.js", "Python", "C#", "Java"]],
 ]);
 
-export function ContextMenu() {
+export function ContextMenu(): JSX.Element {
   const [currentPage, setCurrentPage] = useState<
     "home" | "classes" | "hobbies" | "programming-languages"
   >("home");
@@ -51,6 +51,7 @@ export function ContextMenu() {
       >
         {currentPage !== "home" && (
           <button
+            type="button"
             style={{ position: "absolute" }}
             onClick={() => setCurrentPage("home")}
           >
@@ -74,6 +75,7 @@ export function ContextMenu() {
               className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
             >
               <button
+                type="button"
                 disabled={currentPage !== "home"}
                 style={{
                   width: "100%",

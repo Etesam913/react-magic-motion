@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { LayoutGroup, MagicMotion, Transition } from "react-magic-motion";
+import type { Transition } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
 import { Toggle } from "./toggle";
 
 export function ExampleComponent({

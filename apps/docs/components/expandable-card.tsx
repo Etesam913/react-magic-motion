@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MagicCard, MagicExclude } from "react-magic-motion";
 
-function CloseFullscreenSvg() {
+function CloseFullscreenSvg(): JSX.Element {
   return (
     <>
       <rect
@@ -42,7 +42,7 @@ function CloseFullscreenSvg() {
   );
 }
 
-function OpenFullscreenSvg() {
+function OpenFullscreenSvg(): JSX.Element {
   return (
     <>
       <rect
@@ -121,6 +121,7 @@ export function ExpandableCard(): JSX.Element {
           </h3>
 
           <button
+            type="button"
             style={{ position: "absolute", right: 0, zIndex: 9999 }}
             onClick={() => setIsCardExpanded(!isCardExpanded)}
           >
@@ -159,29 +160,35 @@ export function ExpandableCard(): JSX.Element {
                 gap: "1rem",
               }}
             >
-              <h4 style={{ fontSize: "1.2em", fontWeight: 600 }}>
+              <h4
+                style={{
+                  fontSize: "1.2em",
+                  fontWeight: 600,
+                  marginTop: "1.25rem",
+                }}
+              >
                 Title: The Enigmatic Smile of Mona Lisa
               </h4>
               <p>
                 Unveil the allure of the world-renowned masterpiece, the Mona
                 Lisa, displayed in the heart of the Louvre Museum in Paris.
                 Painted by the illustrious Leonardo da Vinci between 1503 and
-                1506, this portrait is celebrated for Mona Lisa's enigmatic
+                1506, this portrait is celebrated for Mona Lisa&apos;s enigmatic
                 smile that seems to change depending on the viewing angle.
               </p>
               <p>
                 The exquisite blending of light and shadow, known as sfumato,
-                contributes to the mystique of her expression. Da Vinci’s
+                contributes to the mystique of her expression. Da Vinci&apos;s
                 remarkable attention to detail is evident in the delicate
                 veiling and the meticulous background landscapes that frame Mona
-                Lisa's serene demeanor.
+                Lisa&apos;s serene demeanor.
               </p>
               <p>
                 The artistry and the mysteries enveloping the Mona Lisa continue
                 to captivate audiences, making it an enduring symbol of the
                 Renaissance era. Experience the magnetism of the Mona Lisa, a
-                testament to Leonardo da Vinci's genius, and delve into a visual
-                dialogue with a smile that has intrigued the world for
+                testament to Leonardo da Vinci&apos;s genius, and delve into a
+                visual dialogue with a smile that has intrigued the world for
                 centuries.
               </p>
             </section>

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Toggle } from "./toggle";
 import { MagicMotion } from "react-magic-motion";
+import { Toggle } from "./toggle";
 
-export function GridArea() {
+export function GridArea(): JSX.Element {
   const [adjustGridAreas, setAdjustGridAreas] = useState(false);
 
   const gridTemplateAreasString = adjustGridAreas
