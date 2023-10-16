@@ -1,5 +1,7 @@
 <h1 align="center">react-magic-motion</h1>
 
+<h3 align="center"><a href="docs">link to docs website</a></h3>
+
 <p align="center"><code>react-magic-motion</code> is a react.js library that ✨ magically animates your components.</p>
 
 ## ⭐️ Getting Started
