@@ -5,7 +5,7 @@ import type {
   PropsWithChildren,
 } from "react";
 import { Children, createElement, isValidElement } from "react";
-import { m } from "framer-motion";
+import { isMotionComponent, m } from "framer-motion";
 import { isPortal } from "react-is";
 
 function isNodeText(node: ReactNode): boolean {
@@ -31,6 +31,8 @@ export const forbiddenComponentNames = new Set([
   "MagicTabSelect",
   "AnimatePresence",
   "svg",
+  // ej represents <AnimatePresence /> context for some reason
+  "ej",
 ]);
 
 export function convertChildrenToMotionChildren(
@@ -39,6 +41,7 @@ export function convertChildrenToMotionChildren(
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
+
     // Checks if the child is a string or boolean or number
     if (!isValidElement(node)) return node;
 
@@ -51,7 +54,6 @@ export function convertChildrenToMotionChildren(
       }
 
       node = (node.type as FunctionComponent)(nodeProps);
-
       if (!isValidElement(node)) return node;
     }
 
@@ -65,8 +67,13 @@ export function convertChildrenToMotionChildren(
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
 
+    // If the child is a motion component, we use that as the type otherwise convert it to a motion component
+    const typeOfNewElement = (
+      isMotionComponent(node.type) ? node.type : m[childType]
+    ) as string | FunctionComponent<any>;
+
     const newElem = createElement(
-      m[childType] as string | FunctionComponent<any>,
+      typeOfNewElement,
       {
         ...node.props,
         ref: nodeRef,

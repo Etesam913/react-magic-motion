@@ -23,6 +23,7 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
+  debug,
 }: MagicMotionProps): JSX.Element {
   if (disabled) return children;
 
