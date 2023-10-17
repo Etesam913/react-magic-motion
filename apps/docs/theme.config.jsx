@@ -1,7 +1,11 @@
 import Image from "next/image";
 export default {
   head: (
-    <link rel="icon" type="image/x-icon" href="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
+    />
   ),
   logo: (
     <span style={{ display: "flex", gap: "0.65rem", alignItems: "center" }}>
@@ -16,6 +20,11 @@ export default {
   ),
   project: {
     link: "https://github.com/etesam913/react-magic-motion",
+  },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s 👉 react-magic-motion",
+    };
   },
   footer: {
     text: (
