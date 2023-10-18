@@ -1,6 +1,6 @@
 <h1 align="center">react-magic-motion</h1>
 
-<h3 align="center"><a href="docs">link to docs website</a></h3>
+<h3 align="center"><a href="https://react-magic-motion.com">react-magic-motion.com</a></h3>
 
 <p align="center"><code>react-magic-motion</code> is a react.js library that ✨ magically animates your components.</p>
 
@@ -11,14 +11,14 @@
 ```bash
 npm i react-magic-motion
 ```
+
 ### 🔎 Simple Example
 
 #### 🎥 Demo
 
-https://github.com/Etesam913/react-magic-motion/assets/55665282/34157859-7a05-4e3a-9fea-722c44eeafe0  
+https://github.com/Etesam913/react-magic-motion/assets/55665282/d7ffb5ef-b710-4360-946b-180ddfeef60c
 
-
-####  🧑‍💻 Code
+#### 🧑‍💻 Code
 
 ```jsx
 import { useState } from "react";
@@ -99,17 +99,17 @@ export default function App() {
 
 ### 💫 Examples
 
-- [To do list]()
-- [Accordion]()
-- [Sidebar]()
-- [Expandable Card]()
-- [Grid Area]()
-- [Search]()
-- [Tabs]()
+- [To do list](https://www.react-magic-motion.com/Examples)
+- [Accordion](https://www.react-magic-motion.com/Examples/accordion)
+- [Sidebar](https://www.react-magic-motion.com/Examples/collapsible-sidebar)
+- [Expandable Card](https://www.react-magic-motion.com/Examples/expandable-card)
+- [Grid Area](https://www.react-magic-motion.com/Examples/grid-area)
+- [Search](https://www.react-magic-motion.com/Examples/search)
+- [Tabs](https://www.react-magic-motion.com/Examples/tabs)
 
 ## 📓 Docs
 
-- For a full understanding of `react-magic-motion visit` the docs [here]()
+- For a full understanding of `react-magic-motion visit` the docs [here](https://react-magic-motion.com)
 
 ## ❓ Want to Contribute
 
