@@ -15,10 +15,7 @@ npm i react-magic-motion
 
 #### 🎥 Demo
 
-
-
 https://github.com/Etesam913/react-magic-motion/assets/55665282/d7ffb5ef-b710-4360-946b-180ddfeef60c
-
 
 
 ####  🧑‍💻 Code
