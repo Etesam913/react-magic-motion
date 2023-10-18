@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MagicCard, MagicExclude } from "react-magic-motion";
+import { MagicCard } from "react-magic-motion";
 
 function CloseFullscreenSvg(): JSX.Element {
   return (
@@ -125,21 +125,16 @@ export function ExpandableCard(): JSX.Element {
             style={{ position: "absolute", right: 0, zIndex: 9999 }}
             onClick={() => setIsCardExpanded(!isCardExpanded)}
           >
-            <MagicExclude>
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {isCardExpanded ? (
-                  <CloseFullscreenSvg />
-                ) : (
-                  <OpenFullscreenSvg />
-                )}
-              </svg>
-            </MagicExclude>
+            <svg
+              key="exclude"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {isCardExpanded ? <CloseFullscreenSvg /> : <OpenFullscreenSvg />}
+            </svg>
           </button>
         </div>
         <div style={{ overflowY: "auto", overflowX: "hidden" }}>

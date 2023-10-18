@@ -86,7 +86,7 @@ export function TodoListWithExit(): JSX.Element {
             overflow: "hidden",
           }}
         >
-          <AnimatePresence>
+          <AnimatePresence key="exclude">
             {todos.map((todo) => (
               <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
             ))}

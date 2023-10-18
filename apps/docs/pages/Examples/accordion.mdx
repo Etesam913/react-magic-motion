@@ -16,7 +16,7 @@ import { ExampleComponent } from "../../components/example-component";
 
 ```jsx filename="Accordion" showLineNumbers copy
 import { useState } from "react";
-import { MagicExclude, MagicMotion } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
 
 export default function Accordion(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,8 +46,8 @@ export default function Accordion(): JSX.Element {
           onClick={() => setIsOpen(!isOpen)}
         >
           Click me to see my content
-          <MagicExclude>
             <svg
+              key="exclude"
               style={{
                 transform: `rotate(${isOpen ? 180 : 0}deg)`,
                 transition: "320ms ease-in-out",
@@ -66,7 +66,6 @@ export default function Accordion(): JSX.Element {
                 strokeLinejoin="round"
               />
             </svg>
-          </MagicExclude>
         </button>
         {isOpen && (
           <div

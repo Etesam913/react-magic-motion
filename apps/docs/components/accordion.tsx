@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { MagicExclude } from "react-magic-motion";
 
 export function Accordion(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,27 +26,26 @@ export function Accordion(): JSX.Element {
         onClick={() => setIsOpen(!isOpen)}
       >
         Click me to see my content
-        <MagicExclude>
-          <svg
-            style={{
-              transform: `rotate(${isOpen ? 180 : 0}deg)`,
-              transition: "320ms ease-in-out",
-            }}
-            width="20"
-            height="20"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4.5 10L15.6714 21L27.5 10"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </MagicExclude>
+        <svg
+          key="exclude"
+          style={{
+            transform: `rotate(${isOpen ? 180 : 0}deg)`,
+            transition: "320ms ease-in-out",
+          }}
+          width="20"
+          height="20"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.5 10L15.6714 21L27.5 10"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
 
       {isOpen && (

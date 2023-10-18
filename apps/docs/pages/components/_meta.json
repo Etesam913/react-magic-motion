@@ -1,6 +1,5 @@
 {
   "index": "<MagicMotion />",
-  "magic-exclude": "<MagicExclude />",
   "magic-card": "<MagicCard />",
   "magic-tab-select": "<MagicTabSelect />"
 }

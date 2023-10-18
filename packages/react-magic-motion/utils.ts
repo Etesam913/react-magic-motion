@@ -27,35 +27,32 @@ export function getLayoutValueFromChildren(
 
 export const forbiddenComponentNames = new Set([
   "MagicMotion",
-  "MagicExclude",
   "MagicTabSelect",
   "AnimatePresence",
   "svg",
-  // ej represents <AnimatePresence /> context for some reason
-  "ej",
 ]);
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
+  debug?: boolean,
   customProps?: (child: ReactNode) => Record<string, unknown>,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
 
     // Checks if the child is a string or boolean or number
-    if (!isValidElement(node)) return node;
+    if (!isValidElement(node) || node.key === "exclude") return node;
 
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
 
     if (typeof node.type === "function") {
-      if (forbiddenComponentNames.has(node.type.name)) {
-        return node;
-      }
+    
 
       node = (node.type as FunctionComponent)(nodeProps);
       if (!isValidElement(node)) return node;
     }
+
 
     const childType = node.type as keyof typeof m;
 
@@ -81,6 +78,7 @@ export function convertChildrenToMotionChildren(
       },
       convertChildrenToMotionChildren(
         node.props.children as ReactNode,
+        debug,
         customProps,
       ),
     );
