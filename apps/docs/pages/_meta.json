@@ -1,12 +1,8 @@
 {
   "index": "Introduction",
-  
-  "components":{
-    "title": "Components"
-  },
-  "guides":{
-    "title": "Guides"
-  }
+  "examples": "Examples",
+  "components":"Components",
+  "guides": "Guides"
 }
 
 
