@@ -12,7 +12,10 @@
     "dev": "tsup ./index.tsx --format esm,cjs --watch --dts --sourcemap  --external react",
     "clean": "rm -rf .turbo && rm -rf ./node_modules && rm -rf ./dist"
   },
-  "files": ["dist/", "card.css"],
+  "files": [
+    "dist/",
+    "card.css"
+  ],
   "devDependencies": {
     "@turbo/gen": "^1.10.12",
     "@types/node": "^20.5.2",

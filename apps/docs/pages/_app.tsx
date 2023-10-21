@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import "react-magic-motion/dist/index.css";
 import { Fragment_Mono as fragmentMonoFont } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const fragmentMono = fragmentMonoFont({
   style: "normal",
@@ -19,6 +20,7 @@ export default function MyApp({ Component, pageProps }): JSX.Element {
         }
       `}</style>
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
