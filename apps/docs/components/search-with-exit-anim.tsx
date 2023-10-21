@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, MagicMotion, motion } from "react-magic-motion";
+import { AnimatePresence, motion } from "react-magic-motion";
 
 const books = [
   {
