@@ -106,6 +106,7 @@ function Book({ title, imgSrc }: { title: string; imgSrc: string }) {
         {title}
       </h5>
       <img
+        alt={`image of ${title}`}
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
       />
