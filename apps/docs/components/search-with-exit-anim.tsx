@@ -1,22 +1,5 @@
-import { SearchWithStart } from "../../components/search-with-start-anim.tsx";
-
-# Non-Layout Animations
-
-- As `react-magic-motion` is built on top of `framer-motion`, it supports all the animations that `framer-motion` supports.
-- Just convert the desired element to its `motion` equivalent, and add the `initial` and `animate` props to it.
-  - For example, if you want to animate a `div`, just replace it with `motion.div`, and add the `initial` and `animate` props to it.
-
-### Search With Non-Layout Animation
-
-- Here is the search example, but with `initial` and `animate` props added to each `Book` component.
-- Notice how the `Book` component has a `motion.div` instead of a `div`.
-- To see more complex examples, see [here](./examples/to-do-list)
-
-<SearchWithStart />
-
-```jsx showLineNumbers copy  {81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 107}
 import { useState } from "react";
-import { motion } from "react-magic-motion";
+import { AnimatePresence, MagicMotion, motion } from "react-magic-motion";
 
 const books = [
   {
@@ -96,18 +79,21 @@ function Book({
 }): JSX.Element {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.3 }}
-      animate={{ opacity: 1, scale: 1, transition: { scale: { type: "spring" } } }}
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0 }}
       style={{
         width: "10rem",
         padding: "0.5rem",
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        backgroundColor: "rgba(238, 238, 238)",
       }}
+      className=" nx-bg-black/[.05] dark:nx-bg-gray-50/10"
     >
-      <h5
+      <motion.h5
+        layout
         style={{
           textAlign: "center",
           fontWeight: "bold",
@@ -115,8 +101,9 @@ function Book({
         }}
       >
         {title}
-      </h5>
-      <img
+      </motion.h5>
+      <motion.img
+        layout
         alt={title}
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
@@ -125,7 +112,7 @@ function Book({
   );
 }
 
-export function SearchWithStart(): JSX.Element {
+export function SearchWithExit(): JSX.Element {
   const [searchText, setSearchText] = useState("");
 
   return (
@@ -151,15 +138,7 @@ export function SearchWithStart(): JSX.Element {
         style={{ width: "15rem" }}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        style={{
-          backgroundColor: "rgba(238, 238, 238)",
-          lineHeight: 1.25,
-          width: "15rem",
-          padding: "0.5rem 0.75rem",
-          borderRadius: "0.5rem",
-          display: "block",
-          fontSize: "0.875rem",
-        }}
+        className="nx-block nx-appearance-none nx-rounded-lg nx-px-3 nx-py-2 nx-transition-colors nx-text-base nx-leading-tight md:nx-text-sm nx-bg-black/[.05] dark:nx-bg-gray-50/10 focus:nx-bg-white dark:focus:nx-bg-dark placeholder:nx-text-gray-500 dark:placeholder:nx-text-gray-400 contrast-more:nx-border contrast-more:nx-border-current"
       />
       <h4 style={{ fontWeight: "bold", fontSize: "1.1em", marginTop: "1rem" }}>
         My Books
@@ -172,19 +151,19 @@ export function SearchWithStart(): JSX.Element {
           gap: "0.65em",
         }}
       >
-        {books
-          .filter(({ title }) =>
-            title.toLowerCase().trim().includes(searchText.toLowerCase().trim())
-          )
-          .map(({ id, title, imgSrc }) => (
-            <Book key={id} title={title} imgSrc={imgSrc} />
-          ))}
+        <AnimatePresence>
+          {books
+            .filter(({ title }) =>
+              title
+                .toLowerCase()
+                .trim()
+                .includes(searchText.toLowerCase().trim())
+            )
+            .map(({ id, title, imgSrc }) => (
+              <Book key={id} title={title} imgSrc={imgSrc} />
+            ))}
+        </AnimatePresence>
       </div>
     </div>
   );
 }
-
-```
-
-- For more information on the supported `framer-motion` animations, see here:
-- https://www.framer.com/motion/component/

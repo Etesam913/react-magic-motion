@@ -1,10 +1,18 @@
 import { TodoListWithExit } from "../../components/todo-list-with-exit-anim";
+import { SearchWithExit } from "../../components/search-with-exit-anim";
+import { Callout } from "nextra/components";
 
 # Adding Exit Animations
 
-The `<AnimatePresence>` component is used to remove components from the DOM. It's used in conjunction with the `exit` prop on a `<motion>` component.
+The `<AnimatePresence>` component is used to animate the removal of components from the DOM.
+
+- To animate the `exit` property of an `AnimatePresence` child, just add the `exit` property with an animation object.
 
 - There is more info on `<AnimatePresence />` in the `framer-motion` docs [here](https://www.framer.com/docs/animate-presence/).
+
+<Callout emoji="⚠️">
+  If you are using an `<AnimatePresence>` inside of a `<MagicMotion>` component, you must add `key="exclude` prop to the `<AnimatePresence>` component. 
+</Callout>
 
 ### Example: To Do List with Exit Animations on Delete
 
@@ -12,7 +20,7 @@ The `<AnimatePresence>` component is used to remove components from the DOM. It'
 
 ### Sample Code
 
-```jsx filename="To Do List With Exit Animations" showLineNumbers copy /AnimatePresence/ /exit/ /motion.li/ /layout/ /transition/ /MagicMotion/
+```jsx filename="To Do List With Exit Animations" showLineNumbers copy {41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 63, 97, 101}
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
 import { AnimatePresence, motion, MagicMotion } from "react-magic-motion";
 

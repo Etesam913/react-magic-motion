@@ -27,10 +27,16 @@ npm i react-magic-motion
 ### Basic Usage
 
 - `react-magic-motion` provides `<MagicMotion />` for automatic animation of your components.
+- In the example, clicking the button will animate the list items in and out of the DOM.
+- To see more examples, click [here](./examples)
+
+#### Example
+
+<MyGoals />
 
 #### Sample Code
 
-```jsx copy filename="my-goals.js" showLineNumbers /MagicMotion/
+```jsx copy filename="my-goals.js" showLineNumbers {17, 50}
 import { useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 
@@ -86,10 +92,6 @@ export function MyGoals() {
 
 ```
 
-#### Example
-
-<MyGoals />
-
 ## About
 
 ### Info
@@ -102,10 +104,10 @@ export function MyGoals() {
 
 ### Package Comparisons
 
-|                                                                 | `react-magic-motion` | `@formkit/auto-animate` |
-| :-------------------------------------------------------------- | :------------------: | :---------------------: |
-| "linear" easing                                                 |          ✅          |           ✅            |
-| "spring" easing                                                 |          ✅          |           ❌            |
-| [shared layout animations](http://localhost:3001/examples/tabs) |          ✅          |           ❌            |
-| multi-framework support                                         |          ❌          |           ✅            |
-| smooth animation cancelling                                     |          ✅          |           ❌            |
+|                                             | `react-magic-motion` | `@formkit/auto-animate` |
+| :------------------------------------------ | :------------------: | :---------------------: |
+| "linear" easing                             |          ✅          |           ✅            |
+| "spring" easing                             |          ✅          |           ❌            |
+| [shared layout animations](./examples/tabs) |          ✅          |           ❌            |
+| multi-framework support                     |          ❌          |           ✅            |
+| smooth animation cancelling                 |          ✅          |           ❌            |
