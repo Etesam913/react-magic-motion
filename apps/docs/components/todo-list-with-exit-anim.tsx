@@ -32,7 +32,6 @@ function TodoListItem({
     <motion.li
       layout
       exit={{ opacity: 0 }}
-      transition={{ type: "spring", opacity: { duration: 0.25 } }}
       className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
       style={{
         display: "flex",

@@ -14,7 +14,7 @@ The `<AnimatePresence>` component is used to remove components from the DOM. It'
 
 ```jsx filename="To Do List With Exit Animations" showLineNumbers copy /AnimatePresence/ /exit/ /motion.li/ /layout/ /transition/ /MagicMotion/
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
-import { AnimatePresence, MagicMotion, motion } from "react-magic-motion";
+import { AnimatePresence, motion, MagicMotion } from "react-magic-motion";
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
@@ -40,27 +40,35 @@ function TodoListItem({
   todo,
   setTodos,
 }: {
-  todo: { id: string; text: string };
-  setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
+  todo: {
+    id: `${string}-${string}-${string}-${string}-${string}`;
+    text: string;
+  };
+  setTodos: Dispatch<
+    SetStateAction<
+      {
+        id: `${string}-${string}-${string}-${string}-${string}`;
+        text: string;
+      }[]
+    >
+  >;
 }): JSX.Element {
   return (
     <motion.li
       layout
       exit={{ opacity: 0 }}
-      transition={{ type: "spring", opacity: { duration: 0.25 } }}
-      className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
       style={{
         display: "flex",
         justifyContent: "space-between",
         lineHeight: "2rem",
         padding: "0.35rem 1rem",
+        backgroundColor: "rgb(239 239 239 / 70%)",
       }}
     >
       {todo.text}
       <button
         type="button"
         title="Delete this item"
-        className="nx-bg-black/[.02]"
         onClick={() =>
           setTodos((todos) => todos.filter((t) => t.id !== todo.id))
         }
@@ -71,7 +79,7 @@ function TodoListItem({
   );
 }
 
-export function TodoListWithExit(): JSX.Element {
+export default function TodoList(): JSX.Element {
   const [todos, setTodos] = useState([
     { id: crypto.randomUUID(), text: "🐕 Walk the dog" },
     { id: crypto.randomUUID(), text: "🍔 Eat lunch" },
@@ -101,11 +109,11 @@ export function TodoListWithExit(): JSX.Element {
             overflow: "hidden",
           }}
         >
-          <AnimatePresence>
-            {todos.map((todo) => (
-              <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
-            ))}
-          </AnimatePresence>
+        <AnimatePresence key="exclude">
+          {todos.map((todo) => (
+            <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
+          ))}
+        </AnimatePresence>
         </ul>
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -115,12 +123,12 @@ export function TodoListWithExit(): JSX.Element {
             ref={newTodoInput}
             type="text"
             placeholder="Write a new todo 📝"
-            className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
             style={{
               padding: "0.5rem 1rem",
               border: "none",
               borderRadius: "0.25rem",
               width: "100%",
+              backgroundColor: "rgb(239 239 239)",
             }}
           />
 
