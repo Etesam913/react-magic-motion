@@ -11,8 +11,6 @@ export default {
         href="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
     />
     </>
-    
-    
   ),
   logo: (
     <span style={{ display: "flex", gap: "0.65rem", alignItems: "center" }}>

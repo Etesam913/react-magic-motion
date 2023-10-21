@@ -1,6 +1,7 @@
 {
   "index": "Introduction",
+  "applications": "Applications",
   "components": "Components",
-  "examples": "Examples",
-  "guides": "Guides"
+  "guides": "Guides",
+  "license": "License"
 }
