@@ -1,8 +1,7 @@
 import { useState } from "react";
 import type { Transition } from "react-magic-motion";
-
-import { Toggle } from "./toggle";
 import dynamic from "next/dynamic";
+import { Toggle } from "./toggle";
 
 const DynamicMagicMotion = dynamic(
   () => import("react-magic-motion").then((mod) => mod.MagicMotion),

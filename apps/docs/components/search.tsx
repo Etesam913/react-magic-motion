@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "react-magic-motion";
 
 const books = [
   {
