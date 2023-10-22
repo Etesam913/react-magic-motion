@@ -78,9 +78,7 @@ function Book({
   imgSrc: string;
 }): JSX.Element {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.3 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <div
       style={{
         width: "10rem",
         padding: "0.5rem",
@@ -104,7 +102,7 @@ function Book({
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
       />
-    </motion.div>
+    </div>
   );
 }
 
