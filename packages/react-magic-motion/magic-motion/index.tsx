@@ -10,6 +10,7 @@ import {
   convertChildrenToMotionChildren,
   getLayoutValueFromChildren,
 } from "../utils";
+import { usePrefersReducedMotion } from "../hooks";
 
 interface MagicMotionProps {
   children: JSX.Element;
@@ -26,7 +27,7 @@ export function MagicMotion({
   disabled,
   debug,
 }: MagicMotionProps): JSX.Element {
-  if (disabled) return children;
+  const isMotionReduced = usePrefersReducedMotion();
 
   const motionChildren = convertChildrenToMotionChildren(
     children,
@@ -37,10 +38,12 @@ export function MagicMotion({
         layoutDependency,
         transition,
       };
-    },
+    }
   );
 
-  return (
+  return isMotionReduced || disabled ? (
+    <>{children}</>
+  ) : (
     <LayoutGroup>
       <LazyMotion features={domMax}>{motionChildren}</LazyMotion>
     </LayoutGroup>
