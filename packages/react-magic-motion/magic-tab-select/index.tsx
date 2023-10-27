@@ -2,18 +2,22 @@
 
 import { type Transition, m, LazyMotion, domMax } from "framer-motion";
 import { type FunctionComponent, createElement } from "react";
+import { usePrefersReducedMotion } from "../hooks";
 
 interface TabSelectProps {
   children: JSX.Element;
   id: string;
   transition?: Transition;
+  disabled?: boolean;
 }
 export function MagicTabSelect({
   children,
   id,
   transition,
+  disabled,
 }: TabSelectProps): JSX.Element {
   let motionChildren: JSX.Element | null = children;
+  const isMotionReduced = usePrefersReducedMotion();
 
   if (typeof motionChildren.type === "function") {
     motionChildren = (motionChildren.type as FunctionComponent)(
@@ -29,5 +33,9 @@ export function MagicTabSelect({
     motionChildren.props.children
   );
 
-  return <LazyMotion features={domMax}>{motionElement}</LazyMotion>;
+  return isMotionReduced || disabled ? (
+    <>{children}</>
+  ) : (
+    <LazyMotion features={domMax}>{motionElement}</LazyMotion>
+  );
 }
