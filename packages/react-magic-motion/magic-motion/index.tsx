@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import {
   convertChildrenToMotionChildren,
+  getAdditionalDefaultProps,
   getLayoutValueFromChildren,
 } from "../utils";
 
@@ -30,14 +31,9 @@ export function MagicMotion({
 
   const motionChildren = convertChildrenToMotionChildren(
     children,
+    layoutDependency,
+    transition: Transition
     debug,
-    (child) => {
-      return {
-        layout: getLayoutValueFromChildren(child),
-        layoutDependency,
-        transition,
-      };
-    },
   );
 
   return (

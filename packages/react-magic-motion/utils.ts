@@ -5,7 +5,7 @@ import type {
   PropsWithChildren,
 } from "react";
 import { Children, createElement, isValidElement } from "react";
-import { isMotionComponent, m } from "framer-motion";
+import { isMotionComponent, m, Transition } from "framer-motion";
 import { isPortal } from "react-is";
 
 function isNodeText(node: ReactNode): boolean {
@@ -25,17 +25,23 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-export const forbiddenComponentNames = new Set([
-  "MagicMotion",
-  "MagicTabSelect",
-  "AnimatePresence",
-  "svg",
-]);
+export function getAdditionalDefaultProps(
+  child: ReactNode,
+  layoutDependency: any,
+  transition: Transition,
+) {
+  return {
+    layout: getLayoutValueFromChildren(child),
+    layoutDependency,
+    transition,
+  };
+}
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
+  layoutDependency: any,
+  transition: Transition,
   debug?: boolean,
-  customProps?: (child: ReactNode) => Record<string, unknown>,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
@@ -45,21 +51,43 @@ export function convertChildrenToMotionChildren(
 
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
+    // console.log('💫', node, node.type)
 
     if (typeof node.type === "function") {
-    
+      if (node.key === "animate-presence") {
+        // const presenceChild = node.child
+        const nodeChild = node.props.children;
 
+        const motionChild = convertChildrenToMotionChildren(
+          nodeChild,
+          layoutDependency,
+
+
+          debug,
+
+        );
+
+        const newAnimatePresence = createElement(
+          node.type,
+          { ...node.props },
+          motionChild,
+        );
+        return newAnimatePresence;
+      }
       node = (node.type as FunctionComponent)(nodeProps);
       if (!isValidElement(node)) return node;
     }
 
-
     const childType = node.type as keyof typeof m;
 
-    // Creates a motion version of the element child type
-    const passedInProps = customProps
-      ? customProps((node.props as PropsWithChildren).children)
-      : {};
+    // const passedInProps = customProps
+    //   ? customProps((node.props as PropsWithChildren).children)
+    //   : {};
+    const passedInProps = getAdditionalDefaultProps(
+      (node.props as PropsWithChildren).children,
+      layoutDependency,
+      transition,
+    );
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
@@ -78,8 +106,9 @@ export function convertChildrenToMotionChildren(
       },
       convertChildrenToMotionChildren(
         node.props.children as ReactNode,
+        transition,
+        layoutDependency
         debug,
-        customProps,
       ),
     );
 
