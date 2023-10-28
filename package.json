@@ -10,7 +10,8 @@
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "tsconfig": "workspace:*",
-    "turbo": "^1.10.13"
+    "turbo": "^1.10.13",
+    "@babel/traverse": ">=7.23.2"
   },
   "packageManager": "pnpm@8.6.10",
   "name": "react-magic-motion",

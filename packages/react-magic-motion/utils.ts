@@ -25,23 +25,21 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-export function getAdditionalDefaultProps(
-  child: ReactNode,
-  layoutDependency: any,
-  transition: Transition,
-) {
-  return {
-    layout: getLayoutValueFromChildren(child),
-    layoutDependency,
-    transition,
-  };
-}
+// export function getAdditionalDefaultProps(
+//   child: ReactNode,
+//   layoutDependency: any,
+//   transition: Transition,
+// ) {
+//   return {
+//     layout: getLayoutValueFromChildren(child),
+//     layoutDependency,
+//     transition,
+//   };
+// }
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
-  layoutDependency: any,
-  transition: Transition,
-  debug?: boolean,
+  customProps: Record<string, unknown>
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
@@ -55,16 +53,11 @@ export function convertChildrenToMotionChildren(
 
     if (typeof node.type === "function") {
       if (node.key === "animate-presence") {
-        // const presenceChild = node.child
         const nodeChild = node.props.children;
 
         const motionChild = convertChildrenToMotionChildren(
           nodeChild,
-          layoutDependency,
-
-
-          debug,
-
+          {...customProps, exit: {opacity: 0}},
         );
 
         const newAnimatePresence = createElement(
@@ -83,11 +76,7 @@ export function convertChildrenToMotionChildren(
     // const passedInProps = customProps
     //   ? customProps((node.props as PropsWithChildren).children)
     //   : {};
-    const passedInProps = getAdditionalDefaultProps(
-      (node.props as PropsWithChildren).children,
-      layoutDependency,
-      transition,
-    );
+
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
@@ -102,13 +91,12 @@ export function convertChildrenToMotionChildren(
       {
         ...node.props,
         ref: nodeRef,
-        ...passedInProps,
+        ...customProps,
+        layout: getLayoutValueFromChildren(child),
       },
       convertChildrenToMotionChildren(
         node.props.children as ReactNode,
-        transition,
-        layoutDependency
-        debug,
+        customProps
       ),
     );
 

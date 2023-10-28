@@ -6,18 +6,14 @@ import {
   domMax,
   LayoutGroup,
 } from "framer-motion";
-import {
-  convertChildrenToMotionChildren,
-  getAdditionalDefaultProps,
-  getLayoutValueFromChildren,
-} from "../utils";
+import { convertChildrenToMotionChildren } from "../utils";
+import { usePrefersReducedMotion } from "../hooks";
 
 interface MagicMotionProps {
   children: JSX.Element;
   transition?: Transition;
   layoutDependency?: unknown;
   disabled?: boolean;
-  debug?: boolean;
 }
 
 export function MagicMotion({
@@ -25,18 +21,17 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
-  debug,
 }: MagicMotionProps): JSX.Element {
-  if (disabled) return children;
+  const isMotionReduced = usePrefersReducedMotion();
 
-  const motionChildren = convertChildrenToMotionChildren(
-    children,
+  const motionChildren = convertChildrenToMotionChildren(children, {
     layoutDependency,
-    transition: Transition
-    debug,
-  );
+    transition,
+  });
 
-  return (
+  return isMotionReduced || disabled ? (
+    <>{children}</>
+  ) : (
     <LayoutGroup>
       <LazyMotion features={domMax}>{motionChildren}</LazyMotion>
     </LayoutGroup>

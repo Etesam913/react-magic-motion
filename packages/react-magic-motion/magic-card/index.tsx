@@ -17,6 +17,7 @@ interface MagicCardProps {
   isCardExpanded: boolean;
   children: JSX.Element;
   transition?: Transition;
+  disabled?: boolean;
   isBackgroundFadeEnabled?: boolean;
   onBackgroundFadeClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
@@ -92,6 +93,7 @@ export function MagicCard({
   return (
     <LazyMotion features={domMax}>
       {motionChildren}
+
       {isCardExpanded && (
         <div
           className="react-magic-motion-placeholder-box"

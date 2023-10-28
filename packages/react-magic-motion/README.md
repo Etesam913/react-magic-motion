@@ -99,13 +99,13 @@ export default function App() {
 
 ### 💫 Examples
 
-- [To do list](https://www.react-magic-motion.com/Examples)
-- [Accordion](https://www.react-magic-motion.com/Examples/accordion)
-- [Sidebar](https://www.react-magic-motion.com/Examples/collapsible-sidebar)
-- [Expandable Card](https://www.react-magic-motion.com/Examples/expandable-card)
-- [Grid Area](https://www.react-magic-motion.com/Examples/grid-area)
-- [Search](https://www.react-magic-motion.com/Examples/search)
-- [Tabs](https://www.react-magic-motion.com/Examples/tabs)
+- [To do list](https://www.react-magic-motion.com/applications)
+- [Accordion](https://www.react-magic-motion.com/applications/accordion)
+- [Sidebar](https://www.react-magic-motion.com/applications/collapsible-sidebar)
+- [Expandable Card](https://www.react-magic-motion.com/applications/expandable-card)
+- [Grid Area](https://www.react-magic-motion.com/applications/grid-area)
+- [Search](https://www.react-magic-motion.com/applications/search)
+- [Tabs](https://www.react-magic-motion.com/applications/tabs)
 
 ## 📓 Docs
 

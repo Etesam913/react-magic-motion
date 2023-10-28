@@ -18,10 +18,11 @@ pnpm install
 pnpm run dev
 ```
 
-- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see a rudimentary playground.
+- Open [http://localhost:3001](http://localhost:3001) with your browser to see the docs.
 
 - Make and commit desired changes.
 
-  - Make sure to run `yarn lint --fix` before commiting to ensure that there are no linting errors.
+  - Make sure to run `pnpm run lint --fix` before commiting to ensure that there are no linting errors.
 
 - Finally, submit a pr from your forked branch to the main branch
