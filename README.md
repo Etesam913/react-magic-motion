@@ -11,14 +11,14 @@
 ```bash
 npm i react-magic-motion
 ```
+
 ### 🔎 Simple Example
 
 #### 🎥 Demo
 
 https://github.com/Etesam913/react-magic-motion/assets/55665282/dfc56ad5-5012-4f5e-90cc-8ec372527320
 
-
-####  🧑‍💻 Code
+#### 🧑‍💻 Code
 
 ```jsx
 import { useState } from "react";
@@ -109,7 +109,7 @@ export default function App() {
 
 ## 📓 Docs
 
-- For a full understanding of `react-magic-motion visit` the docs [here](https://react-magic-motion.com)
+- For a full understanding of `react-magic-motion` visit the docs [here](https://react-magic-motion.com)
 
 ## ❓ Want to Contribute
 
