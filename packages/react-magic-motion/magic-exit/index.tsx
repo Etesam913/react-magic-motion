@@ -20,14 +20,14 @@ export function MagicExit({
   initial,
   animate,
   exit,
-  transition,
+
   mode = "sync",
 }: {
   children: false | ReactNode;
   initial?: TargetAndTransition;
   animate?: TargetAndTransition;
   exit?: TargetAndTransition;
-  transition?: Transition;
+
   mode?: "sync" | "wait" | "popLayout";
 }) {
   function addExitAnimationToChildren(
@@ -67,7 +67,6 @@ export function MagicExit({
         newElemProps.initial = initial;
         newElemProps.animate = animate;
         newElemProps.exit = exit;
-        newElemProps.transition = transition;
       }
 
       const newElem = createElement(
@@ -81,7 +80,7 @@ export function MagicExit({
   }
 
   return (
-    <AnimatePresence initial={false} key="react-magic-motion-animate-presence">
+    <AnimatePresence mode={mode} key="react-magic-motion-animate-presence">
       {addExitAnimationToChildren(children, true)}
     </AnimatePresence>
   );

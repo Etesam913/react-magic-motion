@@ -124,7 +124,13 @@ interface MagicExitProps {
   initial?: TargetAndTransition;
   animate?: TargetAndTransition;
   exit?: TargetAndTransition;
-  transition?: Transition;
   mode?: "sync" | "wait" | "popLayout";
 }
 ```
+
+| Prop name | Default value | Description                                                                                                 |
+| :-------- | :------------ | :---------------------------------------------------------------------------------------------------------- |
+| `initial` | `undefined`   | The initial animation styles                                                                                |
+| `animate` | `undefined`   | The styles that will be animated to from `initial`                                                          |
+| `exit`    | `undefined`   | The styles that will be animated when the element is removed                                                |
+| `mode`    | `"sync"`      | The animation mode, more info can be found here: https://www.framer.com/motion/animate-presence/#%23%23mode |
