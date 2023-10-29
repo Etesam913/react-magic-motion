@@ -31,6 +31,24 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
+export const forbiddenComponentNames = new Set(["MagicExit", "MagicMotion"]);
+
+/**
+  When a component is encontered that is forbidden (should not be animated)
+  this function will return the regular un-animated component.
+*/
+function handleForbiddenComponent(
+  node: React.ReactPortal | React.ReactElement<unknown>,
+): null | React.ReactPortal | React.ReactElement<unknown> {
+  if (typeof node.type === "function") {
+    if (forbiddenComponentNames.has(node.type.name)) {
+      return node;
+    }
+    return null;
+  }
+  return null;
+}
+
 export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps: Record<string, unknown>,
@@ -43,36 +61,19 @@ export function convertChildrenToMotionChildren(
 
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
+
+    let forbiddenResult = handleForbiddenComponent(node);
+    if (forbiddenResult) return forbiddenResult;
+
     if (typeof node.type === "function") {
       if (node.type.name === "MagicExit" || node.type.name === "MagicMotion") {
         return node;
       }
-      // if (node.key === "react-magic-motion-animate-presence") {
 
-      //   return node;
-      // }
-      // if (node.key === "magic-ap") {
-      //   const nodeChild = node.props.children;
-
-      //   const motionChild = convertChildrenToMotionChildren(nodeChild, {
-      //     ...customProps,
-      //   });
-
-      //   const newAnimatePresence = createElement(
-      //     node.type,
-      //     { ...node.props },
-      //     motionChild,
-      //   );
-      //   return newAnimatePresence;
-      // }
       node = (node.type as FunctionComponent)(nodeProps);
-      if (node && typeof node.type === "function") {
-        if (
-          node.type.name === "MagicExit" ||
-          node.type.name === "MagicMotion"
-        ) {
-          return node;
-        }
+      if (node) {
+        forbiddenResult = handleForbiddenComponent(node);
+        if (forbiddenResult) return forbiddenResult;
       }
 
       if (!isValidElement(node)) return node;
@@ -103,7 +104,6 @@ export function convertChildrenToMotionChildren(
         ...customProps,
         layout: getLayoutValueFromChildren(child),
       },
-
       newElemChildren,
     );
 
