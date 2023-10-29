@@ -44,7 +44,7 @@ export function convertChildrenToMotionChildren(
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
     if (typeof node.type === "function") {
-      if (node.type.name === "MagicExit") {
+      if (node.type.name === "MagicExit" || node.type.name === "MagicMotion") {
         return node;
       }
       // if (node.key === "react-magic-motion-animate-presence") {
@@ -66,6 +66,15 @@ export function convertChildrenToMotionChildren(
       //   return newAnimatePresence;
       // }
       node = (node.type as FunctionComponent)(nodeProps);
+      if (node && typeof node.type === "function") {
+        if (
+          node.type.name === "MagicExit" ||
+          node.type.name === "MagicMotion"
+        ) {
+          return node;
+        }
+      }
+
       if (!isValidElement(node)) return node;
     }
 
