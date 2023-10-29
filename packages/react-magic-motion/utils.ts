@@ -31,7 +31,11 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-export const forbiddenComponentNames = new Set(["MagicExit", "MagicMotion"]);
+export const forbiddenComponentNames = new Set([
+  "MagicExit",
+  "MagicMotion",
+  "MagicTabSelect",
+]);
 
 /**
   When a component is encontered that is forbidden (should not be animated)

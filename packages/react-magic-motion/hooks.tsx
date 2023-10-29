@@ -10,7 +10,7 @@ const PREFERSREDUCEDMOTION = "(prefers-reduced-motion: no-preference)";
  */
 export function usePlaceholderBoxSize(
   isCardExpanded: boolean,
-  rootNode: RefObject<HTMLElement>
+  rootNode: RefObject<HTMLElement>,
 ): { placeholderBoxHeight: number; placeholderBoxWidth: number } {
   const [placeholderBoxDimensions, setPlaceholderBoxDimensions] = useState({
     width: 0,
@@ -49,13 +49,13 @@ export function usePlaceholderBoxSize(
  * Updates the `prefersReducedMotion` state whenever
  * the `prefers-reduced-motion:reduce` option is set
  */
-export function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
+export function usePrefersReducedMotion(): boolean {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(PREFERSREDUCEDMOTION);
-    if (mediaQueryList) setPrefersReducedMotion(!mediaQueryList.matches);
-    const listener = (event: MediaQueryListEvent) => {
+    setPrefersReducedMotion(!mediaQueryList.matches);
+    const listener = (event: MediaQueryListEvent): void => {
       setPrefersReducedMotion(!event.matches);
     };
     mediaQueryList.addEventListener("change", listener);
