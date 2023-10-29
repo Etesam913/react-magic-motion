@@ -5,6 +5,7 @@ import {
   type Transition,
   domMax,
   LayoutGroup,
+  TargetAndTransition,
 } from "framer-motion";
 import { convertChildrenToMotionChildren } from "../utils";
 import { usePrefersReducedMotion } from "../hooks";

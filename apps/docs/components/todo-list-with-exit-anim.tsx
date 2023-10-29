@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useRef, useState } from "react";
-import { AnimatePresence, MagicMotion, motion } from "react-magic-motion";
+import { MagicExit, MagicMotion } from "react-magic-motion";
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
@@ -29,9 +29,7 @@ function TodoListItem({
   setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
 }): JSX.Element {
   return (
-    <motion.li
-      layout
-      exit={{ opacity: 0 }}
+    <li
       className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
       style={{
         display: "flex",
@@ -51,7 +49,7 @@ function TodoListItem({
       >
         🗑️
       </button>
-    </motion.li>
+    </li>
   );
 }
 
@@ -85,11 +83,11 @@ export function TodoListWithExit(): JSX.Element {
             overflow: "hidden",
           }}
         >
-          <AnimatePresence key="exclude">
+          <MagicExit exit={{ opacity: 0 }}>
             {todos.map((todo) => (
               <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
             ))}
-          </AnimatePresence>
+          </MagicExit>
         </ul>
         <form
           onSubmit={(e) => e.preventDefault()}

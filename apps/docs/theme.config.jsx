@@ -28,7 +28,7 @@ export default {
   },
   useNextSeoProps() {
     return {
-      titleTemplate: "%s 👉 react-magic-motion",
+      titleTemplate: "%s - react-magic-motion",
     };
   },
   footer: {
@@ -58,5 +58,4 @@ export default {
       </span>
     ),
   },
-  // ... other theme options
 };

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "react-magic-motion";
 
 const books = [
   {
@@ -77,7 +78,9 @@ function Book({
   imgSrc: string;
 }): JSX.Element {
   return (
-    <div
+    <motion.div
+      layout
+      exit={{ opacity: 0 }}
       style={{
         width: "10rem",
         padding: "0.5rem",
@@ -101,7 +104,7 @@ function Book({
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
       />
-    </div>
+    </motion.div>
   );
 }
 

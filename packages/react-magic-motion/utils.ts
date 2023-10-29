@@ -1,11 +1,6 @@
-import type {
-  FunctionComponent,
-  Ref,
-  ReactNode,
-  PropsWithChildren,
-} from "react";
+import type { FunctionComponent, Ref, ReactNode } from "react";
 import { Children, createElement, isValidElement } from "react";
-import { isMotionComponent, m, Transition } from "framer-motion";
+import { isMotionComponent, m } from "framer-motion";
 import { isPortal } from "react-is";
 
 function isNodeText(node: ReactNode): boolean {
@@ -13,6 +8,17 @@ function isNodeText(node: ReactNode): boolean {
     typeof node === "string" ||
     (Array.isArray(node) && node.every((child) => typeof child === "string"))
   );
+}
+
+function omit<T extends object, K extends keyof T>(
+  obj: T,
+  ...keys: K[]
+): Omit<T, K> {
+  const result = { ...obj };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
 }
 
 /** Sets the `layout` property depending on the type of the children*/
@@ -25,21 +31,9 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-// export function getAdditionalDefaultProps(
-//   child: ReactNode,
-//   layoutDependency: any,
-//   transition: Transition,
-// ) {
-//   return {
-//     layout: getLayoutValueFromChildren(child),
-//     layoutDependency,
-//     transition,
-//   };
-// }
-
 export function convertChildrenToMotionChildren(
   children: ReactNode,
-  customProps: Record<string, unknown>
+  customProps: Record<string, unknown>,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
@@ -49,34 +43,33 @@ export function convertChildrenToMotionChildren(
 
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
-    // console.log('💫', node, node.type)
-
     if (typeof node.type === "function") {
-      if (node.key === "animate-presence") {
-        const nodeChild = node.props.children;
-
-        const motionChild = convertChildrenToMotionChildren(
-          nodeChild,
-          {...customProps, exit: {opacity: 0}},
-        );
-
-        const newAnimatePresence = createElement(
-          node.type,
-          { ...node.props },
-          motionChild,
-        );
-        return newAnimatePresence;
+      if (node.type.name === "MagicExit") {
+        return node;
       }
+      // if (node.key === "react-magic-motion-animate-presence") {
+
+      //   return node;
+      // }
+      // if (node.key === "magic-ap") {
+      //   const nodeChild = node.props.children;
+
+      //   const motionChild = convertChildrenToMotionChildren(nodeChild, {
+      //     ...customProps,
+      //   });
+
+      //   const newAnimatePresence = createElement(
+      //     node.type,
+      //     { ...node.props },
+      //     motionChild,
+      //   );
+      //   return newAnimatePresence;
+      // }
       node = (node.type as FunctionComponent)(nodeProps);
       if (!isValidElement(node)) return node;
     }
 
     const childType = node.type as keyof typeof m;
-
-    // const passedInProps = customProps
-    //   ? customProps((node.props as PropsWithChildren).children)
-    //   : {};
-
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
@@ -86,6 +79,13 @@ export function convertChildrenToMotionChildren(
       isMotionComponent(node.type) ? node.type : m[childType]
     ) as string | FunctionComponent<any>;
 
+    const childrenCustomProps = { ...customProps };
+
+    const newElemChildren = convertChildrenToMotionChildren(
+      node.props.children as ReactNode,
+      childrenCustomProps,
+    );
+
     const newElem = createElement(
       typeOfNewElement,
       {
@@ -94,10 +94,8 @@ export function convertChildrenToMotionChildren(
         ...customProps,
         layout: getLayoutValueFromChildren(child),
       },
-      convertChildrenToMotionChildren(
-        node.props.children as ReactNode,
-        customProps
-      ),
+
+      newElemChildren,
     );
 
     return newElem;

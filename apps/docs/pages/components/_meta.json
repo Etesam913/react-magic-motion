@@ -1,5 +1,6 @@
 {
   "index": "<MagicMotion />",
+  "magic-exit": "<MagicExit />",
   "magic-card": "<MagicCard />",
   "magic-tab-select": "<MagicTabSelect />"
 }

@@ -1,14 +1,10 @@
-import { useState } from "react";
-import { AnimatePresence, MagicMotion } from "react-magic-motion";
+import { MagicMotion } from "react-magic-motion";
+import { Accordion } from "./accordion";
 
 export function SimpleExample(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(true);
   return (
     <MagicMotion>
-      <div>
-        <AnimatePresence key="animate-presence">{isOpen && <div>testing</div>}</AnimatePresence>
-        <button onClick={() => setIsOpen(!isOpen)}>click me</button>
-      </div>
+      <Accordion />
     </MagicMotion>
   );
 }
