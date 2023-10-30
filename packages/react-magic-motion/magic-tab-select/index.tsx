@@ -32,11 +32,12 @@ export function MagicTabSelect({
     { ...motionChildren.props, layoutId: id, transition },
     motionChildren.props.children,
   );
-  console.log(isMotionReduced, disabled);
 
   return isMotionReduced || disabled ? (
-    <>{children}</>
+    children
   ) : (
-    <LazyMotion features={domMax}>{motionElement}</LazyMotion>
+    <LazyMotion key="MagicTabSelect" features={domMax}>
+      {motionElement}
+    </LazyMotion>
   );
 }

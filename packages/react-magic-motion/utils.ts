@@ -10,17 +10,6 @@ function isNodeText(node: ReactNode): boolean {
   );
 }
 
-function omit<T extends object, K extends keyof T>(
-  obj: T,
-  ...keys: K[]
-): Omit<T, K> {
-  const result = { ...obj };
-  for (const key of keys) {
-    delete result[key];
-  }
-  return result;
-}
-
 /** Sets the `layout` property depending on the type of the children*/
 export function getLayoutValueFromChildren(
   children: ReactNode,
@@ -45,7 +34,7 @@ function handleForbiddenComponent(
   node: React.ReactPortal | React.ReactElement<unknown>,
 ): null | React.ReactPortal | React.ReactElement<unknown> {
   if (typeof node.type === "function") {
-    if (forbiddenComponentNames.has(node.type.name)) {
+    if (forbiddenComponentNames.has(node.key)) {
       return node;
     }
     return null;
@@ -56,28 +45,23 @@ function handleForbiddenComponent(
 export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps: Record<string, unknown>,
+  debug?: boolean,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
-
     // Checks if the child is a string or boolean or number
     if (!isValidElement(node) || node.key === "exclude") return node;
 
     // Checks if the child is a function component
     const nodeProps = node.props as Record<string, unknown>;
-
-    let forbiddenResult = handleForbiddenComponent(node);
-    if (forbiddenResult) return forbiddenResult;
-
-    if (typeof node.type === "function") {
-      if (node.type.name === "MagicExit" || node.type.name === "MagicMotion") {
-        return node;
-      }
-
+    let parent = null;
+    while (typeof node.type === "function") {
+      parent = node;
       node = (node.type as FunctionComponent)(nodeProps);
+
       if (node) {
-        forbiddenResult = handleForbiddenComponent(node);
-        if (forbiddenResult) return forbiddenResult;
+        const forbiddenResult = handleForbiddenComponent(node);
+        if (forbiddenResult) return parent;
       }
 
       if (!isValidElement(node)) return node;
@@ -93,11 +77,10 @@ export function convertChildrenToMotionChildren(
       isMotionComponent(node.type) ? node.type : m[childType]
     ) as string | FunctionComponent<any>;
 
-    const childrenCustomProps = { ...customProps };
-
     const newElemChildren = convertChildrenToMotionChildren(
       node.props.children as ReactNode,
-      childrenCustomProps,
+      customProps,
+      debug,
     );
 
     const newElem = createElement(

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MagicExit, MagicMotion } from "react-magic-motion";
+import { MagicMotion, MagicExit } from "react-magic-motion";
 
-export function AccordionWithExitAnim() {
+export function AccordionWithExitAnim(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <MagicMotion>
@@ -49,7 +49,6 @@ export function AccordionWithExitAnim() {
             />
           </svg>
         </button>
-
         <MagicExit
           initial={{ opacity: 0, y: -20 }}
           animate={{

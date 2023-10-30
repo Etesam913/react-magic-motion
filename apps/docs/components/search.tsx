@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "react-magic-motion";
 
 const books = [
   {
@@ -78,9 +77,7 @@ function Book({
   imgSrc: string;
 }): JSX.Element {
   return (
-    <motion.div
-      layout
-      exit={{ opacity: 0 }}
+    <div
       style={{
         width: "10rem",
         padding: "0.5rem",
@@ -104,7 +101,7 @@ function Book({
         src={imgSrc}
         style={{ width: "auto", height: "8rem", margin: "auto" }}
       />
-    </motion.div>
+    </div>
   );
 }
 
@@ -149,7 +146,10 @@ export function Search(): JSX.Element {
       >
         {books
           .filter(({ title }) =>
-            title.toLowerCase().trim().includes(searchText.toLowerCase().trim())
+            title
+              .toLowerCase()
+              .trim()
+              .includes(searchText.toLowerCase().trim()),
           )
           .map(({ id, title, imgSrc }) => (
             <Book key={id} title={title} imgSrc={imgSrc} />

@@ -3,7 +3,6 @@ import {
   isMotionComponent,
   m,
   type TargetAndTransition,
-  type Transition,
 } from "framer-motion";
 import {
   Children,
@@ -12,32 +11,31 @@ import {
   type FunctionComponent,
   createElement,
 } from "react";
-import { getLayoutValueFromChildren } from "../utils";
 import { isPortal } from "react-is";
+import { getLayoutValueFromChildren } from "../utils";
 
 export function MagicExit({
   children,
   initial,
   animate,
   exit,
-
   mode = "sync",
 }: {
   children: false | ReactNode;
   initial?: TargetAndTransition;
   animate?: TargetAndTransition;
   exit?: TargetAndTransition;
-
   mode?: "sync" | "wait" | "popLayout";
-}) {
+}): JSX.Element {
   function addExitAnimationToChildren(
-    children: false | ReactNode,
+    nodeChildren: false | ReactNode,
     isRootElem: boolean,
-  ) {
-    return Children.map(children, (child): ReactNode => {
+  ): ReactNode {
+    return Children.map(nodeChildren, (child): ReactNode => {
       let node = child;
       if (!isValidElement(node) || node.key === "exclude") return node;
       const nodeProps = node.props as Record<string, unknown>;
+
       if (typeof node.type === "function") {
         node = (node.type as FunctionComponent)(nodeProps);
         if (!isValidElement(node)) return node;
@@ -80,7 +78,7 @@ export function MagicExit({
   }
 
   return (
-    <AnimatePresence mode={mode} key="react-magic-motion-animate-presence">
+    <AnimatePresence key="MagicExit" mode={mode}>
       {addExitAnimationToChildren(children, true)}
     </AnimatePresence>
   );
