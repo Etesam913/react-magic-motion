@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AnimatePresence,
   isMotionComponent,
@@ -13,6 +15,7 @@ import {
 } from "react";
 import { isPortal } from "react-is";
 import { getLayoutValueFromChildren } from "../utils";
+import { usePrefersReducedMotion } from "../hooks";
 
 export function MagicExit({
   children,
@@ -20,13 +23,17 @@ export function MagicExit({
   animate,
   exit,
   mode = "sync",
+  disabled,
 }: {
   children: false | ReactNode;
   initial?: TargetAndTransition;
   animate?: TargetAndTransition;
   exit?: TargetAndTransition;
   mode?: "sync" | "wait" | "popLayout";
-}): JSX.Element {
+  disabled?: boolean;
+}): ReactNode {
+  const isMotionReduced = usePrefersReducedMotion();
+
   function addExitAnimationToChildren(
     nodeChildren: false | ReactNode,
     isRootElem: boolean,
@@ -77,7 +84,9 @@ export function MagicExit({
     });
   }
 
-  return (
+  return disabled || isMotionReduced ? (
+    children
+  ) : (
     <AnimatePresence key="MagicExit" mode={mode}>
       {addExitAnimationToChildren(children, true)}
     </AnimatePresence>

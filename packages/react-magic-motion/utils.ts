@@ -34,7 +34,7 @@ function handleForbiddenComponent(
   node: React.ReactPortal | React.ReactElement<unknown>,
 ): null | React.ReactPortal | React.ReactElement<unknown> {
   if (typeof node.type === "function") {
-    if (forbiddenComponentNames.has(node.key)) {
+    if (node.key !== null && forbiddenComponentNames.has(String(node.key))) {
       return node;
     }
     return null;
@@ -45,6 +45,8 @@ function handleForbiddenComponent(
 export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps: Record<string, unknown>,
+  isRootNode: boolean,
+  rootNodeCallback?: (node: ReactElement) => void,
   debug?: boolean,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
@@ -80,6 +82,8 @@ export function convertChildrenToMotionChildren(
     const newElemChildren = convertChildrenToMotionChildren(
       node.props.children as ReactNode,
       customProps,
+      false,
+      rootNodeCallback,
       debug,
     );
 
@@ -93,6 +97,9 @@ export function convertChildrenToMotionChildren(
       },
       newElemChildren,
     );
+    if (isRootNode && rootNodeCallback) {
+      rootNodeCallback(newElem);
+    }
 
     return newElem;
   });

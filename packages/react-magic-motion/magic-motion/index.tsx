@@ -32,6 +32,8 @@ export function MagicMotion({
       layoutDependency,
       transition,
     },
+    true,
+    undefined,
     debug,
   );
 
