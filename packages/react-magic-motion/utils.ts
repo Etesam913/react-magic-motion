@@ -1,4 +1,4 @@
-import type { FunctionComponent, Ref, ReactNode } from "react";
+import type { FunctionComponent, Ref, ReactNode, ReactElement } from "react";
 import { Children, createElement, isValidElement } from "react";
 import { isMotionComponent, m } from "framer-motion";
 import { isPortal } from "react-is";

@@ -9,6 +9,7 @@ import {
 import {
   Children,
   isValidElement,
+  type Ref,
   type ReactNode,
   type FunctionComponent,
   createElement,
@@ -63,7 +64,12 @@ export function MagicExit({
         false,
       );
 
-      const newElemProps = {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- This assignment is safe even if it is any
+      const newElemProps: Record<string, unknown> & {
+        initial?: TargetAndTransition;
+        animate?: TargetAndTransition;
+        exit?: TargetAndTransition;
+      } = {
         ...node.props,
         ref: nodeRef,
         layout: getLayoutValueFromChildren(child),
