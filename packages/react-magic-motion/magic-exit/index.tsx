@@ -26,18 +26,18 @@ export function MagicExit({
   mode = "sync",
   disabled,
 }: {
-  children: false | ReactNode;
+  children: ReactNode;
   initial?: TargetAndTransition;
   animate?: TargetAndTransition;
   exit?: TargetAndTransition;
   mode?: "sync" | "wait" | "popLayout";
   disabled?: boolean;
-}): ReactNode {
+}): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
 
   function addExitAnimationToChildren(
     nodeChildren: false | ReactNode,
-    isRootElem: boolean,
+    isRootElem: boolean
   ): ReactNode {
     return Children.map(nodeChildren, (child): ReactNode => {
       let node = child;
@@ -61,7 +61,7 @@ export function MagicExit({
 
       const newElemChildren = addExitAnimationToChildren(
         node.props.children as ReactNode,
-        false,
+        false
       );
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- This assignment is safe even if it is any
@@ -83,7 +83,7 @@ export function MagicExit({
       const newElem = createElement(
         typeOfNewElement,
         newElemProps,
-        newElemChildren,
+        newElemChildren
       );
 
       return newElem;
@@ -91,10 +91,10 @@ export function MagicExit({
   }
 
   return disabled || isMotionReduced ? (
-    children
+    <>{children}</>
   ) : (
     <AnimatePresence key="MagicExit" mode={mode}>
-      {addExitAnimationToChildren(children, true)}
+      {addExitAnimationToChildren(children, true) ?? null}
     </AnimatePresence>
   );
 }
