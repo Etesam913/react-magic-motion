@@ -29,7 +29,7 @@ export default {
   docsRepositoryBase: "https://github.com/Etesam913/react-magic-motion/tree/main/apps/docs/",
   useNextSeoProps() {
     return {
-      titleTemplate: "%s 👉 react-magic-motion",
+      titleTemplate: "%s - react-magic-motion",
     };
   },
   footer: {

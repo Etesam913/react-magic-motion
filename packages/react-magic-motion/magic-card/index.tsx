@@ -9,8 +9,8 @@ import {
 } from "framer-motion";
 import { Children, createElement, isValidElement, useRef } from "react";
 import type { PropsWithChildren, FunctionComponent, ReactNode } from "react";
-import { usePlaceholderBoxSize, usePrefersReducedMotion } from "../hooks";
-import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
+import { usePlaceholderBoxSize } from "../hooks";
+import { getLayoutValueFromChildren } from "../utils";
 import "../card.css";
 
 interface MagicCardProps {
@@ -48,9 +48,6 @@ export function MagicCard({
 
       // Checks if the child is a function component
       if (typeof node.type === "function") {
-        if (forbiddenComponentNames.has(node.type.name)) {
-          return node;
-        }
         node = (node.type as FunctionComponent)(node.props);
         if (!isValidElement(node)) return node;
       }

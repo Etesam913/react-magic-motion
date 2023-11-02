@@ -1,14 +1,6 @@
 import { useState } from "react";
-import type { Transition } from "react-magic-motion";
-import dynamic from "next/dynamic";
+import { MagicMotion, type Transition } from "react-magic-motion";
 import { Toggle } from "./toggle";
-
-const DynamicMagicMotion = dynamic(
-  () => import("react-magic-motion").then((mod) => mod.MagicMotion),
-  {
-    ssr: false,
-  }
-);
 
 export function ExampleComponent({
   children,
@@ -19,7 +11,7 @@ export function ExampleComponent({
 }): JSX.Element {
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
   return (
-    <DynamicMagicMotion transition={transition} disabled={!isAnimationEnabled}>
+    <MagicMotion transition={transition} disabled={!isAnimationEnabled}>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         {children}
 
@@ -32,6 +24,6 @@ export function ExampleComponent({
           <span>Animation {isAnimationEnabled ? "Enabled" : "Disabled"}</span>
         </div>
       </div>
-    </DynamicMagicMotion>
+    </MagicMotion>
   );
 }

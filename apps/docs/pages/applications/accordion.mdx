@@ -7,7 +7,10 @@ import { ExampleComponent } from "../../components/example-component";
 ### Example
 
 <ExampleComponent
-  transition={{ type: "spring", stiffness: 180, damping: 20, mass: 1.1 }}
+  transition={{
+    layout: { type: "spring", stiffness: 180, damping: 20, mass: 1.1 },
+    exit: { duration: 0.1 },
+  }}
 >
   <Accordion />
 </ExampleComponent>

@@ -1,0 +1,136 @@
+import { AccordionWithExitAnim } from "../../components/accordion-with-exit-anim.tsx";
+
+# `<MagicExit />` (not released yet)
+
+### Overview
+
+- This component is used for adding animations to elements that are removed from the DOM using conditional rendering.
+- You can define an `initial` prop used to set the initial animation styles.
+- You can define an `animate` prop used to set the styles that will be animated to from `initial`.
+- You can define an `exit` prop quite similar to `animate` that will be used to animate the element out of the DOM.
+
+An example of this component can be seen below:
+
+<AccordionWithExitAnim />
+
+```jsx copy filename="Accordion With Exit Animation" showLineNumbers {2, 7, 98, 96, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68}
+import { useState } from "react";
+import { MagicExit, MagicMotion } from "react-magic-motion";
+
+export function AccordionWithExitAnim() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <MagicMotion>
+      <div
+        style={{
+          backgroundColor: "rgba(238, 238, 238)",
+          padding: "1rem",
+          borderRadius: 12,
+          margin: "1rem 0",
+          overflow: "hidden",
+        }}
+      >
+        <button
+          type="button"
+          style={{
+            fontSize: "1.1em",
+            fontWeight: 500,
+            width: "100%",
+            textAlign: "left",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Click me to see my content
+          <svg
+            key="exclude"
+            style={{
+              transform: `rotate(${isOpen ? 180 : 0}deg)`,
+              transition: "320ms ease-in-out",
+            }}
+            width="20"
+            height="20"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.5 10L15.6714 21L27.5 10"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
+        <MagicExit
+          initial={{ opacity: 0, y: -20 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: { y: { type: "spring", damping: 12, stiffness: 120 } },
+          }}
+          exit={{
+            opacity: 0,
+            y: -20,
+            transition: {
+              opacity: { duration: 0.175 },
+              y: { duration: 0.25 },
+            },
+          }}
+        >
+          {isOpen && (
+            <div
+              style={{
+                gap: "1rem",
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1rem",
+              }}
+            >
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+                dapibus tellus ut libero sagittis, a pharetra eros placerat.
+                Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+                Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+                convallis id.
+              </div>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                gravida lobortis sem, vel blandit dolor ultrices nec. Donec
+                dapibus tellus ut libero sagittis, a pharetra eros placerat.
+                Aliquam erat volutpat. Nunc nec nisl ac turpis semper pharetra.
+                Nullam pulvinar pellentesque mauris, sit amet tincidunt nisl
+                convallis id.
+              </div>
+            </div>
+          )}
+        </MagicExit>
+      </div>
+    </MagicMotion>
+  );
+}
+```
+
+### Props
+
+```ts
+interface MagicExitProps {
+  children: false | ReactNode;
+  initial?: TargetAndTransition;
+  animate?: TargetAndTransition;
+  exit?: TargetAndTransition;
+  mode?: "sync" | "wait" | "popLayout";
+}
+```
+
+| Prop name | Default value | Description                                                                                                  |
+| :-------- | :------------ | :----------------------------------------------------------------------------------------------------------- |
+| `initial` | `undefined`   | The initial animation styles                                                                                 |
+| `animate` | `undefined`   | The styles that will be animated to from `initial`                                                           |
+| `exit`    | `undefined`   | The styles that will be animated when the element is removed                                                 |
+| `mode`    | `"sync"`      | The animation mode, more info can be found here: https://www.framer.com/motion/animate-presence/#%23%23mode` |
