@@ -26,7 +26,7 @@ export default {
   project: {
     link: "https://github.com/etesam913/react-magic-motion",
   },
-  docsRepositoryBase: "https://github.com/Etesam913/react-magic-motion/tree/main/",
+  docsRepositoryBase: "https://github.com/Etesam913/react-magic-motion/tree/main/apps/docs/",
   useNextSeoProps() {
     return {
       titleTemplate: "%s 👉 react-magic-motion",
