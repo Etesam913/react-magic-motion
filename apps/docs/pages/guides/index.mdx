@@ -110,9 +110,9 @@ export default function TodoList(): JSX.Element {
           }}
         >
          <MagicExit exit={{ opacity: 0 }}>
-          {todos.map((todo) => (
-            <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
-          ))}
+           {todos.map((todo) => (
+             <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
+           ))}
         </MagicExit>
         </ul>
         <form

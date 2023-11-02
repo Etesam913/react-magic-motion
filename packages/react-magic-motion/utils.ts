@@ -47,7 +47,6 @@ export function convertChildrenToMotionChildren(
   customProps: Record<string, unknown>,
   isRootNode: boolean,
   rootNodeCallback?: (node: ReactElement) => void,
-  debug?: boolean,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
@@ -84,7 +83,6 @@ export function convertChildrenToMotionChildren(
       customProps,
       false,
       rootNodeCallback,
-      debug,
     );
 
     const newElem = createElement(

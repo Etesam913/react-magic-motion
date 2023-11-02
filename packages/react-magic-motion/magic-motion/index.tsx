@@ -14,7 +14,6 @@ interface MagicMotionProps {
   transition?: Transition;
   layoutDependency?: unknown;
   disabled?: boolean;
-  debug?: boolean;
 }
 
 export function MagicMotion({
@@ -22,7 +21,6 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
-  debug,
 }: MagicMotionProps): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
 
@@ -34,7 +32,6 @@ export function MagicMotion({
     },
     true,
     undefined,
-    debug,
   );
 
   return isMotionReduced || disabled ? (
