@@ -20,7 +20,7 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-export const forbiddenComponentNames = new Set([
+export const forbiddenComponentKeys = new Set([
   "MagicExit",
   "MagicMotion",
   "MagicTabSelect",
@@ -34,7 +34,7 @@ function handleForbiddenComponent(
   node: React.ReactPortal | React.ReactElement<unknown>,
 ): null | React.ReactPortal | React.ReactElement<unknown> {
   if (typeof node.type === "function") {
-    if (node.key !== null && forbiddenComponentNames.has(String(node.key))) {
+    if (node.key !== null && forbiddenComponentKeys.has(String(node.key))) {
       return node;
     }
     return null;

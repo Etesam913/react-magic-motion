@@ -48,9 +48,6 @@ export function MagicCard({
 
       // Checks if the child is a function component
       if (typeof node.type === "function") {
-        // if (forbiddenComponentNames.has(node.type.name)) {
-        //   return node;
-        // }
         node = (node.type as FunctionComponent)(node.props);
         if (!isValidElement(node)) return node;
       }
