@@ -1,9 +1,4 @@
-import type {
-  FunctionComponent,
-  Ref,
-  ReactNode,
-  PropsWithChildren,
-} from "react";
+import type { FunctionComponent, Ref, ReactNode, ReactElement } from "react";
 import { Children, createElement, isValidElement } from "react";
 import { isMotionComponent, m } from "framer-motion";
 import { isPortal } from "react-is";
@@ -25,37 +20,55 @@ export function getLayoutValueFromChildren(
   return true;
 }
 
-export const forbiddenComponentNames = new Set([
+export const forbiddenComponentKeys = new Set([
+  "MagicExit",
   "MagicMotion",
   "MagicTabSelect",
-  "AnimatePresence",
-  "svg",
 ]);
+
+/**
+  When a component is encontered that is forbidden (should not be animated)
+  this function will return the regular un-animated component.
+*/
+function handleForbiddenComponent(
+  node: React.ReactPortal | React.ReactElement<unknown>,
+): null | React.ReactPortal | React.ReactElement<unknown> {
+  if (typeof node.type === "function") {
+    if (node.key !== null && forbiddenComponentKeys.has(String(node.key))) {
+      return node;
+    }
+    return null;
+  }
+  return null;
+}
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
-  customProps?: (child: ReactNode) => Record<string, unknown>,
+  customProps: Record<string, unknown>,
+  isRootNode: boolean,
+  rootNodeCallback?: (node: ReactElement) => void,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
-
     // Checks if the child is a string or boolean or number
     if (!isValidElement(node) || node.key === "exclude") return node;
 
     // Checks if the child is a function component
-    const nodeProps = node.props as Record<string, unknown>;
-
-    if (typeof node.type === "function") {
+    let parent = null;
+    while (typeof node.type === "function") {
+      const nodeProps = node.props as Record<string, unknown>;
+      parent = node;
       node = (node.type as FunctionComponent)(nodeProps);
+
+      if (node) {
+        const forbiddenResult = handleForbiddenComponent(node);
+        if (forbiddenResult) return parent;
+      }
+
       if (!isValidElement(node)) return node;
     }
 
     const childType = node.type as keyof typeof m;
-
-    // Creates a motion version of the element child type
-    const passedInProps = customProps
-      ? customProps((node.props as PropsWithChildren).children)
-      : {};
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
@@ -65,18 +78,26 @@ export function convertChildrenToMotionChildren(
       isMotionComponent(node.type) ? node.type : m[childType]
     ) as string | FunctionComponent<any>;
 
+    const newElemChildren = convertChildrenToMotionChildren(
+      node.props.children as ReactNode,
+      customProps,
+      false,
+      rootNodeCallback,
+    );
+
     const newElem = createElement(
       typeOfNewElement,
       {
         ...node.props,
         ref: nodeRef,
-        ...passedInProps,
+        ...customProps,
+        layout: getLayoutValueFromChildren(node.props.children),
       },
-      convertChildrenToMotionChildren(
-        node.props.children as ReactNode,
-        customProps
-      ),
+      newElemChildren,
     );
+    if (isRootNode && rootNodeCallback) {
+      rootNodeCallback(newElem);
+    }
 
     return newElem;
   });

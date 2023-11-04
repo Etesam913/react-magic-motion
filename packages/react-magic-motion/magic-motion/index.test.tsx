@@ -1,18 +1,30 @@
-import { render } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 import "@testing-library/jest-dom";
-import {
-  convertChildrenToMotionChildren,
-  getLayoutValueFromChildren,
-} from "../utils";
+import { convertChildrenToMotionChildren } from "../utils";
 import { MagicMotion } from ".";
+import { type ReactNode } from "react";
+
+function TestComponent({
+  customText,
+  testId,
+}: {
+  customText: ReactNode;
+  testId: string;
+}) {
+  return <div data-testid={testId}>{customText}</div>;
+}
+
+function ParentComponent() {
+  return <TestComponent customText="test" testId="string-child" />;
+}
 
 describe("<MagicMotion> tests", () => {
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
-        matches: false,
+        matches: true,
         media: query,
         onchange: null,
         addListener: vi.fn(),
@@ -23,6 +35,7 @@ describe("<MagicMotion> tests", () => {
       })),
     });
   });
+
   test("div with two div children", () => {
     const children = (
       <div data-testid="parent-container">
@@ -32,11 +45,8 @@ describe("<MagicMotion> tests", () => {
     );
     const motionChildren = convertChildrenToMotionChildren(
       children,
-      (child) => {
-        return {
-          layout: getLayoutValueFromChildren(child),
-        };
-      }
+      {},
+      true
     ) as any[];
 
     expect(motionChildren).toBeDefined();
@@ -73,11 +83,8 @@ describe("<MagicMotion> tests", () => {
     );
     const motionChildren = convertChildrenToMotionChildren(
       children,
-      (child) => {
-        return {
-          layout: getLayoutValueFromChildren(child),
-        };
-      }
+      {},
+      true
     ) as any[];
 
     expect(motionChildren).toBeDefined();
@@ -102,4 +109,73 @@ describe("<MagicMotion> tests", () => {
     expect(getByTestId("child-1")).toBeInTheDocument();
     expect(getByTestId("child-2")).toBeInTheDocument();
   });
+
+  test("custom component with a div inside of it", () => {
+    const children1 = (
+      <TestComponent
+        testId="string-child"
+        customText={"This is a string child"}
+      />
+    );
+    const children2 = (
+      <TestComponent
+        testId="div-child"
+        customText={<div>This is a div child</div>}
+      />
+    );
+    const motionChildren1 = convertChildrenToMotionChildren(
+      children1,
+      {},
+      true
+    ) as any[];
+    let parentNode = motionChildren1.at(0);
+    let childNode = parentNode.props.children.at(0);
+    expect(motionChildren1).toBeDefined();
+    expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
+    expect(childNode === "This is a string child").toBeTruthy();
+
+    const motionChildren2 = convertChildrenToMotionChildren(
+      children2,
+      {},
+      true
+    ) as any[];
+    parentNode = motionChildren2.at(0);
+    childNode = parentNode.props.children.at(0);
+    expect(motionChildren2).toBeDefined();
+    expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
+    expect(childNode.type.render.name === "MotionComponent").toBeTruthy();
+    expect(
+      childNode.props.children.at(0) === "This is a div child"
+    ).toBeTruthy();
+    expect(childNode.props.layout === "position").toBeTruthy();
+
+    const { getByTestId: getByTestId1 } = render(
+      <MagicMotion>{children1}</MagicMotion>
+    );
+    expect(getByTestId1("string-child")).toBeInTheDocument();
+    const { getByTestId: getByTestId2 } = render(
+      <MagicMotion>{children2}</MagicMotion>
+    );
+    expect(getByTestId2("div-child")).toBeInTheDocument();
+  });
+
+  test("custom component that renders a custom component", () => {
+    const children = <ParentComponent />;
+    const motionChildren = convertChildrenToMotionChildren(
+      children,
+      {},
+      true
+    ) as any[];
+
+    expect(motionChildren).toBeDefined();
+    const parentNode = motionChildren.at(0);
+
+    const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
+    expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
+    expect(parentNode.props.children.at(0) === "test").toBeTruthy();
+    expect(parentNode.props.layout === "position").toBeTruthy();
+    expect(getByTestId("string-child")).toBeInTheDocument();
+  });
+
+  test("a nested <MagicMotion>", () => {});
 });

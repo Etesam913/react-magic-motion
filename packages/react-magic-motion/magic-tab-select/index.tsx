@@ -14,14 +14,14 @@ export function MagicTabSelect({
   children,
   id,
   transition,
-  disabled,
+  disabled = false,
 }: TabSelectProps): JSX.Element {
   let motionChildren: JSX.Element | null = children;
   const isMotionReduced = usePrefersReducedMotion();
 
   if (typeof motionChildren.type === "function") {
     motionChildren = (motionChildren.type as FunctionComponent)(
-      motionChildren.props
+      motionChildren.props,
     );
     if (motionChildren === null) motionChildren = <></>;
   }
@@ -30,12 +30,14 @@ export function MagicTabSelect({
   const motionElement = createElement(
     m[childType] as string | FunctionComponent<any>,
     { ...motionChildren.props, layoutId: id, transition },
-    motionChildren.props.children
+    motionChildren.props.children,
   );
 
   return isMotionReduced || disabled ? (
-    <>{children}</>
+    children
   ) : (
-    <LazyMotion features={domMax}>{motionElement}</LazyMotion>
+    <LazyMotion key="MagicTabSelect" features={domMax}>
+      {motionElement}
+    </LazyMotion>
   );
 }
