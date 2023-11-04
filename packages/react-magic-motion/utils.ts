@@ -34,7 +34,6 @@ export const forbiddenComponentNames = new Set([
 
 export function convertChildrenToMotionChildren(
   children: ReactNode,
-  debug?: boolean,
   customProps?: (child: ReactNode) => Record<string, unknown>,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
@@ -47,12 +46,9 @@ export function convertChildrenToMotionChildren(
     const nodeProps = node.props as Record<string, unknown>;
 
     if (typeof node.type === "function") {
-    
-
       node = (node.type as FunctionComponent)(nodeProps);
       if (!isValidElement(node)) return node;
     }
-
 
     const childType = node.type as keyof typeof m;
 
@@ -78,8 +74,7 @@ export function convertChildrenToMotionChildren(
       },
       convertChildrenToMotionChildren(
         node.props.children as ReactNode,
-        debug,
-        customProps,
+        customProps
       ),
     );
 

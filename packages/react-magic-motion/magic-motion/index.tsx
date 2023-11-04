@@ -17,7 +17,6 @@ interface MagicMotionProps {
   transition?: Transition;
   layoutDependency?: unknown;
   disabled?: boolean;
-  debug?: boolean;
 }
 
 export function MagicMotion({
@@ -25,21 +24,16 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
-  debug,
 }: MagicMotionProps): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
 
-  const motionChildren = convertChildrenToMotionChildren(
-    children,
-    debug,
-    (child) => {
-      return {
-        layout: getLayoutValueFromChildren(child),
-        layoutDependency,
-        transition,
-      };
-    }
-  );
+  const motionChildren = convertChildrenToMotionChildren(children, (child) => {
+    return {
+      layout: getLayoutValueFromChildren(child),
+      layoutDependency,
+      transition,
+    };
+  });
 
   return isMotionReduced || disabled ? (
     <>{children}</>
