@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import { Children, createElement, isValidElement, useRef } from "react";
 import type { PropsWithChildren, FunctionComponent, ReactNode } from "react";
-import { usePlaceholderBoxSize, usePrefersReducedMotion } from "../hooks";
+import { usePlaceholderBoxSize } from "../hooks";
 import { forbiddenComponentNames, getLayoutValueFromChildren } from "../utils";
 import "../card.css";
 
