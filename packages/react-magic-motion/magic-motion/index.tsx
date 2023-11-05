@@ -7,7 +7,7 @@ import {
   LayoutGroup,
 } from "framer-motion";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
-import { usePrefersReducedMotion } from "../hooks";
+import { useComponentInactiveLogging, usePrefersReducedMotion } from "../hooks";
 
 interface MagicMotionProps {
   children: JSX.Element;
@@ -33,6 +33,13 @@ export function MagicMotion({
       transition,
     },
     { isRootNode: true, isLoggingEnabled, depth: 1 }
+  );
+
+  useComponentInactiveLogging(
+    "MagicMotion",
+    disabled,
+    isMotionReduced,
+    isLoggingEnabled
   );
 
   return isMotionReduced || disabled ? (

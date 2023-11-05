@@ -3,7 +3,7 @@
 import { AnimatePresence, type TargetAndTransition } from "framer-motion";
 import { type ReactNode, cloneElement } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
-import { usePrefersReducedMotion } from "../hooks";
+import { useComponentInactiveLogging, usePrefersReducedMotion } from "../hooks";
 
 interface MagicExitProps {
   children: ReactNode;
@@ -43,6 +43,13 @@ export function MagicExit({
       isLoggingEnabled,
       depth: 1,
     }
+  );
+
+  useComponentInactiveLogging(
+    "MagicExit",
+    disabled,
+    isMotionReduced,
+    isLoggingEnabled
   );
 
   return disabled || isMotionReduced ? (

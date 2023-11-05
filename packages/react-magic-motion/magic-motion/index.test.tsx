@@ -234,4 +234,49 @@ describe("<MagicMotion> tests", () => {
 
     expect(getByTestId("div-parent")).toBeInTheDocument();
   });
+
+  test("the disabled property", () => {
+    render(
+      <MagicMotion disabled isLoggingEnabled>
+        <div>
+          <div>this is some text</div>
+          <div>this is some other text</div>
+        </div>
+      </MagicMotion>
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "MagicMotion is disabled as disabled='true'"
+    );
+  });
+  test("the prefers-reduced-motion accessibility property", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+
+    render(
+      <MagicMotion isLoggingEnabled>
+        <div>
+          <div>this is some text</div>
+          <div>this is some other text</div>
+        </div>
+      </MagicMotion>
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "MagicMotion is disabled as prefers-reduced-motion is set to 'reduce'"
+    );
+  });
 });
