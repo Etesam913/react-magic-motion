@@ -6,7 +6,7 @@ import {
   domMax,
   LayoutGroup,
 } from "framer-motion";
-import { convertChildrenToMotionChildren } from "../utils";
+import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { usePrefersReducedMotion } from "../hooks";
 
 interface MagicMotionProps {
@@ -14,6 +14,7 @@ interface MagicMotionProps {
   transition?: Transition;
   layoutDependency?: unknown;
   disabled?: boolean;
+  isLoggingEnabled?: boolean;
 }
 
 export function MagicMotion({
@@ -21,6 +22,7 @@ export function MagicMotion({
   transition,
   layoutDependency,
   disabled,
+  isLoggingEnabled,
 }: MagicMotionProps): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
 
@@ -30,7 +32,7 @@ export function MagicMotion({
       layoutDependency,
       transition,
     },
-    true
+    { isRootNode: true, isLoggingEnabled, depth: 1 }
   );
 
   return isMotionReduced || disabled ? (

@@ -1,26 +1,19 @@
 "use client";
 
-import {
-  AnimatePresence,
-  isMotionComponent,
-  m,
-  type TargetAndTransition,
-} from "framer-motion";
-import {
-  Children,
-  isValidElement,
-  type Ref,
-  type ReactNode,
-  type FunctionComponent,
-  createElement,
-  cloneElement,
-} from "react";
-import { isPortal } from "react-is";
-import {
-  convertChildrenToMotionChildren,
-  getLayoutValueFromChildren,
-} from "../utils";
+import { AnimatePresence, type TargetAndTransition } from "framer-motion";
+import { type ReactNode, cloneElement } from "react";
+import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { usePrefersReducedMotion } from "../hooks";
+
+interface MagicExitProps {
+  children: ReactNode;
+  initial?: TargetAndTransition;
+  animate?: TargetAndTransition;
+  exit?: TargetAndTransition;
+  mode?: "sync" | "wait" | "popLayout";
+  disabled?: boolean;
+  isLoggingEnabled?: boolean;
+}
 
 export function MagicExit({
   children,
@@ -29,28 +22,26 @@ export function MagicExit({
   exit,
   mode = "sync",
   disabled,
-}: {
-  children: ReactNode;
-  initial?: TargetAndTransition;
-  animate?: TargetAndTransition;
-  exit?: TargetAndTransition;
-  mode?: "sync" | "wait" | "popLayout";
-  disabled?: boolean;
-}): JSX.Element {
+  isLoggingEnabled,
+}: MagicExitProps): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
 
   const motionChildren = convertChildrenToMotionChildren(
     children,
     {},
-    true,
-    (rootElem) => {
-      const clonedRootElem = cloneElement(rootElem, {
-        ...rootElem.props,
-        initial,
-        animate,
-        exit,
-      });
-      return clonedRootElem;
+    {
+      isRootNode: true,
+      rootNodeCallback: (rootElem) => {
+        const clonedRootElem = cloneElement(rootElem, {
+          ...rootElem.props,
+          initial,
+          animate,
+          exit,
+        });
+        return clonedRootElem;
+      },
+      isLoggingEnabled,
+      depth: 1,
     }
   );
 

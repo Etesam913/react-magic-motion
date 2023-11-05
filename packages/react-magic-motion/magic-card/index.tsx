@@ -10,7 +10,7 @@ import {
 import { Children, createElement, isValidElement, useRef } from "react";
 import type { PropsWithChildren, FunctionComponent, ReactNode } from "react";
 import { usePlaceholderBoxSize } from "../hooks";
-import { getLayoutValueFromChildren } from "../utils";
+import { getLayoutValueFromChildren } from "../utils/magic-animation";
 import "../card.css";
 
 interface MagicCardProps {

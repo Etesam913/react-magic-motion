@@ -1,10 +1,9 @@
-import { render, cleanup } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 import "@testing-library/jest-dom";
-import { convertChildrenToMotionChildren } from "../utils";
-import { MagicMotion } from ".";
 import { type ReactNode } from "react";
-import { MagicCard } from "../magic-card";
+import { convertChildrenToMotionChildren } from "../utils/magic-animation";
+import { MagicMotion } from ".";
 
 function TestComponent({
   customText,
@@ -47,7 +46,7 @@ describe("<MagicMotion> tests", () => {
     const motionChildren = convertChildrenToMotionChildren(
       children,
       {},
-      true
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
 
     expect(motionChildren).toBeDefined();
@@ -85,7 +84,7 @@ describe("<MagicMotion> tests", () => {
     const motionChildren = convertChildrenToMotionChildren(
       children,
       {},
-      true
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
 
     expect(motionChildren).toBeDefined();
@@ -115,7 +114,7 @@ describe("<MagicMotion> tests", () => {
     const children1 = (
       <TestComponent
         testId="string-child"
-        customText={"This is a string child"}
+        customText="This is a string child"
       />
     );
     const children2 = (
@@ -127,7 +126,7 @@ describe("<MagicMotion> tests", () => {
     const motionChildren1 = convertChildrenToMotionChildren(
       children1,
       {},
-      true
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
     let parentNode = motionChildren1.at(0);
     let childNode = parentNode.props.children.at(0);
@@ -138,7 +137,7 @@ describe("<MagicMotion> tests", () => {
     const motionChildren2 = convertChildrenToMotionChildren(
       children2,
       {},
-      true
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
     parentNode = motionChildren2.at(0);
     childNode = parentNode.props.children.at(0);
@@ -165,7 +164,7 @@ describe("<MagicMotion> tests", () => {
     const motionChildren = convertChildrenToMotionChildren(
       children,
       {},
-      true
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
 
     expect(motionChildren).toBeDefined();
