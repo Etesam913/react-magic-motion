@@ -4,6 +4,8 @@ import "@testing-library/jest-dom";
 import { type ReactNode } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicMotion } from ".";
+import { MagicExit } from "../magic-exit";
+import { motion } from "framer-motion";
 
 function TestComponent({
   customText,
@@ -52,7 +54,7 @@ describe("<MagicMotion> tests", () => {
     );
     const motionChildren = convertChildrenToMotionChildren(
       children,
-      {},
+      { transition: { layout: { bounce: 0.35 } } },
       { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
 
@@ -60,6 +62,7 @@ describe("<MagicMotion> tests", () => {
     const parentNode = motionChildren.at(0);
     expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
     expect(parentNode.props.layout === true).toBeTruthy();
+    expect(parentNode.props.transition).toBeDefined();
     const child1 = parentNode.props.children.at(0);
     const child2 = parentNode.props.children.at(1);
 
@@ -67,11 +70,13 @@ describe("<MagicMotion> tests", () => {
     expect(child1.type.render.name === "MotionComponent").toBeTruthy();
     expect(child1.props.layout === "position").toBeTruthy();
     expect(child1.props.children[0] === "child1").toBeTruthy();
+    expect(child1.props.transition).toBeDefined();
 
     // Checks if child 2 is a motion component
     expect(child2.type.render.name === "MotionComponent").toBeTruthy();
     expect(child2.props.layout === "position").toBeTruthy();
     expect(child2.props.children[0] === "child2").toBeTruthy();
+    expect(child2.props.transition).toBeDefined();
 
     const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
     expect(getByTestId("parent-container")).toBeInTheDocument();
@@ -116,6 +121,50 @@ describe("<MagicMotion> tests", () => {
     expect(child2.type === "div").toBeTruthy();
     expect(child2.props.layout === undefined).toBeTruthy();
     expect(child2.props.children === "child2").toBeTruthy();
+
+    const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
+    expect(getByTestId("parent-container")).toBeInTheDocument();
+    expect(getByTestId("child-1")).toBeInTheDocument();
+    expect(getByTestId("child-2")).toBeInTheDocument();
+  });
+
+  test("div with two 1 div child and 1 motion.div child ", () => {
+    const children = (
+      <div data-testid="parent-container">
+        <div data-testid="child-1">child1</div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          data-testid="child-2"
+        >
+          child2
+        </motion.div>
+      </div>
+    );
+    const motionChildren = convertChildrenToMotionChildren(
+      children,
+      {},
+      { isRootNode: true, depth: 1, isLoggingEnabled: true }
+    ) as any[];
+
+    expect(motionChildren).toBeDefined();
+    const parentNode = motionChildren.at(0);
+    expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
+    expect(parentNode.props.layout === true).toBeTruthy();
+    const child1 = parentNode.props.children.at(0);
+    const child2 = parentNode.props.children.at(1);
+
+    // Check if child 1 is a motion component
+    expect(child1.type.render.name === "MotionComponent").toBeTruthy();
+    expect(child1.props.layout === "position").toBeTruthy();
+    expect(child1.props.children[0] === "child1").toBeTruthy();
+
+    // Check if child 2 is a motion component even when manually defined as so
+    expect(child2.type.render.name === "MotionComponent").toBeTruthy();
+    expect(child2.props.layout === "position").toBeTruthy();
+    expect(child2.props.initial.opacity === 0).toBeTruthy();
+    expect(child2.props.animate.opacity === 1).toBeTruthy();
+    expect(child2.props.children.at(0) === "child2").toBeTruthy();
 
     const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
     expect(getByTestId("parent-container")).toBeInTheDocument();
@@ -230,6 +279,56 @@ describe("<MagicMotion> tests", () => {
       "%cWarning: %s",
       "color: darkorange; font-weight: bold;",
       "Forbidden element encountered: MagicMotion \nStopping traversal!"
+    );
+
+    expect(getByTestId("div-parent")).toBeInTheDocument();
+  });
+
+  test("a nested <MagicMotion>", () => {
+    const children = (
+      <MagicMotion>
+        <div data-testid="div-parent" id="div-parent">
+          element
+        </div>
+      </MagicMotion>
+    );
+    const { getByTestId } = render(
+      <MagicMotion isLoggingEnabled>{children}</MagicMotion>
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: MagicMotion"
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "Forbidden element encountered: MagicMotion \nStopping traversal!"
+    );
+
+    expect(getByTestId("div-parent")).toBeInTheDocument();
+  });
+
+  test("a nested <MagicExit>", () => {
+    const children = (
+      <MagicExit>
+        <div data-testid="div-parent" id="div-parent">
+          element
+        </div>
+      </MagicExit>
+    );
+    const { getByTestId } = render(
+      <MagicMotion isLoggingEnabled>{children}</MagicMotion>
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: MagicExit"
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "Forbidden element encountered: MagicExit \nStopping traversal!"
     );
 
     expect(getByTestId("div-parent")).toBeInTheDocument();
