@@ -23,6 +23,7 @@ export function MagicMotion({
   disabled,
 }: MagicMotionProps): JSX.Element {
   const isMotionReduced = usePrefersReducedMotion();
+
   const motionChildren = convertChildrenToMotionChildren(
     children,
     {

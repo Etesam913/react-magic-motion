@@ -46,7 +46,7 @@ export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps: Record<string, unknown>,
   isRootNode: boolean,
-  rootNodeCallback?: (node: ReactElement) => void,
+  rootNodeCallback?: (node: ReactElement) => ReactElement,
 ): ReactNode {
   return Children.map(children, (child): ReactNode => {
     let node = child;
@@ -96,7 +96,7 @@ export function convertChildrenToMotionChildren(
       newElemChildren,
     );
     if (isRootNode && rootNodeCallback) {
-      rootNodeCallback(newElem);
+      return rootNodeCallback(newElem);
     }
 
     return newElem;

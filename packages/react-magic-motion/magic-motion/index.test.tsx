@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import { convertChildrenToMotionChildren } from "../utils";
 import { MagicMotion } from ".";
 import { type ReactNode } from "react";
+import { MagicCard } from "../magic-card";
 
 function TestComponent({
   customText,
@@ -177,5 +178,16 @@ describe("<MagicMotion> tests", () => {
     expect(getByTestId("string-child")).toBeInTheDocument();
   });
 
-  test("a nested <MagicMotion>", () => {});
+  test("a nested <MagicMotion>", () => {
+    const children = (
+      <MagicMotion>
+        <div data-testid="div-parent" id="div-parent">
+          element
+        </div>
+      </MagicMotion>
+    );
+    const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
+
+    expect(getByTestId("div-parent")).toBeInTheDocument();
+  });
 });
