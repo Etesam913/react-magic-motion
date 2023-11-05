@@ -1,15 +1,9 @@
 import { render } from "@testing-library/react";
-import { beforeAll, describe, expect, test, vi, afterAll } from "vitest";
+import { beforeAll, describe, expect, test, vi, afterEach } from "vitest";
 import "@testing-library/jest-dom";
 import { type ReactNode } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicMotion } from ".";
-import {
-  FUNCTIONCOMPONENTMESSAGE,
-  FORBIDDENELEMENTMESSAGE,
-  logSuccessMessage,
-  logWarningMessage,
-} from "../utils/logging";
 
 function TestComponent({
   customText,
@@ -17,11 +11,11 @@ function TestComponent({
 }: {
   customText: ReactNode;
   testId: string;
-}) {
+}): JSX.Element {
   return <div data-testid={testId}>{customText}</div>;
 }
 
-function ParentComponent() {
+function ParentComponent(): JSX.Element {
   return <TestComponent customText="test" testId="string-child" />;
 }
 
@@ -100,6 +94,12 @@ describe("<MagicMotion> tests", () => {
       { isRootNode: true, depth: 1, isLoggingEnabled: true }
     ) as any[];
 
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "👆 Above element is excluded from being animated"
+    );
+
     expect(motionChildren).toBeDefined();
     const parentNode = motionChildren.at(0);
     expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
@@ -154,6 +154,13 @@ describe("<MagicMotion> tests", () => {
     ) as any[];
     parentNode = motionChildren2.at(0);
     childNode = parentNode.props.children.at(0);
+
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: TestComponent"
+    );
+
     expect(motionChildren2).toBeDefined();
     expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
     expect(childNode.type.render.name === "MotionComponent").toBeTruthy();
@@ -183,9 +190,18 @@ describe("<MagicMotion> tests", () => {
     expect(motionChildren).toBeDefined();
     const parentNode = motionChildren.at(0);
 
-    // expect(consoleMock).toHaveBeenCalledWith(
-    //   ...logSuccessMessage(FUNCTIONCOMPONENTMESSAGE("ParentComponent"))
-    // );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: ParentComponent"
+    );
+
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: TestComponent"
+    );
+
     const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
 
     expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
@@ -202,7 +218,19 @@ describe("<MagicMotion> tests", () => {
         </div>
       </MagicMotion>
     );
-    const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
+    const { getByTestId } = render(
+      <MagicMotion isLoggingEnabled>{children}</MagicMotion>
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cSuccess: %s",
+      "color: green; font-weight: bold;",
+      "Function component encountered: MagicMotion"
+    );
+    expect(consoleMock).toHaveBeenCalledWith(
+      "%cWarning: %s",
+      "color: darkorange; font-weight: bold;",
+      "Forbidden element encountered: MagicMotion \nStopping traversal!"
+    );
 
     expect(getByTestId("div-parent")).toBeInTheDocument();
   });
