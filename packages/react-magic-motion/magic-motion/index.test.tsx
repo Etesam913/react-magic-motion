@@ -1,9 +1,15 @@
 import { render } from "@testing-library/react";
-import { beforeAll, describe, expect, test, vi } from "vitest";
+import { beforeAll, describe, expect, test, vi, afterAll } from "vitest";
 import "@testing-library/jest-dom";
 import { type ReactNode } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicMotion } from ".";
+import {
+  FUNCTIONCOMPONENTMESSAGE,
+  FORBIDDENELEMENTMESSAGE,
+  logSuccessMessage,
+  logWarningMessage,
+} from "../utils/logging";
 
 function TestComponent({
   customText,
@@ -20,6 +26,9 @@ function ParentComponent() {
 }
 
 describe("<MagicMotion> tests", () => {
+  const consoleMock = vi
+    .spyOn(console, "log")
+    .mockImplementation(() => undefined);
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
@@ -34,6 +43,10 @@ describe("<MagicMotion> tests", () => {
         dispatchEvent: vi.fn(),
       })),
     });
+  });
+
+  afterEach(() => {
+    consoleMock.mockReset();
   });
 
   test("div with two div children", () => {
@@ -170,7 +183,11 @@ describe("<MagicMotion> tests", () => {
     expect(motionChildren).toBeDefined();
     const parentNode = motionChildren.at(0);
 
+    // expect(consoleMock).toHaveBeenCalledWith(
+    //   ...logSuccessMessage(FUNCTIONCOMPONENTMESSAGE("ParentComponent"))
+    // );
     const { getByTestId } = render(<MagicMotion>{children}</MagicMotion>);
+
     expect(parentNode.type.render.name === "MotionComponent").toBeTruthy();
     expect(parentNode.props.children.at(0) === "test").toBeTruthy();
     expect(parentNode.props.layout === "position").toBeTruthy();
