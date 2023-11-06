@@ -22,9 +22,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "pnpm" # Caching dependencies is supported for pnpm
+
+      - name: 💫 Install pnpm
+        run: npm install -g pnpm
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: 🧪 Run Vitest
-        run: npm test
+        run: pnpm test
