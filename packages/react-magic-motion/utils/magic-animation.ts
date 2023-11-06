@@ -2,6 +2,7 @@ import type { FunctionComponent, Ref, ReactNode, ReactElement } from "react";
 import { Children, createElement, isValidElement } from "react";
 import { isMotionComponent, m } from "framer-motion";
 import { isPortal } from "react-is";
+import { FORBIDDENELEMENTMESSAGE, FUNCTIONCOMPONENTMESSAGE, KEYEXCLUDEMESSAGE, logSuccess, logWarning } from "./logging";
 
 function isNodeText(node: ReactNode): boolean {
   return (
@@ -42,27 +43,47 @@ function handleForbiddenComponent(
   return null;
 }
 
+
+
 export function convertChildrenToMotionChildren(
   children: ReactNode,
   customProps: Record<string, unknown>,
-  isRootNode: boolean,
-  rootNodeCallback?: (node: ReactElement) => void,
+  nodeInfo: {isRootNode: boolean; rootNodeCallback?: (node: ReactElement) => ReactElement; isLoggingEnabled?:boolean, depth:number}
 ): ReactNode {
-  return Children.map(children, (child): ReactNode => {
+  const {isRootNode, rootNodeCallback, isLoggingEnabled, depth} = nodeInfo
+  if(isLoggingEnabled && children){
+    const numOfDashes = (depth-1)*2 
+    /* eslint-disable no-console -- It is fine for console.log as logging is enabled */
+    console.groupCollapsed(`${' '.repeat(numOfDashes)}👉 Depth: ${depth},`, "elements:", children)
+  }
+  const animatedChildren =  Children.map(children, (child): ReactNode => {
     let node = child;
+
+    if(isLoggingEnabled) console.log(node)
     // Checks if the child is a string or boolean or number
-    if (!isValidElement(node) || node.key === "exclude") return node;
+    if (!isValidElement(node) || node.key === "exclude"){
+       
+      if(isLoggingEnabled &&  isValidElement(node) && node.key === "exclude") logWarning(KEYEXCLUDEMESSAGE)
+      return node;
+    }
 
     // Checks if the child is a function component
-    const nodeProps = node.props as Record<string, unknown>;
     let parent = null;
     while (typeof node.type === "function") {
+       
+      if(isLoggingEnabled) logSuccess(FUNCTIONCOMPONENTMESSAGE(node.type.name))
+      
+      const nodeProps = node.props as Record<string, unknown>;
       parent = node;
       node = (node.type as FunctionComponent)(nodeProps);
-
+      
       if (node) {
         const forbiddenResult = handleForbiddenComponent(node);
-        if (forbiddenResult) return parent;
+        if (forbiddenResult){
+           
+          if(isLoggingEnabled) logWarning(FORBIDDENELEMENTMESSAGE(node.key))
+          return parent;
+        }
       }
 
       if (!isValidElement(node)) return node;
@@ -81,8 +102,7 @@ export function convertChildrenToMotionChildren(
     const newElemChildren = convertChildrenToMotionChildren(
       node.props.children as ReactNode,
       customProps,
-      false,
-      rootNodeCallback,
+      {isRootNode: false, isLoggingEnabled, depth:depth+1}
     );
 
     const newElem = createElement(
@@ -91,14 +111,19 @@ export function convertChildrenToMotionChildren(
         ...node.props,
         ref: nodeRef,
         ...customProps,
-        layout: getLayoutValueFromChildren(child),
+        layout: getLayoutValueFromChildren(node.props.children),
       },
       newElemChildren,
     );
     if (isRootNode && rootNodeCallback) {
-      rootNodeCallback(newElem);
+      return rootNodeCallback(newElem);
     }
 
     return newElem;
   });
+  if(isLoggingEnabled && children){
+    /* eslint-disable no-console -- It is fine for console.log as logging is enabled */
+    console.groupEnd()
+  }
+  return animatedChildren
 }

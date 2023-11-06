@@ -10,24 +10,36 @@
     "generate:component": "turbo gen react-component",
     "build": "tsup ./index.tsx --format esm,cjs --dts --sourcemap --external react",
     "dev": "tsup ./index.tsx --format esm,cjs --watch --dts --sourcemap  --external react",
-    "clean": "rm -rf .turbo && rm -rf ./node_modules && rm -rf ./dist"
+    "clean": "rm -rf .turbo && rm -rf ./node_modules && rm -rf ./dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "files": [
     "dist/",
     "card.css"
   ],
+  "keywords": [
+    "react.js",
+    "react-magic-motion",
+    "animation",
+    "typescript"
+  ],
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
     "@turbo/gen": "^1.10.12",
     "@types/node": "^20.5.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/react-is": "^18.2.1",
     "eslint-config-custom": "workspace:*",
+    "jsdom": "^22.1.0",
     "react": "^18.2.0",
     "react-is": "^18.2.0",
     "tsconfig": "workspace:*",
     "tsup": "^7.2.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "framer-motion": "^10.16.2"
