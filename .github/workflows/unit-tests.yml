@@ -27,6 +27,9 @@ jobs:
       - name: 💫 Install pnpm
         run: npm install -g pnpm
 
+      - name: 🦠 Add pnpm to PATH
+        run: echo "$(npm bin -g)" >> $GITHUB_PATH
+
       - name: 📦 Install dependencies
         run: pnpm install
 
