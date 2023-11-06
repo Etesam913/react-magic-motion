@@ -1,5 +1,7 @@
 import "@testing-library/jest-dom";
 import { describe, beforeAll, vi, test, expect } from "vitest";
+import { cloneElement } from "react";
+import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 
 describe("<MagicExit> tests", () => {
   beforeAll(() => {
@@ -18,7 +20,44 @@ describe("<MagicExit> tests", () => {
     });
   });
 
-  test("empty", () => {
-    expect(true).toBeTruthy();
+  test("passes initial, animate, and exit to first parent", () => {
+    const children = (
+      <div>
+        <div>first child</div>
+        <div>second child</div>
+      </div>
+    );
+
+    const motionChildren = convertChildrenToMotionChildren(
+      children,
+      {},
+      {
+        isRootNode: true,
+        rootNodeCallback: (rootElem) => {
+          const clonedRootElem = cloneElement(rootElem, {
+            ...rootElem.props,
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            exit: { opacity: 0 },
+          });
+          return clonedRootElem;
+        },
+        depth: 1,
+      }
+    ) as any[];
+
+    expect(motionChildren).toBeDefined();
+    const parentNode = motionChildren.at(0);
+    expect(parentNode.props.initial).toEqual({ opacity: 0 });
+    expect(parentNode.props.animate).toEqual({ opacity: 1 });
+    expect(parentNode.props.exit).toEqual({ opacity: 0 });
+    const child1 = parentNode.props.children.at(0);
+    const child2 = parentNode.props.children.at(1);
+    expect(child1.props.initial).toBeUndefined();
+    expect(child1.props.animate).toBeUndefined();
+    expect(child1.props.exit).toBeUndefined();
+    expect(child2.props.initial).toBeUndefined();
+    expect(child2.props.animate).toBeUndefined();
+    expect(child2.props.exit).toBeUndefined();
   });
 });
