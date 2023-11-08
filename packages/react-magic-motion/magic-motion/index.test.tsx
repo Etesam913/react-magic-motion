@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi, afterEach } from "vitest";
 import "@testing-library/jest-dom";
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion } from "framer-motion";
+import { forwardRef } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicExit } from "../magic-exit";
 import { MagicMotion } from ".";
@@ -19,6 +20,31 @@ function TestComponent({
 
 function ParentComponent(): JSX.Element {
   return <TestComponent customText="test" testId="string-child" />;
+}
+
+interface ForwardedRefComponent {
+  children?: React.ReactNode;
+}
+
+const ForwardedRefComponent = forwardRef<
+  HTMLButtonElement,
+  ForwardedRefComponent
+>((props, ref) => {
+  return (
+    <button type="button" ref={ref} className="FancyButton">
+      {props.children}
+    </button>
+  );
+});
+
+ForwardedRefComponent.displayName = "ForwardedRefComponent";
+
+function ForwardedRefParent(): JSX.Element {
+  const buttonRef = useRef<HTMLButtonElement>(null); // Specify the element type
+
+  return (
+    <ForwardedRefComponent ref={buttonRef}>Click me!</ForwardedRefComponent>
+  );
 }
 
 describe("<MagicMotion> tests", () => {
@@ -374,6 +400,14 @@ describe("<MagicMotion> tests", () => {
       "%cWarning: %s",
       "color: darkorange; font-weight: bold;",
       "MagicMotion is disabled as prefers-reduced-motion is set to 'reduce'"
+    );
+  });
+
+  test("a forwardRef child", () => {
+    render(
+      <MagicMotion>
+        <ForwardedRefParent />
+      </MagicMotion>
     );
   });
 });

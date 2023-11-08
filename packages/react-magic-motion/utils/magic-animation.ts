@@ -105,10 +105,12 @@ export function convertChildrenToMotionChildren(
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
-
-    // If the child is a motion component, we use that as the type otherwise convert it to a motion component
+   
+   // If the child is a motion component or forwardRef, we use that as the type otherwise convert it to a motion component
+    const shouldConvertNodeToMotionComponent = isMotionComponent(node.type) || isForwardRef(node)
+    
     const typeOfNewElement = (
-      isMotionComponent(node.type) || isForwardRef(node)
+      shouldConvertNodeToMotionComponent
         ? node.type
         : m[childType]
     ) as string | FunctionComponent<any>;
