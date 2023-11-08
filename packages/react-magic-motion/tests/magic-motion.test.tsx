@@ -1,25 +1,11 @@
 import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi, afterEach } from "vitest";
 import "@testing-library/jest-dom";
-import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicExit } from "../magic-exit";
-import { MagicMotion } from ".";
-
-function TestComponent({
-  customText,
-  testId,
-}: {
-  customText: ReactNode;
-  testId: string;
-}): JSX.Element {
-  return <div data-testid={testId}>{customText}</div>;
-}
-
-function ParentComponent(): JSX.Element {
-  return <TestComponent customText="test" testId="string-child" />;
-}
+import { MagicMotion } from "../magic-motion";
+import { TestComponent, ParentComponent, ForwardedRefParent } from ".";
 
 describe("<MagicMotion> tests", () => {
   const consoleMock = vi
@@ -374,6 +360,14 @@ describe("<MagicMotion> tests", () => {
       "%cWarning: %s",
       "color: darkorange; font-weight: bold;",
       "MagicMotion is disabled as prefers-reduced-motion is set to 'reduce'"
+    );
+  });
+
+  test("a forwardRef child", () => {
+    render(
+      <MagicMotion>
+        <ForwardedRefParent />
+      </MagicMotion>
     );
   });
 });
