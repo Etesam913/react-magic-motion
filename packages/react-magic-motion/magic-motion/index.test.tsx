@@ -1,9 +1,8 @@
 import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi, afterEach } from "vitest";
 import "@testing-library/jest-dom";
-import { useRef, type ReactNode } from "react";
+import { useRef, type ReactNode, forwardRef } from "react";
 import { motion } from "framer-motion";
-import { forwardRef } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicExit } from "../magic-exit";
 import { MagicMotion } from ".";
