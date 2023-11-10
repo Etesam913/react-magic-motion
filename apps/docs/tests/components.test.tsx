@@ -8,7 +8,7 @@ import {
 import { describe, test, expect, beforeAll, vi } from "vitest";
 import { TodoList } from "../components/todo-list";
 import "@testing-library/jest-dom";
-import { MagicMotion } from "react-magic-motion";
+import { MagicMotion } from "../../../packages/react-magic-motion/magic-motion";
 
 describe("Application Tests", () => {
   beforeAll(() => {
