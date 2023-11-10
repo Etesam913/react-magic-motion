@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { describe, beforeAll, vi, test, expect } from "vitest";
-import { cloneElement } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
+import { cloneRootElem } from ".";
 
 describe("<MagicExit> tests", () => {
   beforeAll(() => {
@@ -34,16 +34,10 @@ describe("<MagicExit> tests", () => {
       {
         isRootNode: true,
         rootNodeCallback: (rootElem) => {
-          const clonedRootElem = cloneElement(rootElem, {
-            ...rootElem.props,
-            initial: { opacity: 0 },
-            animate: { opacity: 1 },
-            exit: { opacity: 0 },
-          });
-          return clonedRootElem;
+          return cloneRootElem(rootElem);
         },
         depth: 1,
-      }
+      },
     ) as any[];
 
     expect(motionChildren).toBeDefined();

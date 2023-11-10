@@ -1,4 +1,10 @@
-import { type ReactNode, forwardRef, useRef } from "react";
+import {
+  type ReactNode,
+  forwardRef,
+  useRef,
+  cloneElement,
+  ReactElement,
+} from "react";
 
 export function TestComponent({
   customText,
@@ -37,4 +43,13 @@ export function ForwardedRefParent(): JSX.Element {
   return (
     <ForwardedRefComponent ref={buttonRef}>Click me!</ForwardedRefComponent>
   );
+}
+
+export function cloneRootElem(rootElem: ReactElement) {
+  return cloneElement(rootElem, {
+    ...rootElem.props,
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  });
 }

@@ -21,9 +21,11 @@ function shuffle<T>(array: T[]): T[] {
 }
 
 function TodoListItem({
+  testId,
   todo,
   setTodos,
 }: {
+  testId: string;
   todo: { id: string; text: string };
   setTodos: Dispatch<SetStateAction<{ id: string; text: string }[]>>;
 }): JSX.Element {
@@ -42,6 +44,7 @@ function TodoListItem({
         type="button"
         title="Delete this item"
         className="nx-bg-black/[.02]"
+        data-testid={testId + "-delete-button"}
         onClick={() =>
           setTodos((todos) => todos.filter((t) => t.id !== todo.id))
         }
@@ -81,8 +84,13 @@ export function TodoList(): JSX.Element {
           overflow: "hidden",
         }}
       >
-        {todos.map((todo) => (
-          <TodoListItem key={todo.id} todo={todo} setTodos={setTodos} />
+        {todos.map((todo, i) => (
+          <TodoListItem
+            testId={`todo-${i}`}
+            key={todo.id}
+            todo={todo}
+            setTodos={setTodos}
+          />
         ))}
       </ul>
       <form
@@ -92,6 +100,7 @@ export function TodoList(): JSX.Element {
         <input
           ref={newTodoInput}
           type="text"
+          data-testid="add-todo-input"
           placeholder="Write a new todo 📝"
           className="nx-bg-black/[.05] dark:nx-bg-gray-50/10"
           style={{
@@ -104,6 +113,7 @@ export function TodoList(): JSX.Element {
 
         <button
           type="submit"
+          data-testid="add-todo-button"
           title="Add a new todo"
           style={{
             whiteSpace: "nowrap",
