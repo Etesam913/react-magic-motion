@@ -44,7 +44,7 @@ function TodoListItem({
         type="button"
         title="Delete this item"
         className="nx-bg-black/[.02]"
-        data-testid={testId + "-delete-button"}
+        data-testid={`${testId  }-delete-button`}
         onClick={() =>
           setTodos((todos) => todos.filter((t) => t.id !== todo.id))
         }

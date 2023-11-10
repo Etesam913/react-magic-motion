@@ -13,7 +13,16 @@ module.exports = {
       files: ["*.test.tsx"],
       "rules": {
         "@typescript-eslint/no-unsafe-assignment" : 'off',
-        "@typescript-eslint/no-unsafe-call": "off"
+        "@typescript-eslint/no-unsafe-call": "off",
+        'import/no-extraneous-dependencies': [
+          1,
+          {
+            devDependencies: true,
+            includeInternal: false,
+            includeTypes: false,
+            packageDir: ['.', '../..'], // <--- the key addition
+          },
+        ],
       }
     }
   ]

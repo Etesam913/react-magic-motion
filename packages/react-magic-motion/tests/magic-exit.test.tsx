@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { describe, beforeAll, vi, test, expect } from "vitest";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { cloneRootElem } from ".";
@@ -37,7 +36,7 @@ describe("<MagicExit> tests", () => {
           return cloneRootElem(rootElem);
         },
         depth: 1,
-      },
+      }
     ) as any[];
 
     expect(motionChildren).toBeDefined();
