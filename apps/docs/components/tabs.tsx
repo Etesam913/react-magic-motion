@@ -45,24 +45,30 @@ export function UnderlineTabs(): JSX.Element {
   );
 }
 
-const pillTabs = ["Hobbies", "Work", "Projects", "Languages"];
+const pillTabs = [
+  "Hobbies",
+  "Work",
+  "Projects",
+  "This is a loooooooooong item",
+  "Languages",
+];
 
 export function PillTabs(): JSX.Element {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [hoveredIndex, setHoveredIndex] = useState(0);
 
   const tabsComponents = pillTabs.map((text, i) => {
     return (
       <button
         type="button"
         key={text}
-        onClick={() => setSelectedIndex(i)}
+        onMouseEnter={() => setHoveredIndex(i)}
         style={{
           position: "relative",
           padding: "0.65rem 0.75rem",
           color: "currentColor",
         }}
       >
-        {selectedIndex === i && (
+        {hoveredIndex === i && (
           <MagicTabSelect
             id="pillTabs"
             transition={{ type: "spring", bounce: 0.35 }}
