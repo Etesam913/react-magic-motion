@@ -12,6 +12,7 @@ export function Toggle({
     <button
       onClick={() => setIsActive((prev) => !prev)}
       className="toggle-button"
+      type="button"
       style={{
         display: "flex",
         justifyContent: isActive ? "flex-end" : "flex-start",

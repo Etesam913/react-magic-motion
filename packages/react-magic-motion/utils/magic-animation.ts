@@ -81,7 +81,7 @@ export function convertChildrenToMotionChildren(
     }
 
     // Checks if the child is a function component
-    let parent = null;
+    let parent:ReactNode = null;
     while (typeof node.type === "function") {
       if (isLoggingEnabled)
         logSuccess(FUNCTIONCOMPONENTMESSAGE(node.type.name));

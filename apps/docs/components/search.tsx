@@ -124,6 +124,7 @@ export function Search(): JSX.Element {
         Search Books
       </label>
       <input
+        data-testid="search-input"
         id="searchInput"
         placeholder="Harry Potter"
         type="text"
@@ -146,10 +147,7 @@ export function Search(): JSX.Element {
       >
         {books
           .filter(({ title }) =>
-            title
-              .toLowerCase()
-              .trim()
-              .includes(searchText.toLowerCase().trim()),
+            title.toLowerCase().trim().includes(searchText.toLowerCase().trim())
           )
           .map(({ id, title, imgSrc }) => (
             <Book key={id} title={title} imgSrc={imgSrc} />
