@@ -14,6 +14,7 @@ export function Accordion(): JSX.Element {
     >
       <button
         type="button"
+        data-testid="accordion-button"
         style={{
           fontSize: "1.1em",
           fontWeight: 500,
