@@ -2,10 +2,16 @@ import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi, afterEach } from "vitest";
 import "@testing-library/jest-dom";
 import { motion } from "framer-motion";
+import { Profiler } from "react";
 import { convertChildrenToMotionChildren } from "../utils/magic-animation";
 import { MagicExit } from "../magic-exit";
 import { MagicMotion } from "../magic-motion";
-import { TestComponent, ParentComponent, ForwardedRefParent } from ".";
+import {
+  TestComponent,
+  ParentComponent,
+  ForwardedRefParent,
+  ContextProviderParent,
+} from ".";
 
 describe("<MagicMotion> tests", () => {
   const consoleMock = vi
@@ -367,6 +373,29 @@ describe("<MagicMotion> tests", () => {
     render(
       <MagicMotion>
         <ForwardedRefParent />
+      </MagicMotion>
+    );
+  });
+
+  test("a context provider child", () => {
+    render(
+      <MagicMotion>
+        <ContextProviderParent />
+      </MagicMotion>
+    );
+  });
+
+  test("a react profiler child", () => {
+    render(
+      <MagicMotion>
+        <Profiler
+          id="ok"
+          onRender={() => {
+            return "ok";
+          }}
+        >
+          <div>test</div>
+        </Profiler>
       </MagicMotion>
     );
   });
