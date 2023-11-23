@@ -1,7 +1,13 @@
 import type { FunctionComponent, Ref, ReactNode, ReactElement } from "react";
 import { Children, createElement, isValidElement } from "react";
 import { isMotionComponent, m } from "framer-motion";
-import { isForwardRef, isPortal } from "react-is";
+import {
+  isForwardRef,
+  isPortal,
+  isContextConsumer,
+  isContextProvider,
+  isProfiler,
+} from "react-is";
 import {
   FORBIDDENELEMENTMESSAGE,
   FUNCTIONCOMPONENTMESSAGE,
@@ -14,6 +20,20 @@ function isNodeText(node: ReactNode): boolean {
   return (
     typeof node === "string" ||
     (Array.isArray(node) && node.every((child) => typeof child === "string"))
+  );
+}
+
+export function getIfComponentCanBeConverted(
+  node: React.ReactPortal | ReactElement<unknown>,
+  nodeType: string | React.ComponentType
+): boolean {
+  return (
+    !isMotionComponent(nodeType) &&
+    !isPortal(node) &&
+    !isProfiler(node) &&
+    !isForwardRef(node) &&
+    !isContextProvider(node) &&
+    !isContextConsumer(node)
   );
 }
 
@@ -81,7 +101,7 @@ export function convertChildrenToMotionChildren(
     }
 
     // Checks if the child is a function component
-    let parent:ReactNode = null;
+    let parent: ReactNode = null;
     while (typeof node.type === "function") {
       if (isLoggingEnabled)
         logSuccess(FUNCTIONCOMPONENTMESSAGE(node.type.name));
@@ -105,14 +125,10 @@ export function convertChildrenToMotionChildren(
 
     // @ts-expect-error - This is a hack to get around the fact that the ref type is not correct
     const nodeRef = isPortal(node) ? null : (node.ref as Ref<HTMLElement>);
-   
-   // If the child is a motion component or forwardRef, we use that as the type otherwise convert it to a motion component
-    const shouldConvertNodeToMotionComponent = isMotionComponent(node.type) || isForwardRef(node)
-    
+
+    // If the child is a motion component or forwardRef, we use that as the type otherwise convert it to a motion component
     const typeOfNewElement = (
-      shouldConvertNodeToMotionComponent
-        ? node.type
-        : m[childType]
+      getIfComponentCanBeConverted(node, node.type) ? m[childType] : node.type
     ) as string | FunctionComponent<any>;
 
     const newElemChildren = convertChildrenToMotionChildren(

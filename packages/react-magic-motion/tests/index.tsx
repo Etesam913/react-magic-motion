@@ -1,4 +1,4 @@
-import { forwardRef, useRef, cloneElement } from "react";
+import { forwardRef, useRef, cloneElement, createContext } from "react";
 import type { ReactElement, ReactNode } from "react";
 
 export function TestComponent({
@@ -47,4 +47,14 @@ export function cloneRootElem(rootElem: ReactElement): ReactNode {
     animate: { opacity: 1 },
     exit: { opacity: 0 },
   });
+}
+
+const ContextExample = createContext({});
+
+export function ContextProviderParent(): JSX.Element {
+  return (
+    <ContextExample.Provider value={{}}>
+      <div>Testing</div>
+    </ContextExample.Provider>
+  );
 }
