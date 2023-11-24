@@ -1,0 +1,86 @@
+# Troubleshooting
+
+## Common Errors
+
+### Rendered fewer hooks than expected. This may be caused by an accidental early return statement
+
+* If this error is occurring due to this package, it is probably because a component that has a hook is being conditionally rendered inside of a `<MagicMotion>` tag
+* This is an example of a situation where the error would occur
+
+```jsx copy filename="Rendered fewer hooks error" showLineNumbers
+import { MagicMotion } from "react-magic-motion";
+import { useEffect, useState } from "react";
+
+export function ProblematicComponent() {
+  useEffect(() => {
+    console.log("this causes the error");
+  }, []);
+
+  return <div>This won't show</div>;
+}
+
+export default function App() {
+  const [shouldShow, setShouldShow] = useState(false);
+  return (
+    <main
+      style={{
+        padding: "0.75rem 1rem 0",
+        display: "flex",
+      }}
+    >
+      <MagicMotion>
+        <div>
+          <button onClick={() => setShouldShow(!shouldShow)}>
+            toggle state
+          </button>
+          {shouldShow && <ProblematicComponent />}
+        </div>
+      </MagicMotion>
+    </main>
+  );
+}
+
+```
+
+* To fix this error add `key="exclude"` to the function component and apply a `<MagicMotion>` tag inside the function component
+
+```jsx copy filename="Rendered fewer hooks fix" showLineNumbers {10,12,30}
+import { MagicMotion } from "react-magic-motion";
+import { useEffect, useState } from "react";
+
+export function ProblematicComponent() {
+  useEffect(() => {
+    console.log("this causes the error");
+  }, []);
+
+  return (
+    <MagicMotion>
+      <div>This won't show</div>
+    </MagicMotion>
+  );
+}
+
+export default function App() {
+  const [shouldShow, setShouldShow] = useState(false);
+  return (
+    <main
+      style={{
+        padding: "0.75rem 1rem 0",
+        display: "flex",
+      }}
+    >
+      <MagicMotion>
+        <div>
+          <button onClick={() => setShouldShow(!shouldShow)}>
+            toggle state
+          </button>
+          {shouldShow && <ProblematicComponent key="exclude" />}
+        </div>
+      </MagicMotion>
+    </main>
+  );
+}
+
+```
+* This error will occur with any component that uses hooks, so you will have to add `key="exclude"` to the component.
+* This may happen often when importing a component from a third party library as hooks are used often.
