@@ -145,7 +145,7 @@ export function ExpandableCard(): JSX.Element {
               height: "auto",
             }}
             alt="Mona Lisa"
-            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/expandable-card/mona-lisa.jpg"
+            src="https://storage.googleapis.com/etesam-public/react-magic-motion/examples/expandable-card/mona-lisa.jpg"
           />
           {isCardExpanded && (
             <section

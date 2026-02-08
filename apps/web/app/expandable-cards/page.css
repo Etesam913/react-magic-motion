@@ -37,7 +37,7 @@
   justify-content: flex-end;
   background-size: cover;
   padding: 1rem;
-  background-image: url(https://cool-layout-animations.nyc3.cdn.digitaloceanspaces.com/app-store-background.png);
+  background-image: url(https://storage.googleapis.com/etesam-public/react-magic-motion/app-store-background.png);
 }
 
 .app-row-list {

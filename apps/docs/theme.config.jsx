@@ -8,7 +8,7 @@ export default {
       <link
         rel="icon"
         type="image/x-icon"
-        href="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
+        href="https://storage.googleapis.com/etesam-public/react-magic-motion/react-magic-motion-logo.png"
     />
     </>
   ),
@@ -18,7 +18,7 @@ export default {
         alt="react-magic-motion logo"
         height={36}
         width={36}
-        src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
+        src="https://storage.googleapis.com/etesam-public/react-magic-motion/react-magic-motion-logo.png"
       />
       <h1 style={{ fontWeight: "bold" }}>react-magic-motion</h1>
     </span>
@@ -51,7 +51,7 @@ export default {
             height={24}
             width={24}
             alt="react-magic-motion-logo"
-            src="https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/react-magic-motion-logo.png"
+            src="https://storage.googleapis.com/etesam-public/react-magic-motion/react-magic-motion-logo.png"
           />
           react-magic-motion
         </a>

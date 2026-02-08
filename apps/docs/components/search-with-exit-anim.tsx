@@ -6,67 +6,67 @@ const books = [
     id: 1,
     title: "A Song of Ice and Fire",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/song-of-ice-and-fire.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/song-of-ice-and-fire.jpeg",
   },
   {
     id: 2,
     title: "The Name of the Wind",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/the-name-of-the-wind.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/the-name-of-the-wind.jpeg",
   },
   {
     id: 3,
     title: "The Way of Kings",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/the-way-of-kings.png",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/the-way-of-kings.png",
   },
   {
     id: 4,
     title: "The Lies of Locke Lamora",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/the-lies-of-locke-lamora.webp",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/the-lies-of-locke-lamora.webp",
   },
   {
     id: 5,
     title: "Dune",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/dune.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/dune.jpeg",
   },
   {
     id: 6,
     title: "Neuromancer",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/neuromancer.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/neuromancer.jpeg",
   },
   {
     id: 7,
     title: "Foundation",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/foundation.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/foundation.jpeg",
   },
   {
     id: 8,
     title: "Ender's Game",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/enders-game.jpg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/enders-game.jpg",
   },
   {
     id: 9,
     title: "The Girl with the Dragon Tattoo",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/the-girl-with-the-dragon-tattoo.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/the-girl-with-the-dragon-tattoo.jpeg",
   },
   {
     id: 10,
     title: "Gone Girl",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/gone-girl.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/gone-girl.jpeg",
   },
   {
     id: 11,
     title: "Harry Potter",
     imgSrc:
-      "https://react-magic-motion.nyc3.cdn.digitaloceanspaces.com/examples/search/harry-potter.jpeg",
+      "https://storage.googleapis.com/etesam-public/react-magic-motion/examples/search/harry-potter.jpeg",
   },
 ];
 
